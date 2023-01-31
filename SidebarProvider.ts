@@ -16,7 +16,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   constructor(context: vscode.ExtensionContext) {
     this.context = context;
     this._extensionUri = context.extensionUri;
-    // Check for sapling state in workspace and set tree with previous state
+    // Check for reactree state in workspace and set tree with previous state
     const state: Tree | undefined = context.workspaceState.get('sapling');
     if (state) {
       this.parser = new ReacTreeParser(state.filePath);
