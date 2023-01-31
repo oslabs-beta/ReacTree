@@ -6,7 +6,7 @@ import { Tree } from './types/Tree';
 import { ImportObj } from './types/ImportObj';
 import { File } from '@babel/types';
 
-export class SaplingParser {
+export class ReacTreeParser {
   entryFile: string;
   tree: Tree | undefined;
 
@@ -56,7 +56,7 @@ export class SaplingParser {
     return this.tree;
   }
 
-  // Set Sapling Parser with a specific Data Tree (from workspace state)
+  // Set ReacTree Parser with a specific Data Tree (from workspace state)
   public setTree(tree : Tree) : void {
     this.entryFile = tree.filePath;
     this.tree = tree;

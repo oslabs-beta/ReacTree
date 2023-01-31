@@ -1,13 +1,13 @@
 import * as vscode from 'vscode';
 import { getNonce } from './getNonce';
-import { SaplingParser } from './ReacTreeParser';
+import { ReacTreeParser } from './ReacTreeParser';
 import { Tree } from './types/Tree';
 
 // Sidebar class that creates a new instance of the sidebar + adds functionality with the parser
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
   _doc?: vscode.TextDocument;
-  parser: SaplingParser | undefined;
+  parser: ReacTreeParser | undefined;
   private readonly _extensionUri: vscode.Uri;
   private readonly context: vscode.ExtensionContext;
 
@@ -19,7 +19,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     // Check for sapling state in workspace and set tree with previous state
     const state: Tree | undefined = context.workspaceState.get('sapling');
     if (state) {
-      this.parser = new SaplingParser(state.filePath);
+      this.parser = new ReacTreeParser(state.filePath);
       this.parser.setTree(state);
     }
   }
@@ -79,7 +79,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             return;
           }
           // Run an instance of the parser
-          this.parser = new SaplingParser(data.value);
+          this.parser = new ReacTreeParser(data.value);
           this.parser.parse();
           this.updateView();
           break;
@@ -99,7 +99,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           break;
         }
 
-        // Case when sapling becomes visible in sidebar
+        // Case when reactree becomes visible in sidebar
         case 'onSaplingVisible': {
           if (!this.parser) {
             return;
@@ -162,7 +162,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     // Parse new tree with file as root
     if (fileName) {
-      this.parser = new SaplingParser(fileName);
+      this.parser = new ReacTreeParser(fileName);
       this.parser.parse();
       this.updateView();
     }

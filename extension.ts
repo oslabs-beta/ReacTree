@@ -12,21 +12,21 @@ export function activate(context: vscode.ExtensionContext) {
 	);
   item.tooltip = 'Generate hierarchy tree from current file';
 	item.text = '$(list-tree) Build Tree';
-	item.command = 'sapling.generateTree';
+	item.command = 'reactree.generateTree';
 	item.show();
 
   // Register Sapling Sidebar Webview View
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
-      "sapling-sidebar",
+      "reactree-sidebar",
       sidebarProvider
     )
   );
 
   // Register command to generate tree from current file on status button click or from explorer context
 	context.subscriptions.push(
-		vscode.commands.registerCommand("sapling.generateTree", async (uri: vscode.Uri | undefined) => {
-			await vscode.commands.executeCommand('workbench.view.extension.sapling-sidebar-view');
+		vscode.commands.registerCommand("reactree.generateTree", async (uri: vscode.Uri | undefined) => {
+			await vscode.commands.executeCommand('workbench.view.extension.reactree-sidebar-view');
 			sidebarProvider.statusButtonClicked(uri);
 		})
 	);
