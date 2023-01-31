@@ -95,7 +95,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         }
 
         // Case when sapling becomes visible in sidebar
-        case "onReactreeVisible": {
+        case "onReacTreeVisible": {
           if (!this.parser) {
             return;
           }
