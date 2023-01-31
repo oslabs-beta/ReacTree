@@ -194,6 +194,7 @@ const Sidebar = () => {
   getNodes(viewData);
 
   const data = initialNodes;
+  console.log('HERE', data);
 
   // const [nodes, setNodes, onNodesChange] = useNodesState(data);
   // // console.log('DESTRUCTURED NODES', nodes);

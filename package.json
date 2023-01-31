@@ -1,10 +1,10 @@
 {
-	"name": "reactree",
-	"displayName": "ReacTree",
+	"name": "sapling",
+	"displayName": "Sapling",
 	"description": "React Component Hierarchy Visualizer",
 	"repository": "https://github.com/oslabs-beta/sapling",
 	"icon": "media/sapling-logo-128px.png",
-	"publisher": "team-reactree",
+	"publisher": "team-sapling",
 	"version": "1.2.0",
 	"engines": {
 		"vscode": "^1.60.0"
@@ -25,59 +25,59 @@
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "reactree-sidebar-view",
-					"title": "reactree",
+					"id": "sapling-sidebar-view",
+					"title": "sapling",
 					"icon": "media/logo.svg"
 				}
 			]
 		},
 		"views": {
-			"reactree-sidebar-view": [
+			"sapling-sidebar-view": [
 				{
 					"type": "webview",
-					"id": "reactree-sidebar",
-					"name": "reactree",
+					"id": "sapling-sidebar",
+					"name": "sapling",
 					"icon": "media/logo.svg",
-					"contextualTitle": "reactree"
+					"contextualTitle": "sapling"
 				}
 			]
 		},
 		"commands": [
 			{
-				"command": "reactree.refresh",
-				"category": "ReacTree",
+				"command": "sapling.refresh",
+				"category": "Sapling",
 				"title": "Refresh"
 			},
 			{
-				"command": "reactree.generateTree",
-				"category": "ReacTree",
+				"command": "sapling.generateTree",
+				"category": "Sapling",
 				"title": "Generate Tree"
 			}
 		],
 		"menus": {
 			"commandPalette": [
 				{
-					"command": "reactree.generateTree",
+					"command": "sapling.generateTree",
 					"when": "resourceLangId == javascript || resourceLangId == javascriptreact || resourceLangId == typescript || resourceLangId == typescriptreact"
 				}
 			],
 			"explorer/context": [
 				{
 					"when": "resourceLangId == javascript || resourceLangId == javascriptreact || resourceLangId == typescript || resourceLangId == typescriptreact",
-					"command": "reactree.generateTree",
-					"group": "reactree"
+					"command": "sapling.generateTree",
+					"group": "sapling"
 				}
 			]
 		},
 		"configuration": {
-			"title": "ReacTree",
+			"title": "Sapling",
 			"properties": {
-				"reactree.view.thirdParty": {
+				"sapling.view.thirdParty": {
 					"type": "boolean",
 					"default": true,
 					"description": "Show Third Party components in the tree view."
 				},
-				"reactree.view.reactRouter": {
+				"sapling.view.reactRouter": {
 					"type": "boolean",
 					"default": true,
 					"description": "Show React Router components in the tree view."
