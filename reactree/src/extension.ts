@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { SidebarProvider } from './SidebarProvider';
 
 
-// Sapling extension is activated after vscode startup
+// extension is activated after vscode startup
 export function activate(context: vscode.ExtensionContext) {
 	// instantiating the sidebar webview
   const sidebarProvider = new SidebarProvider(context);
@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
 	item.command = 'reactree.generateTree';
 	item.show();
 		
-  // Register Sapling Sidebar Webview View
+  // Register Sidebar Webview View
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
       "reactree-sidebar",

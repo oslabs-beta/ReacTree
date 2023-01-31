@@ -29,7 +29,7 @@
 			]
 		},
 		"views": {
-			"sapling-sidebar-view": [
+			"reactree-sidebar-view": [
 				{
 					"type": "webview",
 					"id": "reactree-sidebar",
@@ -69,12 +69,12 @@
 		"configuration": {
 			"title": "ReacTree",
 			"properties": {
-				"sapling.view.thirdParty": {
+				"reactree.view.thirdParty": {
 					"type": "boolean",
 					"default": true,
 					"description": "Show Third Party components in the tree view."
 				},
-				"sapling.view.reactRouter": {
+				"reactree.view.reactRouter": {
 					"type": "boolean",
 					"default": true,
 					"description": "Show React Router components in the tree view."
