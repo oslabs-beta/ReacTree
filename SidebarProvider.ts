@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { getNonce } from './getNonce';
-import { SaplingParser } from './SaplingParser';
+import { SaplingParser } from './ReacTreeParser';
 import { Tree } from './types/Tree';
 
 // Sidebar class that creates a new instance of the sidebar + adds functionality with the parser
