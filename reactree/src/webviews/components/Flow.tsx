@@ -9,16 +9,14 @@ import ReactFlow, {
   Edge,
 } from "reactflow";
 
-const Flow = ({ data }: any) => {
-  const initialEdges: Edge[] = [
-    { id: 'e1-2', source: '1', target: '2', animated: true },
-    { id: 'e1-3', source: '1', target: '3', animated: false },
-    { id: 'e3-4', source: '3', target: '4', animated: false },
-  ];
+const Flow = ({ data, initialEdges }: any) => {
 
   useEffect(() => {
     if (data) {
       setNodes(data);
+    }
+    if(initialEdges){
+      setEdges(initialEdges)
     }
   }, [data]);
 

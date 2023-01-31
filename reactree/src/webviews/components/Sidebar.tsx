@@ -121,6 +121,28 @@ const Sidebar = () => {
       });
     }
   };
+
+  //initialEdges test
+
+  const initialEdges: Edge[] = [];
+  const makeEdges = (data: any) => {
+    if (!data) return;
+    let sourceID = "1";
+    let targetID = "2";
+    data.forEach((item: any) => {
+      const node = {
+        id: `e${sourceID}-${targetID}`,
+        source: sourceID,
+        target: targetID,
+        animated: true,
+      }
+      sourceID = (parseInt(sourceID) + 1).toString()
+      targetID = (parseInt(sourceID) + 1).toString()
+      // (parseInt(sourceID + 1)).toString()
+      initialEdges.push(node)
+    })
+  }
+
   // Edits and returns component tree based on users settings
   const parseViewTree = (): void => {
     // Deep copy of the treeData passed in
@@ -162,14 +184,14 @@ const Sidebar = () => {
   };
   getNodes(viewData);
   const data = initialNodes
- 
+  makeEdges(data);
   // Render section
   return (
     <div className="sidebar">
       <Navbar rootFile={rootFile} />
       <hr className="line_break" />
-      <div>test1</div>
-      <Flow data={data}/>
+      <div>test2</div>
+      <Flow data={data} initialEdges ={initialEdges}/>
     </div>
   );
 };
