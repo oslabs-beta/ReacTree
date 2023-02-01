@@ -92,25 +92,60 @@ const Sidebar = () => {
         data: {
           // if the item has props, show them on each div
           label: (
-            <div>
-              <strong>{item.fileName}</strong>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <p
+                style={{
+                  fontWeight: 800,
+                  marginBottom: '0.5em',
+                  textAlign: 'center',
+                }}
+              >
+                {item.fileName}
+              </p>
               {Object.keys(item.props).length > 0 && (
                 <>
-                  <hr />
-                  {Object.keys(item.props).map((prop: any, idx: number) => (
-                    <div key={idx}>{prop}</div>
-                  ))}
+                  <hr style={{ width: '75%', margin: '0.25em 0' }} />
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {Object.keys(item.props).map((prop: any, idx: number) => (
+                      <div key={idx} style={{ margin: '0 0.5em' }}>
+                        {prop}
+                      </div>
+                    ))}
+                  </div>
                 </>
               )}
               {item.reduxConnect && (
                 <>
-                  <hr />
-                  <p>
-                    <b>Connected to Redux Store</b>
+                  <hr style={{ width: '75%', margin: '0.25em 0' }} />
+                  <p
+                    style={{
+                      fontWeight: 400,
+                      marginTop: '0.5em',
+                      textAlign: 'center',
+                    }}
+                  >
+                    Connected to Redux Store
                   </p>
                 </>
               )}
-              <button onClick={() => viewFile(item.filePath)}>File</button>
+              <button
+                style={{ marginTop: '0.5em' }}
+                onClick={() => viewFile(item.filePath)}
+              >
+                File
+              </button>
             </div>
           ),
         },
