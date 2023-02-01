@@ -123,25 +123,46 @@ const Sidebar = () => {
   };
 
   //initialEdges test
-
+console.log("VIEWDATA",viewData)
   const initialEdges: Edge[] = [];
-  const makeEdges = (data: any) => {
-    if (!data) return;
-    let sourceID = "1";
-    let targetID = "2";
-    data.forEach((item: any) => {
-      const node = {
-        id: `e${sourceID}-${targetID}`,
-        source: sourceID,
-        target: targetID,
-        animated: true,
+  // const makeEdges = (data: any) => {
+  //   if (!data) return;
+  //   let sourceID = "1";
+  //   let targetID = "2";
+  //   data.forEach((item: any) => {
+  //     const node = {
+  //       id: `e${sourceID}-${targetID}`,
+  //       source: sourceID,
+  //       target: targetID,
+  //       animated: true,
+  //     }
+  //     sourceID = (parseInt(sourceID) + 1).toString()
+  //     targetID = (parseInt(sourceID) + 1).toString()
+  //     // (parseInt(sourceID + 1)).toString()
+  //     initialEdges.push(node)
+  //   })
+  // }
+
+  let ide = 0;
+
+  const makeEdges = (tree: any, parentId?: any) => {
+    if (!tree) return;
+    tree.forEach((item: any) => {
+      const nodeId = ++ide;
+      if (parentId) {
+        const edge = {
+          id: `e${parentId}-${nodeId}`,
+          source: parentId.toString(),
+          target: nodeId.toString(),
+          animated: false,
+        };
+        initialEdges.push(edge)
+      } 
+      if (item.children) {
+        makeEdges(item.children, nodeId);
       }
-      sourceID = (parseInt(sourceID) + 1).toString()
-      targetID = (parseInt(sourceID) + 1).toString()
-      // (parseInt(sourceID + 1)).toString()
-      initialEdges.push(node)
     })
-  }
+  };
 
   // Edits and returns component tree based on users settings
   const parseViewTree = (): void => {
@@ -184,7 +205,8 @@ const Sidebar = () => {
   };
   getNodes(viewData);
   const data = initialNodes
-  makeEdges(data);
+  makeEdges(viewData);
+  console.log("EDGES", initialEdges)
   // Render section
   return (
     <div className="sidebar">

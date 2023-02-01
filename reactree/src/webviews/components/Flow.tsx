@@ -10,13 +10,12 @@ import ReactFlow, {
 } from "reactflow";
 
 const Flow = ({ data, initialEdges }: any) => {
-
   useEffect(() => {
     if (data) {
       setNodes(data);
     }
-    if(initialEdges){
-      setEdges(initialEdges)
+    if (initialEdges) {
+      setEdges(initialEdges);
     }
   }, [data]);
 
