@@ -60,8 +60,8 @@ const Sidebar = () => {
     // Edge case to verify that there is in fact a file path for the current node
     if (file) {
       tsvscode.postMessage({
-        type: "onViewFile",
-        value: file
+        type: 'onViewFile',
+        value: file,
       });
     }
   };
@@ -100,6 +100,14 @@ const Sidebar = () => {
                   {Object.keys(item.props).map((prop: any, idx: number) => (
                     <div key={idx}>{prop}</div>
                   ))}
+                </>
+              )}
+              {item.reduxConnect && (
+                <>
+                  <hr />
+                  <p>
+                    <b>Connected to Redux Store</b>
+                  </p>
                 </>
               )}
               <button onClick={() => viewFile(item.filePath)}>File</button>
