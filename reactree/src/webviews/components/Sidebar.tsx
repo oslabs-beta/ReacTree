@@ -85,7 +85,6 @@ const Sidebar = () => {
     if (!tree) {
       return;
     }
-    let count = 0;
     tree.forEach((item: any) => {
       const node = {
         id: (++id).toString(),
@@ -156,10 +155,7 @@ const Sidebar = () => {
           ),
         },
         position: { x: 0, y: 0 },
-        // position: {
-        //   x: xPos + count++ * 250,
-        //   y: yPos + item.depth * nodeGap,
-        // },
+        type: item.depth === 0 ? 'input' : '',
       };
       initialNodes.push(node);
       if (item.children) {
