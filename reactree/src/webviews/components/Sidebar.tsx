@@ -79,6 +79,7 @@ const Sidebar = () => {
   let yPos = 200;
   const nodeGap = 100;
 
+  // creates nodes for the initialNodes array
   const getNodes = (tree: any) => {
     if (!tree) {
       return;
