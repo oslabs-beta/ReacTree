@@ -141,7 +141,13 @@ const Sidebar = () => {
                 </>
               )}
               <button
-                style={{ marginTop: '0.5em' }}
+                style={{
+                  marginTop: '0.5em',
+                  backgroundColor: '#003f8e',
+                  color: 'white',
+                  padding: '0.5em 1em',
+                  borderRadius: '0.25em',
+                }}
                 onClick={() => viewFile(item.filePath)}
               >
                 File
