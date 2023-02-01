@@ -1,20 +1,10 @@
 import * as React from 'react';
-import { useEffect, useState, useCallback } from 'react';
-import ReactFlow, {
-  Node,
-  useNodesState,
-  useEdgesState,
-  addEdge,
-  Connection,
-  ConnectionLineType,
-  Edge,
-} from 'reactflow';
+import { useEffect, useState } from 'react';
+import { Node, Edge } from 'reactflow';
 import 'reactflow/dist/style.css';
-// import { Tree as TreeType } from '../../parser';
 
 // component imports
 import Navbar from './Navbar';
-import Tree from './Tree';
 import Flow from './Flow';
 
 interface SidebarProps {
@@ -66,6 +56,16 @@ const Sidebar = () => {
     // console.log('HERE', viewData);
   }, []);
 
+  const viewFile = (file: any) => {
+    // Edge case to verify that there is in fact a file path for the current node
+    if (file) {
+      tsvscode.postMessage({
+        type: "onViewFile",
+        value: file
+      });
+    }
+  };
+
   // Separate useEffect that gets triggered when the treeData and settings state variables get updated
   useEffect(() => {
     if (treeData && settings) {
@@ -102,6 +102,7 @@ const Sidebar = () => {
                   ))}
                 </>
               )}
+              <button onClick={() => viewFile(item.filePath)}>File</button>
             </div>
           ),
         },
