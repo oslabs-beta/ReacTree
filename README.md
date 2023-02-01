@@ -1,71 +1,34 @@
-# reactree README
+# VSCode Webview React
 
-This is the README for your extension "reactree". After writing up a brief description, we recommend including the following sections.
+This project was bootstrapped with 
+* [Create React App](https://github.com/facebookincubator/create-react-app)
+* [Create React App TypeScript](https://github.com/wmonk/create-react-app-typescript)
+* [VSCode Extension Webview Sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/webview-sample)
 
-## Features
+[The webview API](https://code.visualstudio.com/docs/extensions/webview) allows extensions to create customizable views within VSCode. Single Page Application frameworks are perfect fit for this use case. However, to make modern JavaScript frameworks/toolchains appeal to VSCode webview API's [security best practices](https://code.visualstudio.com/docs/extensions/webview#_security) requires some knowledge of both the bundling framework you are using and how VSCode secures webview. This project aims to provide an out-of-box starter kit for Create React App and TypeScript in VSCode's webview.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Development
 
-For example if there is an image subfolder under your extension project workspace:
+Run following commands in the terminal
 
-\!\[feature X\]\(images/feature-x.png\)
+```shell
+yarn install --ignore-engines
+yarn run build
+```
+And then press F5, in Extension Development Host session, run `Start React Webview` command from command palette.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Under the hood
 
-## Requirements
+Things we did on top of Create React App TypeScript template
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+* We inline `index.html` content in `ext-src/extension.ts` when creating the webview
+* We set strict security policy for accessing resources in the webview.
+  * Only resources in `/build` can be accessed
+  * Onlu resources whose scheme is `vscode-resource` can be accessed.
+* For all resources we are going to use in the webview, we change their schemes to `vscode-resource`
+* Since we only allow local resources, absolute path for styles/images (e.g., `/static/media/logo.svg`) will not work. We add a `.env` file which sets `PUBLIC_URL` to `./` and after bundling, resource urls will be relative.
+* We add baseUrl `<base href="${vscode.Uri.file(path.join(this._extensionPath, 'build')).with({ scheme: 'vscode-resource' })}/">` and then all relative paths work.
 
-## Extension Settings
+## Limitations
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Right now you can only run production bits (`yarn run build`) in the webview, how to make dev bits work (webpack dev server) is still unknown yet. Suggestions and PRs welcome !
