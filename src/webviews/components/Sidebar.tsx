@@ -69,51 +69,43 @@ const Sidebar = () => {
 
   const initialNodes: Node[] = [];
   let id = 0;
-  let xPos = 5;
-  let xPos1 = 150;
-  let yPos = 5;
-  const nodeGap = 50;
+  let xPos = 25;
+  let yPos = 200;
+  const nodeGap = 100;
 
   const getNodes = (tree: any) => {
     if (!tree) {
       return;
     }
-    if (tree.length < 1) {
-      tree.forEach((item: any) => {
-        const node = {
-          id: (++id).toString(),
-          data: {
-            label: item.fileName,
-          },
-          position: {
-            x: 150,
-            y: yPos + item.depth * nodeGap,
-          },
-        };
-        initialNodes.push(node);
-        if (item.children) {
-          getNodes(item.children);
-        }
-      });
-    } else {
-      let count = 0;
-      tree.forEach((item: any) => {
-        const node = {
-          id: (++id).toString(),
-          data: {
-            label: item.fileName,
-          },
-          position: {
-            x: xPos + count++ * 250,
-            y: yPos + item.depth * nodeGap,
-          },
-        };
-        initialNodes.push(node);
-        if (item.children) {
-          getNodes(item.children);
-        }
-      });
-    }
+    let count = 0;
+    tree.forEach((item: any) => {
+      const node = {
+        id: (++id).toString(),
+        data: {
+          label: (
+            <div>
+              <strong>{item.fileName}</strong>
+              {Object.keys(item.props).length > 0 && (
+                <>
+                  <hr />
+                  {Object.keys(item.props).map((prop: any, idx: number) => (
+                    <div key={idx}>{prop}</div>
+                  ))}
+                </>
+              )}
+            </div>
+          ),
+        },
+        position: {
+          x: xPos + count++ * 250,
+          y: yPos + item.depth * nodeGap,
+        },
+      };
+      initialNodes.push(node);
+      if (item.children) {
+        getNodes(item.children);
+      }
+    });
   };
 
   // Edits and returns component tree based on users settings
@@ -208,7 +200,7 @@ const Sidebar = () => {
   // Render section
   return (
     <div className="sidebar">
-      <Navbar rootFile={rootFile} />
+      <Navbar rootFile={rootFile} />    
       <hr className="line_break" />
       {/* <div>
         {viewData && viewData[0].children.map((node: any) => <div>{node.name}</div>)}
