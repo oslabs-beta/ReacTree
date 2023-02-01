@@ -6,6 +6,7 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
   Connection,
+  ConnectionLineType,
   Edge,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
@@ -72,13 +73,14 @@ const Sidebar = () => {
       parseViewTree();
     }
   }, [treeData, settings]);
-  
+
   const initialNodes: Node[] = [];
   let id = 0;
   let xPos = 25;
   let yPos = 200;
   const nodeGap = 100;
 
+  // creates nodes for the initialNodes array
   const getNodes = (tree: any) => {
     if (!tree) {
       return;
@@ -88,6 +90,7 @@ const Sidebar = () => {
       const node = {
         id: (++id).toString(),
         data: {
+          // if the item has props, show them on each div
           label: (
             <div>
               <strong>{item.fileName}</strong>
@@ -102,10 +105,11 @@ const Sidebar = () => {
             </div>
           ),
         },
-        position: {
-          x: xPos + count++ * 250,
-          y: yPos + item.depth * nodeGap,
-        },
+        position: { x: 0, y: 0 },
+        // position: {
+        //   x: xPos + count++ * 250,
+        //   y: yPos + item.depth * nodeGap,
+        // },
       };
       initialNodes.push(node);
       if (item.children) {
@@ -115,7 +119,7 @@ const Sidebar = () => {
   };
 
   //initialEdges test
-console.log("VIEWDATA",viewData)
+  console.log('VIEWDATA', viewData);
   const initialEdges: Edge[] = [];
   // const makeEdges = (data: any) => {
   //   if (!data) return;
@@ -146,14 +150,15 @@ console.log("VIEWDATA",viewData)
           id: `e${parentId}-${nodeId}`,
           source: parentId.toString(),
           target: nodeId.toString(),
+          type: 'smoothstep',
           animated: false,
         };
-        initialEdges.push(edge)
-      } 
+        initialEdges.push(edge);
+      }
       if (item.children) {
         makeEdges(item.children, nodeId);
       }
-    })
+    });
   };
 
   // Edits and returns component tree based on users settings
@@ -196,16 +201,16 @@ console.log("VIEWDATA",viewData)
     setViewData([treeParsed]);
   };
   getNodes(viewData);
-  const data = initialNodes
+  const data = initialNodes;
   makeEdges(viewData);
-  console.log("EDGES", initialEdges)
+  console.log('EDGES', initialEdges);
   // Render section
   return (
     <div className="sidebar">
-      <Navbar rootFile={rootFile} />    
+      <Navbar rootFile={rootFile} />
       <hr className="line_break" />
       <div>test2</div>
-      <Flow data={data} initialEdges ={initialEdges}/>
+      <Flow initialNodes={initialNodes} initialEdges={initialEdges} />
     </div>
   );
 };
