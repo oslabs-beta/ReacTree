@@ -92,6 +92,7 @@ const Sidebar = () => {
           label: (
             <div>
               <strong>{item.fileName}</strong>
+              // if the item has props, show them on each div
               {Object.keys(item.props).length > 0 && (
                 <>
                   <hr />
