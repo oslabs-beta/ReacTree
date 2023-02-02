@@ -116,6 +116,7 @@
 		"chai": "^4.3.4",
 		"css-loader": "^6.2.0",
 		"eslint": "^7.27.0",
+		"file-loader": "^6.2.0",
 		"glob": "^7.1.7",
 		"global-jsdom": "^8.2.0",
 		"jsdom": "^17.0.0",
@@ -129,6 +130,8 @@
 		"webpack-cli": "^4.7.0"
 	},
 	"dependencies": {
+		"@coreui/icons": "^3.0.0",
+		"@coreui/icons-react": "^2.1.0",
 		"@fortawesome/fontawesome-svg-core": "^1.2.36",
 		"@fortawesome/free-solid-svg-icons": "^5.15.4",
 		"@fortawesome/react-fontawesome": "^0.1.15",
