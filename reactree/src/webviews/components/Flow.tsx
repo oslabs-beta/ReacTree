@@ -111,8 +111,9 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
           connectionLineType={ConnectionLineType.SmoothStep}
           fitView
         >
+          <Controls />
         </ReactFlow>
-        <Controls />
+        
         <div className="controls">
           <button onClick={() => onLayout("TB")}>vertical layout</button>
           <button onClick={() => onLayout("LR")}>horizontal layout</button>
