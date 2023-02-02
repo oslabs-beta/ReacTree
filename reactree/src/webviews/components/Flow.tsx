@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { useCallback, useEffect } from 'react';
+import * as React from "react";
+import { useCallback, useEffect } from "react";
 import ReactFlow, {
   Node,
   useNodesState,
@@ -8,11 +8,12 @@ import ReactFlow, {
   Connection,
   ConnectionLineType,
   Edge,
-} from 'reactflow';
-import * as dagre from 'dagre';
+  Controls,
+} from "reactflow";
+import * as dagre from "dagre";
 
-import 'reactflow/dist/style.css';
-import '../../../media/dagre.css';
+import "reactflow/dist/style.css";
+import "../../../media/dagre.css";
 
 const Flow = ({ initialNodes, initialEdges }: any) => {
   const dagreGraph = new dagre.graphlib.Graph();
@@ -24,9 +25,9 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
   const getLayoutedElements = (
     nodes: any[],
     edges: any[],
-    direction = 'TB'
+    direction = "TB"
   ) => {
-    const isHorizontal = direction === 'LR';
+    const isHorizontal = direction === "LR";
     dagreGraph.setGraph({ rankdir: direction });
 
     nodes.forEach((node) => {
@@ -41,8 +42,8 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
 
     nodes.forEach((node) => {
       const nodeWithPosition = dagreGraph.node(node.id);
-      node.targetPosition = isHorizontal ? 'left' : 'top';
-      node.sourcePosition = isHorizontal ? 'right' : 'bottom';
+      node.targetPosition = isHorizontal ? "left" : "top";
+      node.sourcePosition = isHorizontal ? "right" : "bottom";
 
       // We are shifting the dagre node position (anchor=center center) to the top left
       // so it matches the React Flow node anchor point (top left).
@@ -62,8 +63,8 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
     initialEdges
   );
 
-  console.log('NODES', initialNodes);
-  console.log('EDGES', initialEdges);
+  console.log("NODES", initialNodes);
+  console.log("EDGES", initialEdges);
 
   useEffect(() => {
     if (initialNodes) {
@@ -109,10 +110,12 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
           onConnect={onConnect}
           connectionLineType={ConnectionLineType.SmoothStep}
           fitView
-        />
+        >
+        </ReactFlow>
+        <Controls />
         <div className="controls">
-          <button onClick={() => onLayout('TB')}>vertical layout</button>
-          <button onClick={() => onLayout('LR')}>horizontal layout</button>
+          <button onClick={() => onLayout("TB")}>vertical layout</button>
+          <button onClick={() => onLayout("LR")}>horizontal layout</button>
         </div>
       </div>
     </div>
