@@ -8,6 +8,7 @@ import ReactFlow, {
   Connection,
   ConnectionLineType,
   Edge,
+  Controls
 } from 'reactflow';
 import * as dagre from 'dagre';
 
@@ -108,8 +109,9 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           connectionLineType={ConnectionLineType.SmoothStep}
-          fitView
-        />
+          fitView>
+          <Controls />
+        </ReactFlow>
         <div className="controls">
           <button onClick={() => onLayout('TB')}>vertical layout</button>
           <button onClick={() => onLayout('LR')}>horizontal layout</button>

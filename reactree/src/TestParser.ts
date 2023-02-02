@@ -56,7 +56,7 @@ export class TestParser {
     return this.tree;
   }
 
-  // Set Sapling Parser with a specific Data Tree (from workspace state)
+  // Set ReacTree Parser with a specific Data Tree (from workspace state)
   public setTree(tree : Tree) : void {
     this.entryFile = tree.filePath;
     this.tree = tree;
