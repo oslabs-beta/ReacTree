@@ -7,6 +7,16 @@ import 'reactflow/dist/style.css';
 import Navbar from './Navbar';
 import Flow from './Flow';
 
+// image imports
+// import Redux from '../../../media/Redux.png';
+import CIcon from '@coreui/icons-react';
+import { cibRedux, cilInfo } from '@coreui/icons';
+
+// import tooltip
+import Tippy from '@tippy.js/react';
+import 'tippy.js/dist/tippy.css';
+import { prototype } from 'mocha';
+
 interface SidebarProps {
   initialNodes: any;
   initialEdges: Edge<any>[];
@@ -20,6 +30,7 @@ const Sidebar = () => {
   const [settings, setSettings]: [{ [key: string]: boolean }, Function] =
     useState();
   const [rootFile, setRootFile]: [string | undefined, Function] = useState();
+  const [showProps, setShowProps]: [boolean, Function] = useState(false);
 
   // useEffect whenever the Sidebar is rendered
   useEffect(() => {
@@ -66,6 +77,10 @@ const Sidebar = () => {
     }
   };
 
+  const handleProps = () => {
+    setShowProps(!showProps);
+  };
+
   // Separate useEffect that gets triggered when the treeData and settings state variables get updated
   useEffect(() => {
     if (treeData && settings) {
@@ -74,11 +89,9 @@ const Sidebar = () => {
     }
   }, [treeData, settings]);
 
+  // initialize iniialialNodes for ReactFlow setup
   const initialNodes: Node[] = [];
   let id = 0;
-  let xPos = 25;
-  let yPos = 200;
-  const nodeGap = 100;
 
   // creates nodes for the initialNodes array
   const getNodes = (tree: any) => {
@@ -98,54 +111,56 @@ const Sidebar = () => {
                 alignItems: 'center',
               }}
             >
+              <div style={{ alignSelf: 'flex-end' }}>
+                {item.reduxConnect && (
+                  <CIcon icon={cibRedux} width={12} height={12} />
+                )}
+                {Object.keys(item.props).length > 0 && (
+                  <CIcon
+                    onClick={handleProps}
+                    icon={cilInfo}
+                    width={12}
+                    height={12}
+                    style={{ cursor: 'pointer', color: '#003f8e' }}
+                  />
+                )}
+              </div>
               <p
                 style={{
                   fontWeight: 800,
                   marginBottom: '0.5em',
                   textAlign: 'center',
+                  color: item.depth === 0 ? 'white' : 'black',
                 }}
               >
                 {item.fileName}
               </p>
-              {Object.keys(item.props).length > 0 && (
+              {Object.keys(item.props).length > 0 && showProps && (
                 <>
                   <hr style={{ width: '75%', margin: '0.25em 0' }} />
                   <div
                     style={{
                       display: 'flex',
-                      flexWrap: 'wrap',
-                      justifyContent: 'center',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      marginRight: '18px'
                     }}
                   >
                     {Object.keys(item.props).map((prop: any, idx: number) => (
                       <div key={idx} style={{ margin: '0 0.5em' }}>
-                        {prop}
+                        &#8226; {prop}
                       </div>
                     ))}
                   </div>
                 </>
               )}
-              {item.reduxConnect && (
-                <>
-                  <hr style={{ width: '75%', margin: '0.25em 0' }} />
-                  <p
-                    style={{
-                      fontWeight: 400,
-                      marginTop: '0.5em',
-                      textAlign: 'center',
-                    }}
-                  >
-                    Connected to Redux Store
-                  </p>
-                </>
-              )}
               <button
                 style={{
-                  marginTop: '0.5em',
-                  backgroundColor: '#003f8e',
-                  color: 'white',
+                  marginTop: '0.25em',
+                  backgroundColor: item.depth === 0 ? 'white' : '#003f8e',
+                  color: item.depth === 0 ? 'black' : 'white',
                   padding: '0.5em 1em',
-                  borderRadius: '0.25em',
+                  borderRadius: '5px',
                 }}
                 onClick={() => viewFile(item.filePath)}
               >
@@ -156,6 +171,10 @@ const Sidebar = () => {
         },
         position: { x: 0, y: 0 },
         type: item.depth === 0 ? 'input' : '',
+        style: {
+          backgroundColor: item.depth === 0 ? '#003f8e' : 'white',
+          borderRadius: '5px',
+        },
       };
       initialNodes.push(node);
       if (item.children) {
@@ -165,30 +184,13 @@ const Sidebar = () => {
   };
 
   //initialEdges test
-  console.log('VIEWDATA', viewData);
   const initialEdges: Edge[] = [];
-  // const makeEdges = (data: any) => {
-  //   if (!data) return;
-  //   let sourceID = "1";
-  //   let targetID = "2";
-  //   data.forEach((item: any) => {
-  //     const node = {
-  //       id: `e${sourceID}-${targetID}`,
-  //       source: sourceID,
-  //       target: targetID,
-  //       animated: true,
-  //     }
-  //     sourceID = (parseInt(sourceID) + 1).toString()
-  //     targetID = (parseInt(sourceID) + 1).toString()
-  //     // (parseInt(sourceID + 1)).toString()
-  //     initialEdges.push(node)
-  //   })
-  // }
-
   let ide = 0;
 
   const makeEdges = (tree: any, parentId?: any) => {
-    if (!tree) return;
+    if (!tree) {
+      return;
+    }
     tree.forEach((item: any) => {
       const nodeId = ++ide;
       if (parentId) {
@@ -255,7 +257,6 @@ const Sidebar = () => {
     <div className="sidebar">
       <Navbar rootFile={rootFile} />
       <hr className="line_break" />
-      <div>test2</div>
       <Flow initialNodes={initialNodes} initialEdges={initialEdges} />
     </div>
   );
