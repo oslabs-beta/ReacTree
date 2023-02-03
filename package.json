@@ -1,53 +1,74 @@
 {
-  "name": "vscode-webview-react",
-  "version": "0.1.0",
-  "engines": {
-    "vscode": "^1.23.0"
-  },
-  "publisher": "rebornix",
-  "activationEvents": [
-    "onCommand:react-webview.start"
-  ],
-  "main": "./build/ext-src/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "react-webview.start",
-        "title": "Start React Webview",
-        "category": "React"
-      }
-    ]
-  },
-  "dependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "terser": "^5.15.0",
-    "yarn": "^1.22.19",
-    "vscode": "^1.1.17"
-  },
-  "resolutions": {
-  },
-  "scripts": {
-    "vscode:prepublish": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "start": "react-scripts start",
-    "build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "@types/jest": "^23.3.13",
-    "@types/node": "^10.1.2",
-    "@types/react": "^16.3.14",
-    "@types/react-dom": "^16.0.5",
-    "react-scripts": "^5.0.1",
-    "rewire": "^6.0.0",
-    "typescript": "^3.3.1"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "name": "reactree",
+    "displayName": "REACTREE",
+    "description": "React higherarchy visualizer and component preview tool",
+    "version": "0.0.1",
+    "icon": "icon.png",
+    "publisher": "REACTREE",
+    "preview": true,
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "note",
+        "vscode"
+    ],
+    "license": "MIT",
+    "activationEvents": [
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "reacTree.start",
+                "title": "ReacTree: Show Panel"
+            }
+        ]
+    },
+    "extensionPack": [
+        "docsmsft.docs-markdown",
+        "docsmsft.docs-preview"
+    ],
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "webpack --mode production --config webpack.config.ts --verbose --display-modules",
+        "watch": "webpack --mode development --config webpack.config.ts --watch --info-verbosity verbose",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.7.7",
+        "@babel/preset-react": "^7.7.4",
+        "@types/fs-extra": "^8.0.1",
+        "@types/jest": "^24.0.24",
+        "@types/node": "^12.12.21",
+        "@types/object-path": "^0.11.0",
+        "@types/react": "^16.9.17",
+        "@types/react-dom": "^16.9.4",
+        "@types/rimraf": "^2.0.3",
+        "@types/webpack": "^4.41.0",
+        "babel-loader": "^8.0.6",
+        "copy-webpack-plugin": "^5.1.1",
+        "css-loader": "^3.4.0",
+        "sass-loader": "^8.0.0",
+        "style-loader": "^1.0.2",
+        "ts-loader": "^6.2.1",
+        "ts-node": "^8.5.4",
+        "typescript": "^3.7.3",
+        "vscode": "^1.1.36",
+        "webpack": "^4.41.4",
+        "webpack-cli": "^3.3.10"
+    },
+    "dependencies": {
+        "fs-extra": "^8.1.0",
+        "object-path": "^0.11.4",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0"
+    }
 }
