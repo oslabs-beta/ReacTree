@@ -29,8 +29,7 @@ const webviewConfig: webpack.Configuration = {
             { test: /\.tsx?$/, loaders: ['babel-loader', 'ts-loader'] },
             { test: /\.s?css$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] }
         ]
-    },
-   
+    }, 
 };
 
 export default [webviewConfig, extConfig];
