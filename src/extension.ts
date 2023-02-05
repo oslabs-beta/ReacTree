@@ -3,102 +3,58 @@ import * as vscode from 'vscode';
 
 
 export function activate(extContext: vscode.ExtensionContext) {
-    let webviewPanel: vscode.WebviewPanel | undefined; 
-    webviewPanel = vscode.window.createWebviewPanel('vscode-note', 'vscode-note', vscode.ViewColumn.One, {
-        enableScripts: true,
-        localResourceRoots: [vscode.Uri.file(path.join(extContext.extensionPath, 'out'))]
-    });
+    extContext.subscriptions.push(vscode.commands.registerCommand('reacTree.start', () => {
+        ReacTreePanel.createOrShow(extContext.extensionPath);
+	}));
+};
 
-    webviewPanel.iconPath = vscode.Uri.file(path.join(extContext.extensionPath, 'images/wv-icon.svg'));
-    
-    webviewPanel.onDidDispose(
-        () => {
-            webviewPanel = undefined;
-            console.log('webview panel closed.');
-        },
-        null,
-        extContext.subscriptions
-    );
+export function deactivate() { }
 
-    webviewPanel.onDidChangeViewState( () => {
-        console.log('viewStateChanged');
-        }, 
-        null, 
-        extContext.subscriptions
-        // e => {
-        //     const panel = e.webviewPanel;
-        //     if (panel.visible) {
-        //         this.parseDomain();
-        //         this.showNotesPlanView();
-        //     }
-        // },
-        // null,
-        // extContext.subscriptions
-    );
+class ReacTreePanel {
+    
+    public static currentPanel: ReacTreePanel | undefined;
 
-    webviewPanel.webview.onDidReceiveMessage(
-        (msg: any) => {
-            switch (msg.command) {
-                case 'startup':
-                    console.log('message received')
-                    // vscode.commands.executeCommand('vscode-note.note.edit', msg.data.id, msg.data.category);
-                    break;
-                case 'testing':
-                    console.log('reachedBrain')
-                    webviewPanel!.webview.postMessage({ command: 'refactor' });
-                    break;
-                case 'edit-contentFile':
-                    vscode.commands.executeCommand('vscode-note.note.edit.col.content', msg.data.id, msg.data.n);
-                    break;
-                case 'edit-col':
-                    vscode.commands.executeCommand('vscode-note.note.edit.col', msg.data.id, msg.data.cn);
-                    break;
-                case 'doc':
-                    vscode.commands.executeCommand('vscode-note.note.doc.show', msg.data);
-                    break;
-                case 'files':
-                    vscode.commands.executeCommand('vscode-note.note.files.open', msg.data);
-                    break;
-            }
-        },
-        undefined,
-        extContext.subscriptions
-    );
-    
-    function createNewPanel(extContext: vscode.ExtensionContext) {  
-        let webviewPanel: vscode.WebviewPanel | undefined = vscode.window.createWebviewPanel('vscode-note', 'vscode-note', vscode.ViewColumn.One, {
-            enableScripts: true,
-            localResourceRoots: [vscode.Uri.file(path.join(extContext.extensionPath, 'out'))]
-        });
-    
-        webviewPanel.iconPath = vscode.Uri.file(path.join(extContext.extensionPath, 'images/wv-icon.svg'));
+    private static readonly viewType = "reacTree";
+
+    private readonly _panel: vscode.WebviewPanel;
+    private readonly _extensionPath: string;
+    private _disposables: vscode.Disposable[] = [];
+
+    public static createOrShow(extensionPath: string) {
+		const column = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
         
-        webviewPanel.onDidDispose(
-            () => {
-                webviewPanel = undefined;
-                console.log('webview panel closed.');
-            },
-            null,
-            extContext.subscriptions
-        );
-    
-        webviewPanel.onDidChangeViewState( () => {
-            console.log('viewStateChanged');
-            }, 
-            null, 
-            extContext.subscriptions
-            // e => {
-            //     const panel = e.webviewPanel;
-            //     if (panel.visible) {
-            //         this.parseDomain();
-            //         this.showNotesPlanView();
-            //     }
-            // },
-            // null,
-            // extContext.subscriptions
-        );
-    
-        webviewPanel.webview.onDidReceiveMessage(
+		// If we already have a panel, show it.
+		// Otherwise, create a new panel.
+        if (ReacTreePanel.currentPanel) {
+            ReacTreePanel.currentPanel._panel.reveal(column);
+        } else {
+        // ReactPanel.currentPanel = new ReactPanel(extensionPath, column || vscode.ViewColumn.One);
+            console.log('FIRST')
+			ReacTreePanel.currentPanel = new ReacTreePanel(extensionPath, vscode.ViewColumn.Two);
+		}
+	}
+
+    private constructor(extensionPath: string, column: vscode.ViewColumn) {
+        console.log('SECOND')
+		this._extensionPath = extensionPath;
+
+		// Create and show a new webview panel
+		this._panel = vscode.window.createWebviewPanel(ReacTreePanel.viewType, "ReacTree", column, {
+			// Enable javascript in the webview
+			enableScripts: true,
+
+			// And restric the webview to only loading content from our extension's `media` directory.
+			localResourceRoots: [vscode.Uri.file(path.join(this._extensionPath, "out"))],
+		});
+
+		// Set the webview's initial html content
+		this._panel.webview.html = this._getHtmlForWebview();
+
+		// Listen for when the panel is disposed
+		// This happens when the user closes the panel or when the panel is closed programatically
+		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
+        
+        this._panel.webview.onDidReceiveMessage(
             (msg: any) => {
                 switch (msg.command) {
                     case 'startup':
@@ -107,7 +63,7 @@ export function activate(extContext: vscode.ExtensionContext) {
                         break;
                     case 'testing':
                         console.log('reachedBrain')
-                        webviewPanel!.webview.postMessage({ command: 'refactor' });
+                        this._panel!.webview.postMessage({ command: 'refactor' });
                         break;
                     case 'edit-contentFile':
                         vscode.commands.executeCommand('vscode-note.note.edit.col.content', msg.data.id, msg.data.n);
@@ -123,57 +79,61 @@ export function activate(extContext: vscode.ExtensionContext) {
                         break;
                 }
             },
-            undefined,
-            extContext.subscriptions
+            null,
+            this._disposables
         );
-        webviewPanel.webview.html = webviewHTML;
-        return webviewPanel
     }
 
-    function assetsFile (name: string) {
-        const file = path.join(extContext.extensionPath, 'out', name);
-        return vscode.Uri.file(file)
-            .with({ scheme: 'vscode-resource' })
-            .toString();
-    };
+    public dispose() {
+		ReacTreePanel.currentPanel = undefined;
+        console.log('dipose part 1')
+		// Clean up our resources
+		this._panel.dispose();
+        console.log('dipose part 2')
 
-    const webviewHTML: string = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>reacttree</title>
-    </head>
-    <body>
-        <div id="root"></div>
-        <script>
-            const vscode = acquireVsCodeApi();
-            window.onload = function() {
-                vscode.postMessage({ command: 'startup' });
-                console.log('HTML started up.');
-            };
-        </script>
-        <script src="${assetsFile('main.wv.js')}"></script>
-    </body>
-    </html>
-    `;
+		while (this._disposables.length) {
+			const x = this._disposables.pop();
+			if (x) {
+				x.dispose();
+			}
+		}
+	}
 
-    webviewPanel.webview.html = webviewHTML;
+    private _getHtmlForWebview() {
+		const scriptPathOnDisk = vscode.Uri.file(path.join(this._extensionPath, "out", 'main.wv.js'));
+		const scriptUri = scriptPathOnDisk.with({ scheme: "vscode-resource" });
 
-    function showPanel(newWebviewPanel: vscode.WebviewPanel | undefined) {
-        if (!newWebviewPanel) {
-            newWebviewPanel = createNewPanel(extContext);
-        }
-        webviewPanel = newWebviewPanel;
-        //if not working try !webviewPanel!.visible
-        if (!webviewPanel!.visible) {
-            webviewPanel!.reveal(vscode.ViewColumn.One);
-        }
-    }
+		// Use a nonce to whitelist which scripts can be run
+		const nonce = getNonce();
 
-    extContext.subscriptions.push(vscode.commands.registerCommand('reacTree.start', () => {
-        showPanel(webviewPanel);
-	}));
-};
+		return `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>reacttree</title>
+        </head>
+        <body>
+            <div id="root"></div>
+            <script>
+                const vscode = acquireVsCodeApi();
+                window.onload = function() {
+                    vscode.postMessage({ command: 'startup' });
+                    console.log('HTML started up.');
+                };
+            </script>
+            <script nonce="${nonce}" src="${scriptUri}"></script>
+        </body>
+        </html>
+        `;
+	}
+}
 
-export function deactivate() { }
+function getNonce() {
+	let text = "";
+	const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	for (let i = 0; i < 32; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
+}
