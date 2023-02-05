@@ -1,16 +1,14 @@
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import ReactFlow, {
-  Node,
   useNodesState,
   useEdgesState,
   addEdge,
-  Connection,
   ConnectionLineType,
-  Edge,
+  MiniMap,
   Controls,
-} from "reactflow";
-import * as dagre from "dagre";
+} from 'reactflow';
+import * as dagre from 'dagre';
 
 import "reactflow/dist/style.css";
 import "../../../media/dagre.css";
@@ -20,7 +18,8 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
   const nodeWidth = 172;
-  const nodeHeight = 36;
+  // const nodeHeight = 36;
+  const nodeHeight = 120;
 
   const getLayoutedElements = (
     nodes: any[],
@@ -92,7 +91,6 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
     (direction) => {
       const { nodes: layoutedNodes, edges: layoutedEdges } =
         getLayoutedElements(nodes, edges, direction);
-
       setNodes([...layoutedNodes]);
       setEdges([...layoutedEdges]);
     },
@@ -111,12 +109,32 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
           connectionLineType={ConnectionLineType.SmoothStep}
           fitView
         >
-          <Controls />
+          <Controls style={{ borderRadius: '5px' }} />
         </ReactFlow>
-        
-        <div className="controls">
-          <button onClick={() => onLayout("TB")}>vertical layout</button>
-          <button onClick={() => onLayout("LR")}>horizontal layout</button>
+        <div className="controls" style={{ width: '100px' }}>
+          <button
+            onClick={() => onLayout('TB')}
+            style={{
+              backgroundColor: 'white',
+              color: 'black',
+              borderRadius: '5px',
+              // width: '80%',
+            }}
+          >
+            vertical
+          </button>
+          <button
+            onClick={() => onLayout('LR')}
+            style={{
+              backgroundColor: 'white',
+              color: 'black',
+              borderRadius: '5px',
+              paddingLeft: '2px',
+              marginTop: '2px',
+            }}
+          >
+            horizontal
+          </button>
         </div>
       </div>
     </div>

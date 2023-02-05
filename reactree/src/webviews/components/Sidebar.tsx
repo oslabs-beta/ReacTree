@@ -1,21 +1,21 @@
 import * as React from 'react';
-import { useEffect, useState, useCallback } from 'react';
-import ReactFlow, {
-  Node,
-  useNodesState,
-  useEdgesState,
-  addEdge,
-  Connection,
-  ConnectionLineType,
-  Edge,
-} from 'reactflow';
+import { useEffect, useState } from 'react';
+import { Node, Edge } from 'reactflow';
 import 'reactflow/dist/style.css';
-// import { Tree as TreeType } from '../../parser';
 
 // component imports
 import Navbar from './Navbar';
-import Tree from './Tree';
 import Flow from './Flow';
+
+// image imports
+// import Redux from '../../../media/Redux.png';
+import CIcon from '@coreui/icons-react';
+import { cibRedux, cilInfo } from '@coreui/icons';
+
+// import tooltip
+import Tippy from '@tippy.js/react';
+import 'tippy.js/dist/tippy.css';
+import { prototype } from 'mocha';
 
 interface SidebarProps {
   initialNodes: any;
@@ -30,6 +30,7 @@ const Sidebar = () => {
   const [settings, setSettings]: [{ [key: string]: boolean }, Function] =
     useState();
   const [rootFile, setRootFile]: [string | undefined, Function] = useState();
+  const [showProps, setShowProps]: [boolean, Function] = useState(false);
 
   // useEffect whenever the Sidebar is rendered
   useEffect(() => {
@@ -66,6 +67,20 @@ const Sidebar = () => {
     // console.log('HERE', viewData);
   }, []);
 
+  const viewFile = (file: any) => {
+    // Edge case to verify that there is in fact a file path for the current node
+    if (file) {
+      tsvscode.postMessage({
+        type: 'onViewFile',
+        value: file,
+      });
+    }
+  };
+
+  const handleProps = () => {
+    setShowProps(!showProps);
+  };
+
   // Separate useEffect that gets triggered when the treeData and settings state variables get updated
   useEffect(() => {
     if (treeData && settings) {
@@ -74,42 +89,92 @@ const Sidebar = () => {
     }
   }, [treeData, settings]);
 
+  // initialize iniialialNodes for ReactFlow setup
   const initialNodes: Node[] = [];
   let id = 0;
-  let xPos = 25;
-  let yPos = 200;
-  const nodeGap = 100;
 
   // creates nodes for the initialNodes array
   const getNodes = (tree: any) => {
     if (!tree) {
       return;
     }
-    let count = 0;
     tree.forEach((item: any) => {
       const node = {
         id: (++id).toString(),
         data: {
           // if the item has props, show them on each div
           label: (
-            <div>
-              <strong>{item.fileName}</strong>
-              {Object.keys(item.props).length > 0 && (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <div style={{ alignSelf: 'flex-end' }}>
+                {item.reduxConnect && (
+                  <CIcon icon={cibRedux} width={12} height={12} />
+                )}
+                {Object.keys(item.props).length > 0 && (
+                  <CIcon
+                    onClick={handleProps}
+                    icon={cilInfo}
+                    width={12}
+                    height={12}
+                    style={{ cursor: 'pointer', color: '#003f8e' }}
+                  />
+                )}
+              </div>
+              <p
+                style={{
+                  fontWeight: 800,
+                  marginBottom: '0.5em',
+                  textAlign: 'center',
+                  color: item.depth === 0 ? 'white' : 'black',
+                }}
+              >
+                {item.fileName}
+              </p>
+              {Object.keys(item.props).length > 0 && showProps && (
                 <>
-                  <hr />
-                  {Object.keys(item.props).map((prop: any, idx: number) => (
-                    <div key={idx}>{prop}</div>
-                  ))}
+                  <hr style={{ width: '75%', margin: '0.25em 0' }} />
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      marginRight: '18px'
+                    }}
+                  >
+                    {Object.keys(item.props).map((prop: any, idx: number) => (
+                      <div key={idx} style={{ margin: '0 0.5em' }}>
+                        &#8226; {prop}
+                      </div>
+                    ))}
+                  </div>
                 </>
               )}
+              <button
+                style={{
+                  marginTop: '0.25em',
+                  backgroundColor: item.depth === 0 ? 'white' : '#003f8e',
+                  color: item.depth === 0 ? 'black' : 'white',
+                  padding: '0.5em 1em',
+                  borderRadius: '5px',
+                }}
+                onClick={() => viewFile(item.filePath)}
+              >
+                File
+              </button>
             </div>
           ),
         },
         position: { x: 0, y: 0 },
-        // position: {
-        //   x: xPos + count++ * 250,
-        //   y: yPos + item.depth * nodeGap,
-        // },
+        type: item.depth === 0 ? 'input' : '',
+        style: {
+          backgroundColor: item.depth === 0 ? '#003f8e' : 'white',
+          borderRadius: '5px',
+        },
       };
       initialNodes.push(node);
       if (item.children) {
@@ -119,30 +184,13 @@ const Sidebar = () => {
   };
 
   //initialEdges test
-  console.log('VIEWDATA', viewData);
   const initialEdges: Edge[] = [];
-  // const makeEdges = (data: any) => {
-  //   if (!data) return;
-  //   let sourceID = "1";
-  //   let targetID = "2";
-  //   data.forEach((item: any) => {
-  //     const node = {
-  //       id: `e${sourceID}-${targetID}`,
-  //       source: sourceID,
-  //       target: targetID,
-  //       animated: true,
-  //     }
-  //     sourceID = (parseInt(sourceID) + 1).toString()
-  //     targetID = (parseInt(sourceID) + 1).toString()
-  //     // (parseInt(sourceID + 1)).toString()
-  //     initialEdges.push(node)
-  //   })
-  // }
-
   let ide = 0;
 
   const makeEdges = (tree: any, parentId?: any) => {
-    if (!tree) return;
+    if (!tree) {
+      return;
+    }
     tree.forEach((item: any) => {
       const nodeId = ++ide;
       if (parentId) {
@@ -200,16 +248,17 @@ const Sidebar = () => {
     // Update the vewData state
     setViewData([treeParsed]);
   };
+ 
   getNodes(viewData);
   const data = initialNodes;
   makeEdges(viewData);
+  console.log("viewData", viewData)
   console.log('EDGES', initialEdges);
   // Render section
   return (
     <div className="sidebar">
       <Navbar rootFile={rootFile} />
       <hr className="line_break" />
-      <div>test2</div>
       <Flow initialNodes={initialNodes} initialEdges={initialEdges} />
     </div>
   );

@@ -8,12 +8,13 @@ import { File } from '@babel/types';
 
 export class TestParser {
   entryFile: string;
-  tree: Tree | undefined;
+  tree: Tree | undefined; 
 
   constructor(filePath: string) {
     // Fix when selecting files in wsl file system
     this.entryFile = filePath;
-    if (process.platform === 'linux' && this.entryFile.includes('wsl$')) {
+
+    if (process.platform === 'linux' && this.entryFile.includes('wsl$')) { 
       this.entryFile = path.resolve(filePath.split(path.win32.sep).join(path.posix.sep));
       this.entryFile = '/' + this.entryFile.split('/').slice(3).join('/');
     // Fix for when running wsl but selecting files held on windows file system
@@ -22,6 +23,7 @@ export class TestParser {
       this.entryFile = path.join(root, filePath.split(path.win32.sep).slice(1).join(path.posix.sep));
     }
 
+    // doesnt work atm
     this.tree = undefined;
     // Break down and reasemble given filePath safely for any OS using path?
   }
@@ -50,7 +52,7 @@ export class TestParser {
     this.tree = root;
     this.parser(root);
     return this.tree;
-  }
+  };
 
   public getTree() : Tree {
     return this.tree;
@@ -130,6 +132,7 @@ export class TestParser {
     // If import is a node module, do not parse any deeper
     if (!['\\', '/', '.'].includes(componentTree.importPath[0])) {
       componentTree.thirdParty = true;
+      // in what case do fileName === react...
       if (componentTree.fileName === 'react-router-dom' || componentTree.fileName === 'react-router') {
         componentTree.reactRouter = true;
       }
@@ -163,10 +166,12 @@ export class TestParser {
       componentTree.error = 'Error while processing this file/node';
       return componentTree;
     }
+console.log("ast line 169", ast)
 
     // Find imports in the current file, then find child components in the current file
     const imports = this.getImports(ast.program.body);
-
+console.log("astprogrambody", ast.program.body)    
+console.log("imports line 174", imports)
     // Get any JSX Children of current file:
     componentTree.children = this.getJSXChildren(ast.tokens, imports, componentTree);
 
