@@ -7,7 +7,7 @@
     "publisher": "REACTREE",
     "preview": true,
     "engines": {
-        "vscode": "^1.30.0"
+        "vscode": "^1.74.3"
     },
     "repository": {
         "type": "git",
@@ -21,8 +21,7 @@
         "vscode"
     ],
     "license": "MIT",
-    "activationEvents": [
-    ],
+    "activationEvents": [],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
@@ -39,12 +38,12 @@
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "webpack --mode production --config webpack.config.ts --verbose --display-modules",
-        "watch": "webpack --mode development --config webpack.config.ts --watch --info-verbosity verbose",
-        "postinstall": "node ./node_modules/vscode/bin/install"
+        "watch": "webpack --mode development --config webpack.config.ts --watch --info-verbosity verbose"
     },
     "devDependencies": {
         "@babel/core": "^7.7.7",
         "@babel/preset-react": "^7.7.4",
+        "@types/dagre": "^0.7.48",
         "@types/fs-extra": "^8.0.1",
         "@types/jest": "^24.0.24",
         "@types/node": "^12.12.21",
@@ -52,23 +51,29 @@
         "@types/react": "^16.9.17",
         "@types/react-dom": "^16.9.4",
         "@types/rimraf": "^2.0.3",
+        "@types/vscode": "^1.75.0",
         "@types/webpack": "^4.41.0",
         "babel-loader": "^8.0.6",
         "copy-webpack-plugin": "^5.1.1",
         "css-loader": "^3.4.0",
         "sass-loader": "^8.0.0",
         "style-loader": "^1.0.2",
-        "ts-loader": "^6.2.1",
+        "ts-loader": "^6.2.2",
         "ts-node": "^8.5.4",
-        "typescript": "^3.7.3",
-        "vscode": "^1.1.36",
+        "typescript": "^3.9.10",
+        "vscode-test": "^1.5.2",
         "webpack": "^4.41.4",
         "webpack-cli": "^3.3.10"
     },
     "dependencies": {
+        "@coreui/icons": "^3.0.0",
+        "@coreui/icons-react": "^2.1.0",
+        "@types/dagre": "^0.7.48",
+        "dagre": "^0.8.5",
         "fs-extra": "^8.1.0",
         "object-path": "^0.11.4",
-        "react": "^16.12.0",
-        "react-dom": "^16.12.0"
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "reactflow": "^11.5.2"
     }
 }

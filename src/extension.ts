@@ -1,186 +1,143 @@
-import * as path from 'path';
 import * as vscode from 'vscode';
+import ReacTreePanel from './panel'
+
 
 export function activate(extContext: vscode.ExtensionContext) {
-  let webviewPanel: vscode.WebviewPanel | undefined;
-  webviewPanel = vscode.window.createWebviewPanel(
-    'vscode-note',
-    'vscode-note',
-    vscode.ViewColumn.One,
-    {
-      enableScripts: true,
-      localResourceRoots: [
-        vscode.Uri.file(path.join(extContext.extensionPath, 'out')),
-      ],
-    }
-  );
+    let webviewPanel: vscode.WebviewPanel | undefined; 
+    webviewPanel = vscode.window.createWebviewPanel('vscode-note', 'vscode-note', vscode.ViewColumn.One, {
+        enableScripts: true,
+        localResourceRoots: [vscode.Uri.file(path.join(extContext.extensionPath, 'out'))]
+    });
 
-  webviewPanel.iconPath = vscode.Uri.file(
-    path.join(extContext.extensionPath, 'images/wv-icon.svg')
-  );
-
-  webviewPanel.onDidDispose(
-    () => {
-      webviewPanel = undefined;
-      console.log('webview panel closed.');
-    },
-    null,
-    extContext.subscriptions
-  );
-
-  webviewPanel.onDidChangeViewState(
-    () => {
-      console.log('viewStateChanged');
-    },
-    null,
-    extContext.subscriptions
-    // e => {
-    //     const panel = e.webviewPanel;
-    //     if (panel.visible) {
-    //         this.parseDomain();
-    //         this.showNotesPlanView();
-    //     }
-    // },
-    // null,
-    // extContext.subscriptions
-  );
-
-  webviewPanel.webview.onDidReceiveMessage(
-    (msg: any) => {
-      switch (msg.command) {
-        case 'startup':
-          console.log('message received');
-          // vscode.commands.executeCommand('vscode-note.note.edit', msg.data.id, msg.data.category);
-          break;
-        case 'testing':
-          console.log('reachedBrain');
-          webviewPanel!.webview.postMessage({ command: 'refactor' });
-          break;
-        case 'edit-contentFile':
-          vscode.commands.executeCommand(
-            'vscode-note.note.edit.col.content',
-            msg.data.id,
-            msg.data.n
-          );
-          break;
-        case 'edit-col':
-          vscode.commands.executeCommand(
-            'vscode-note.note.edit.col',
-            msg.data.id,
-            msg.data.cn
-          );
-          break;
-        case 'doc':
-          vscode.commands.executeCommand('vscode-note.note.doc.show', msg.data);
-          break;
-        case 'files':
-          vscode.commands.executeCommand(
-            'vscode-note.note.files.open',
-            msg.data
-          );
-          break;
-      }
-    },
-    undefined,
-    extContext.subscriptions
-  );
-
-  function createNewPanel(extContext: vscode.ExtensionContext) {
-    let webviewPanel: vscode.WebviewPanel | undefined =
-      vscode.window.createWebviewPanel(
-        'vscode-note',
-        'vscode-note',
-        vscode.ViewColumn.One,
-        {
-          enableScripts: true,
-          localResourceRoots: [
-            vscode.Uri.file(path.join(extContext.extensionPath, 'out')),
-          ],
-        }
-      );
-
-    webviewPanel.iconPath = vscode.Uri.file(
-      path.join(extContext.extensionPath, 'images/wv-icon.svg')
-    );
-
+    webviewPanel.iconPath = vscode.Uri.file(path.join(extContext.extensionPath, 'images/wv-icon.svg'));
+    
     webviewPanel.onDidDispose(
-      () => {
-        webviewPanel = undefined;
-        console.log('webview panel closed.');
-      },
-      null,
-      extContext.subscriptions
+        () => {
+            webviewPanel = undefined;
+            console.log('webview panel closed.');
+        },
+        null,
+        extContext.subscriptions
     );
 
-    webviewPanel.onDidChangeViewState(
-      () => {
+    webviewPanel.onDidChangeViewState( () => {
         console.log('viewStateChanged');
-      },
-      null,
-      extContext.subscriptions
-      // e => {
-      //     const panel = e.webviewPanel;
-      //     if (panel.visible) {
-      //         this.parseDomain();
-      //         this.showNotesPlanView();
-      //     }
-      // },
-      // null,
-      // extContext.subscriptions
+        }, 
+        null, 
+        extContext.subscriptions
+        // e => {
+        //     const panel = e.webviewPanel;
+        //     if (panel.visible) {
+        //         this.parseDomain();
+        //         this.showNotesPlanView();
+        //     }
+        // },
+        // null,
+        // extContext.subscriptions
     );
 
     webviewPanel.webview.onDidReceiveMessage(
-      (msg: any) => {
-        switch (msg.command) {
-          case 'startup':
-            console.log('message received');
-            // vscode.commands.executeCommand('vscode-note.note.edit', msg.data.id, msg.data.category);
-            break;
-          case 'testing':
-            console.log('reachedBrain');
-            webviewPanel!.webview.postMessage({ command: 'refactor' });
-            break;
-          case 'edit-contentFile':
-            vscode.commands.executeCommand(
-              'vscode-note.note.edit.col.content',
-              msg.data.id,
-              msg.data.n
-            );
-            break;
-          case 'edit-col':
-            vscode.commands.executeCommand(
-              'vscode-note.note.edit.col',
-              msg.data.id,
-              msg.data.cn
-            );
-            break;
-          case 'doc':
-            vscode.commands.executeCommand(
-              'vscode-note.note.doc.show',
-              msg.data
-            );
-            break;
-          case 'files':
-            vscode.commands.executeCommand(
-              'vscode-note.note.files.open',
-              msg.data
-            );
-            break;
-        }
-      },
-      undefined,
-      extContext.subscriptions
+        (msg: any) => {
+            switch (msg.command) {
+                case 'startup':
+                    console.log('message received')
+                    // vscode.commands.executeCommand('vscode-note.note.edit', msg.data.id, msg.data.category);
+                    break;
+                case 'testing':
+                    console.log('reachedBrain')
+                    webviewPanel!.webview.postMessage({ command: 'refactor' });
+                    break;
+                case 'edit-contentFile':
+                    vscode.commands.executeCommand('vscode-note.note.edit.col.content', msg.data.id, msg.data.n);
+                    break;
+                case 'edit-col':
+                    vscode.commands.executeCommand('vscode-note.note.edit.col', msg.data.id, msg.data.cn);
+                    break;
+                case 'doc':
+                    vscode.commands.executeCommand('vscode-note.note.doc.show', msg.data);
+                    break;
+                case 'files':
+                    vscode.commands.executeCommand('vscode-note.note.files.open', msg.data);
+                    break;
+            }
+        },
+        undefined,
+        extContext.subscriptions
     );
-    webviewPanel.webview.html = webviewHTML;
-    return webviewPanel;
-  }
+    
+    function createNewPanel(extContext: vscode.ExtensionContext) {  
+        let webviewPanel: vscode.WebviewPanel | undefined = vscode.window.createWebviewPanel('vscode-note', 'vscode-note', vscode.ViewColumn.One, {
+            enableScripts: true,
+            localResourceRoots: [vscode.Uri.file(path.join(extContext.extensionPath, 'out'))]
+        });
+    
+        webviewPanel.iconPath = vscode.Uri.file(path.join(extContext.extensionPath, 'images/wv-icon.svg'));
+        
+        webviewPanel.onDidDispose(
+            () => {
+                webviewPanel = undefined;
+                console.log('webview panel closed.');
+            },
+            null,
+            extContext.subscriptions
+        );
+    
+        webviewPanel.onDidChangeViewState( () => {
+            console.log('viewStateChanged');
+            }, 
+            null, 
+            extContext.subscriptions
+            // e => {
+            //     const panel = e.webviewPanel;
+            //     if (panel.visible) {
+            //         this.parseDomain();
+            //         this.showNotesPlanView();
+            //     }
+            // },
+            // null,
+            // extContext.subscriptions
+        );
+    
+        webviewPanel.webview.onDidReceiveMessage(
+            (msg: any) => {
+                switch (msg.command) {
+                    case 'startup':
+                        console.log('message received')
+                        // vscode.commands.executeCommand('vscode-note.note.edit', msg.data.id, msg.data.category);
+                        break;
+                    case 'testing':
+                        console.log('reachedBrain')
+                        webviewPanel!.webview.postMessage({ command: 'refactor' });
+                        break;
+                    case 'edit-contentFile':
+                        vscode.commands.executeCommand('vscode-note.note.edit.col.content', msg.data.id, msg.data.n);
+                        break;
+                    case 'edit-col':
+                        vscode.commands.executeCommand('vscode-note.note.edit.col', msg.data.id, msg.data.cn);
+                        break;
+                    case 'doc':
+                        vscode.commands.executeCommand('vscode-note.note.doc.show', msg.data);
+                        break;
+                    case 'files':
+                        vscode.commands.executeCommand('vscode-note.note.files.open', msg.data);
+                        break;
+                }
+            },
+            undefined,
+            extContext.subscriptions
+        );
+        webviewPanel.webview.html = webviewHTML;
+        return webviewPanel
+    }
 
-  function assetsFile(name: string) {
-    const file = path.join(extContext.extensionPath, 'out', name);
-    return vscode.Uri.file(file).with({ scheme: 'vscode-resource' }).toString();
-  }
+    function assetsFile (name: string) {
+        const file = path.join(extContext.extensionPath, 'out', name);
+        return vscode.Uri.file(file)
+            .with({ scheme: 'vscode-resource' })
+            .toString();
+    };
 
-  const webviewHTML: string = `<!DOCTYPE html>
+    const webviewHTML: string = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -201,25 +158,22 @@ export function activate(extContext: vscode.ExtensionContext) {
     </html>
     `;
 
-  webviewPanel.webview.html = webviewHTML;
+    webviewPanel.webview.html = webviewHTML;
 
-  function showPanel(newWebviewPanel: vscode.WebviewPanel | undefined) {
-    if (!newWebviewPanel) {
-      newWebviewPanel = createNewPanel(extContext);
-    //   activate(extContext);
+    function showPanel(newWebviewPanel: vscode.WebviewPanel | undefined) {
+        if (!newWebviewPanel) {
+            newWebviewPanel = createNewPanel(extContext);
+        }
+        webviewPanel = newWebviewPanel;
+        //if not working try !webviewPanel!.visible
+        if (!webviewPanel!.visible) {
+            webviewPanel!.reveal(vscode.ViewColumn.One);
+        }
     }
-    webviewPanel = newWebviewPanel;
-    //if not working try !webviewPanel!.visible
-    if (!webviewPanel!.visible) {
-      webviewPanel!.reveal(vscode.ViewColumn.One);
-    }
-  }
 
-  extContext.subscriptions.push(
-    vscode.commands.registerCommand('reacTree.start', () => {
-      showPanel(webviewPanel);
-    })
-  );
-}
+    extContext.subscriptions.push(vscode.commands.registerCommand('reacTree.start', () => {
+        showPanel(webviewPanel);
+	}));
+};
 
-export function deactivate() {}
+export function deactivate() { }
