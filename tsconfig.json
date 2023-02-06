@@ -1,25 +1,33 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "esnext",
+        "target": "es6",
         "outDir": "out",
         "lib": [
-            "esnext",
+            "es6",
             "dom"
         ],
         "sourceMap": true,
         "jsx": "preserve",
-        "strict": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true,
-        "noUnusedParameters": true,
-        "noUnusedLocals": true,
-        "noImplicitAny": true,
+        // "strict": true,
+        // "noImplicitReturns": true,
+        // "noFallthroughCasesInSwitch": true,
+        // "noUnusedParameters": true,
+        // "noUnusedLocals": true,
+        // "noImplicitAny": true,
         "typeRoots": [
             "./node_modules/@types",
             "./typings"
         ],
-        "resolveJsonModule": true,
-        "esModuleInterop": true
-    }
+        // "resolveJsonModule": true,
+        // "esModuleInterop": true, 
+        // "skipLibCheck": true
+    },
+    "include": ["src", "src/types/index.d.ts"],
+	"exclude": [
+		"node_modules",
+		".vscode-test",
+		"src/webviews",
+        "src/test/test_apps"
+	]
 }
