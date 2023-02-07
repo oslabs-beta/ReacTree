@@ -1,4 +1,4 @@
-// React component tree is a nested data structure, children are Trees
+// React component tree is a nested data structure, children are Treess
 
 export type Tree = {
   id: string;
