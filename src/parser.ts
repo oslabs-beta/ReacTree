@@ -71,7 +71,7 @@ export class Parser {
   }
 
   public updateTree(filePath: string): Tree {
-    let children: any[] = [];
+    let children: {depth: number; filePath: string; expanded: boolean}[] = [];
 
     const getChildNodes = (node: Tree): void => {
       const { depth, filePath, expanded } = node;
@@ -183,7 +183,6 @@ export class Parser {
 
     // Find imports in the current file, then find child components in the current file
     const imports = this.getImports(ast.program.body);
-
     // Get any JSX Children of current file:
     if (ast.tokens) {
       componentTree.children = this.getJSXChildren(
