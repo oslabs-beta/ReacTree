@@ -1,30 +1,28 @@
-//@ts-check
+import * as path from 'path';
+import * as webpack from 'webpack';
 
-'use strict';
-
-const path = require('path');
-
-/**@type {import('webpack').Configuration}*/
-const config = {
-  target: 'node', // vscode extensions run in a Node.js-context 📖 -> https://webpack.js.org/configuration/node/
-  mode: 'none', // this leaves the source code as close as possible to the original (when packaging we set this to 'production')
-
-  entry: './src/extension.ts', // the entry point of this extension, 📖 -> https://webpack.js.org/configuration/entry-context/
-
+const extConfig: webpack.Configuration = {
+  target: 'node',
+  entry: './src/extension.ts',
   output: {
-    // the bundle is stored in the 'dist' folder (check package.json), 📖 -> https://webpack.js.org/configuration/output/
-    path: path.resolve(__dirname, 'out'),
     filename: 'extension.js',
     libraryTarget: 'commonjs2',
+    path: path.resolve(__dirname, 'out'),
   },
-  devtool: 'nosources-source-map',
-  externals: {
-    vscode: 'commonjs vscode', // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
-    // modules added here also need to be added in the .vsceignore file
+  resolve: { extensions: ['.ts', '.js'] },
+  module: { rules: [{ test: /\.ts$/, loader: 'ts-loader' }] },
+  externals: { vscode: 'vscode' },
+};
+
+const webviewConfig: webpack.Configuration = {
+  target: 'web',
+  entry: './src/webview/index.tsx',
+  output: {
+    filename: '[name].wv.js',
+    path: path.resolve(__dirname, 'out'),
   },
   resolve: {
-    // support reading TypeScript and JavaScript files, 📖 -> https://github.com/TypeStrong/ts-loader
-    extensions: ['.ts', '.js', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx', 'scss'],
   },
   module: {
     rules: [
@@ -33,12 +31,26 @@ const config = {
         exclude: /node_modules/,
         use: [
           {
+            loader: 'babel-loader',
+          },
+          {
             loader: 'ts-loader',
           },
         ],
       },
-      { test: /\\.(png|jp(e*)g|svg|gif)$/, use: ['file-loader'] },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
+      },
     ],
   },
 };
-module.exports = config;
+
+export default [webviewConfig, extConfig];
