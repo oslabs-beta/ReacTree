@@ -10,11 +10,11 @@
         "sourceMap": true,
         "jsx": "preserve",
         "strict": true,
-        "noImplicitReturns": true,
+        // "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "noUnusedParameters": true,
         // "noUnusedLocals": true,
-        "noImplicitAny": true,
+        // "noImplicitAny": true,
         "typeRoots": [
             "./node_modules/@types",
             "./typings"

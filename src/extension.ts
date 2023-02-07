@@ -4,7 +4,7 @@ import ReacTreePanel from './panel'
 
 export function activate(extContext: vscode.ExtensionContext) {
     extContext.subscriptions.push(vscode.commands.registerCommand('reacTree.start', () => {
-        ReacTreePanel.createOrShow(extContext.extensionPath);
+        ReacTreePanel.createOrShow(extContext);
 	}));
 };
 

@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { getNonce } from "./getNonce";
-// import { Parser } from './parser';
+import { Parser } from './parser';
 // import { Tree } from "./types/Tree";
 
 export default class ReacTreePanel {
@@ -12,9 +12,11 @@ export default class ReacTreePanel {
 
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionPath: string;
+  private readonly _extContext: vscode.ExtensionContext;
+  private parser: Parser | undefined;
   private _disposables: vscode.Disposable[] = [];
 
-  public static createOrShow(extensionPath: string) {
+  public static createOrShow(extContext: vscode.ExtensionContext) {
     const column = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
       
     // If we already have a panel, show it.
@@ -24,13 +26,15 @@ export default class ReacTreePanel {
     } else {
     // ReactPanel.currentPanel = new ReactPanel(extensionPath, column || vscode.ViewColumn.One);
       console.log('FIRST')
-      ReacTreePanel.currentPanel = new ReacTreePanel(extensionPath, vscode.ViewColumn.Two);
+      ReacTreePanel.currentPanel = new ReacTreePanel(extContext, vscode.ViewColumn.Two);
     }
   }
 
-  private constructor(extensionPath: string, column: vscode.ViewColumn) {
+  private constructor(extContext: vscode.ExtensionContext, column: vscode.ViewColumn) {
     console.log('SECOND')
-    this._extensionPath = extensionPath;
+    this._extensionPath = extContext.extensionPath;
+    this._extContext = extContext;
+    // Not added - state preserver**
 
     // Create and show a new webview panel
     this._panel = vscode.window.createWebviewPanel(ReacTreePanel.viewType, "ReacTree", column, {
@@ -59,6 +63,14 @@ export default class ReacTreePanel {
             console.log('reachedBrain')
             this._panel!.webview.postMessage({ command: 'refactor' });
             break;
+          case 'onFile':
+            console.log(msg.value);
+            if (!msg.value) break; //if doesnt work change to return 
+            this.parser = new Parser(msg.value);
+            this.parser.parse();
+            console.log(this.parser.tree);
+            this.updateView()
+            break;
           case 'edit-contentFile':
             vscode.commands.executeCommand('vscode-note.note.edit.col.content', msg.data.id, msg.data.n);
             break;
@@ -76,6 +88,17 @@ export default class ReacTreePanel {
       null,
       this._disposables
     );
+  }
+
+  private updateView() {
+    // Save current state of tree to workspace state:
+    const tree = this.parser!.getTree();
+    this._extContext.workspaceState.update('reacTree', tree);
+    // Send updated tree to webview
+    this._panel.webview.postMessage({
+      command: "parsed-data",
+      value: tree
+    });
   }
 
   public dispose() {
