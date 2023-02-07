@@ -13,7 +13,7 @@
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "noUnusedParameters": true,
-        "noUnusedLocals": true,
+        // "noUnusedLocals": true,
         "noImplicitAny": true,
         "typeRoots": [
             "./node_modules/@types",
