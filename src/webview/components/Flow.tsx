@@ -62,8 +62,6 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
     initialEdges
   );
 
-  console.log('NODES', initialNodes);
-  console.log('EDGES', initialEdges);
 
   useEffect(() => {
     if (initialNodes) {
@@ -87,6 +85,7 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
       ),
     []
   );
+  
   const onLayout = useCallback(
     (direction) => {
       const { nodes: layoutedNodes, edges: layoutedEdges } =

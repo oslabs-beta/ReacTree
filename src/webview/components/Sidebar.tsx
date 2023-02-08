@@ -83,6 +83,7 @@ const Sidebar = () => {
   // const handleProps = () => {
   //   setShowProps(!showProps);
   // };
+
   const handleProps = (nodeId: any) => {
     setShowPropsStatus(!propsObj[nodeId]);
   };
@@ -215,6 +216,7 @@ const Sidebar = () => {
         getNodes(item.children);
       }
     });
+    console.log('initial nodes: ', initialNodes)
   };
 
   //initialEdges test
@@ -241,6 +243,7 @@ const Sidebar = () => {
         makeEdges(item.children, nodeId);
       }
     });
+    console.log('Initial Edges: ', initialEdges)
   };
 
   // Edits and returns component tree based on users settings
@@ -280,6 +283,7 @@ const Sidebar = () => {
 
     // Invoking the helper function
     traverse(treeParsed);
+    console.log('After traverse: ',treeParsed)
     // Update the vewData state
     setViewData([treeParsed]);
     console.log('viewData: ',viewData)
@@ -295,7 +299,6 @@ const Sidebar = () => {
   // console.log('showpropsstatus', showPropsStatus);
   const data = initialNodes;
   makeEdges(viewData);
-  console.log('EDGES', initialEdges);
   // Render section
   return (
     <div className="sidebar">
