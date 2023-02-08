@@ -66,6 +66,8 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "@coreui/icons": "^3.0.0",
+		"@coreui/icons-react": "^2.1.0",
     "dagre": "^0.8.5",
     "fs-extra": "^8.1.0",
     "object-path": "^0.11.4",
