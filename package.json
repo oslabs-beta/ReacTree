@@ -67,7 +67,9 @@
   },
   "dependencies": {
     "@coreui/icons": "^3.0.0",
-		"@coreui/icons-react": "^2.1.0",
+    "@coreui/icons-react": "^2.1.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "dagre": "^0.8.5",
     "fs-extra": "^8.1.0",
     "object-path": "^0.11.4",

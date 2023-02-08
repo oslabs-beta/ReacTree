@@ -53,8 +53,8 @@ export default class ReacTreePanel {
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
       
     this._panel.webview.onDidReceiveMessage(
-      (msg: any) => {
-        switch (msg.command) {
+      async (msg: any) => {
+        switch (msg.type) {
           case 'startup':
             console.log('message received')
             // vscode.commands.executeCommand('vscode-note.note.edit', msg.data.id, msg.data.category);
@@ -90,14 +90,15 @@ export default class ReacTreePanel {
     );
   }
 
-  private updateView() {
+  private async updateView() {
     // Save current state of tree to workspace state:
     const tree = this.parser!.getTree();
     this._extContext.workspaceState.update('reacTree', tree);
     // Send updated tree to webview
     this._panel.webview.postMessage({
-      command: "parsed-data",
-      value: JSON.stringify(tree)
+      type: "parsed-data",
+      value: tree, 
+      settings: await vscode.workspace.getConfiguration('reacTree')
     });
   }
 
