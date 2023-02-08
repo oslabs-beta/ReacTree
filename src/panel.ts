@@ -12,6 +12,7 @@ export default class ReacTreePanel {
 
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionPath: string;
+  private readonly _extensionUri: vscode.Uri;
   private readonly _extContext: vscode.ExtensionContext;
   private parser: Parser | undefined;
   private _disposables: vscode.Disposable[] = [];
@@ -33,6 +34,7 @@ export default class ReacTreePanel {
   private constructor(extContext: vscode.ExtensionContext, column: vscode.ViewColumn) {
     console.log('SECOND')
     this._extensionPath = extContext.extensionPath;
+    this._extensionUri = extContext.extensionUri;
     this._extContext = extContext;
     // Not added - state preserver**
 
@@ -46,7 +48,7 @@ export default class ReacTreePanel {
     });
 
     // Set the webview's initial html content
-    this._panel.webview.html = this._getHtmlForWebview();
+    this._panel.webview.html = this._getHtmlForWebview(this._panel.webview);
 
     // Listen for when the panel is disposed
     // This happens when the user closes the panel or when the panel is closed programatically
@@ -117,15 +119,23 @@ export default class ReacTreePanel {
     }
   }
 
-  private _getHtmlForWebview() {
-    const scriptPathOnDisk = vscode.Uri.file(
-      path.join(this._extensionPath, 'out', 'main.wv.js')
+  private _getHtmlForWebview(webview: vscode.Webview) {
+    // const scriptPathOnDisk = vscode.Uri.file(
+    //   path.join(this._extensionPath, 'out', 'main.wv.js')
+    // );
+    // const stylePathOnDisk = vscode.Uri.file(
+    //   path.join(this._extensionPath, '/src/webview/style.css')
+    // );
+    // const styleUri = stylePathOnDisk.with({ scheme: 'vscode-resource' });
+    // const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
+    const scriptUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionPath, "out", "main.wv.js")
     );
-    const stylePathOnDisk = vscode.Uri.file(
-      path.join(this._extensionPath, '/src/webview/style.css')
+
+    const styleUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionPath, "media", "styles.css")
     );
-    const styleUri = stylePathOnDisk.with({ scheme: 'vscode-resource' });
-    const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
+
 
     // Use a nonce to whitelist which scripts can be run
     const nonce = getNonce();

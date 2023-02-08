@@ -7,7 +7,7 @@
   "publisher": "REACTREE",
   "preview": true,
   "engines": {
-    "vscode": "^1.30.0"
+    "vscode": "^1.39.0"
   },
   "repository": {
     "type": "git",
