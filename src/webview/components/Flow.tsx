@@ -98,7 +98,7 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
   );
 
   return (
-    <div className="tree_view">
+    <div className="tree_view" >
       <div className="layoutflow">
         <ReactFlow
           nodes={nodes}

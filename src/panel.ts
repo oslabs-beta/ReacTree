@@ -40,7 +40,7 @@ export default class ReacTreePanel {
     this._panel = vscode.window.createWebviewPanel(ReacTreePanel.viewType, "ReacTree", column, {
       // Enable javascript in the webview
       enableScripts: true,
-
+      retainContextWhenHidden: true,
       // And restric the webview to only loading content from our extension's `media` directory.
       localResourceRoots: [vscode.Uri.file(path.join(this._extensionPath, "out"))],
     });
@@ -70,6 +70,12 @@ export default class ReacTreePanel {
             this.parser.parse();
             console.log(this.parser.tree);
             this.updateView()
+            break;
+          case 'onViewFile':
+            console.log("onViewFile", msg.value);
+            if (!msg.value) return;
+            const doc = await vscode.workspace.openTextDocument(msg.value);
+            const editor = await vscode.window.showTextDocument(doc, {preserveFocus: false, preview: false});
             break;
           case 'edit-contentFile':
             vscode.commands.executeCommand('vscode-note.note.edit.col.content', msg.data.id, msg.data.n);

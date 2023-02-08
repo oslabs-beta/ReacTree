@@ -288,7 +288,6 @@ const Sidebar = () => {
     setViewData([treeParsed]);
     console.log('viewData: ',viewData)
   };
-
   getNodes(viewData);
   // set showPropsStatus obj after propsObj is made, which is after getNodes is invoked
   // const invokeShowPropsStatus = () => {
