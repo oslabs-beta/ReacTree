@@ -4,7 +4,7 @@ import { getNonce } from "./getNonce";
 import { Parser } from './parser';
 // import { Tree } from "./types/Tree";
 
-export default class ReacTreePanel {
+export default class ReacTreePanel{
     
   public static currentPanel: ReacTreePanel | undefined;
 
@@ -30,12 +30,15 @@ export default class ReacTreePanel {
       ReacTreePanel.currentPanel = new ReacTreePanel(extContext, vscode.ViewColumn.Two);
     }
   }
-
-  private constructor(extContext: vscode.ExtensionContext, column: vscode.ViewColumn) {
+  //temporarily setting extcontext to any type
+  private constructor(_extContext: any, column: vscode.ViewColumn) {
     console.log('SECOND')
-    this._extensionPath = extContext.extensionPath;
-    this._extensionUri = extContext.extensionUri;
-    this._extContext = extContext;
+    // this._extensionPath = _extContext.extensionPath;
+    this._extContext = _extContext;
+    console.log('extContext', _extContext);
+    console.log('this._extContext', this._extContext);
+    this._extensionUri = _extContext.extensionUri;
+    
     // Not added - state preserver**
 
     // Create and show a new webview panel
@@ -44,7 +47,8 @@ export default class ReacTreePanel {
       enableScripts: true,
 
       // And restric the webview to only loading content from our extension's `media` directory.
-      localResourceRoots: [vscode.Uri.file(path.join(this._extensionPath, "out"))],
+      // localResourceRoots: [vscode.Uri.file(path.join(this._extensionPath, "out"))],
+      localResourceRoots: [this._extensionUri],
     });
 
     // Set the webview's initial html content
@@ -118,22 +122,22 @@ export default class ReacTreePanel {
       }
     }
   }
-
-  private _getHtmlForWebview(webview: vscode.Webview) {
+  // setting to type any
+  private _getHtmlForWebview(webview: any) {
     // const scriptPathOnDisk = vscode.Uri.file(
     //   path.join(this._extensionPath, 'out', 'main.wv.js')
     // );
     // const stylePathOnDisk = vscode.Uri.file(
-    //   path.join(this._extensionPath, '/src/webview/style.css')
+    //   path.join(this._extensionPath, '../media/style.css')
     // );
     // const styleUri = stylePathOnDisk.with({ scheme: 'vscode-resource' });
     // const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionPath, "out", "main.wv.js")
+      vscode.Uri.joinPath(this._extensionUri, "out", "main.wv.js")
     );
 
     const styleUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionPath, "media", "styles.css")
+      vscode.Uri.joinPath(this._extensionUri, "media", "styles.css")
     );
 
 
