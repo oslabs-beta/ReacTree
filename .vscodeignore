@@ -1,0 +1,10 @@
+**/*
+
+!out/**/*.js
+!CHANGELOG.md
+!packages.json
+!images
+!README.md
+!icon.png
+!notes-usage
+!upgrade
