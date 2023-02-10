@@ -1,13 +1,17 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Node, Edge } from "reactflow";
+import LiveRenderModal from './LiveRenderModal'
 
-// import * as Modal from 'react-modal';
 import Flow from "./Flow";
 import Navbar from "./Navbar";
 
 import CIcon from "@coreui/icons-react";
 import { cibRedux, cilInfo, cilZoom } from "@coreui/icons";
+
+import Modal from 'react-bootstrap/Modal';
+
+
 
 interface vscode {
   postMessage(message: any): void;
@@ -25,12 +29,14 @@ const Sidebar = () => {
   // state variables for the incomimg treeData, parsed viewData, user's settings, and the root file name
   const [treeData, setTreeData]: any = useState();
   const [viewData, setViewData]: any = useState();
-  const [settings, setSettings]: [{ [key: string]: boolean }, Function] =
-    useState();
+  const [settings, setSettings]: [{ [key: string]: boolean }, Function] = useState();
   const [rootFile, setRootFile]: [string | undefined, Function] = useState();
-  const [showProps, setShowProps]: [boolean, Function] = useState(false);
-  // const [showRender, setShowRender]: [boolean, Function] = useState(false);
   const [showPropsStatus, setShowPropsStatus]: [any, Function] = useState({});
+  const [showModalStatus, setShowModalStatus]: [any, Function] = useState({});
+
+  const [show, setShow]: [boolean, Function] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     // Event Listener for 'message' from the extension
@@ -80,19 +86,6 @@ const Sidebar = () => {
       });
     }
   };
-  // toggle prop icon on/off
-  // const handleProps = () => {
-  //   setShowProps(!showProps);
-  // };
-
-  // // toggle render icon on/off
-  // const openRender = () => {
-  //   setShowRender(true);
-  // };
-
-  // const closeRender = () => {
-  //   setShowRender(false);
-  // };
 
   // Separate useEffect that gets triggered when the treeData and settings state variables get updated
   useEffect(() => {
@@ -107,28 +100,24 @@ const Sidebar = () => {
   let id = 0;
   const propsObj: any = {};
   // creates nodes for the initialNodes array
-  const makePropsObj = (fileName: string) => {
-    propsObj[fileName] = false;
-    // setShowPropsStatus(propsObj);
+  const makePropsObj = (itemID: string) => {
+    propsObj[itemID] = false;
   };
 
-  const handleProps = (fileName: string) => {
-    setShowPropsStatus({...showPropsStatus, [fileName]: !showPropsStatus[fileName]});
-    // setShowPropsStatus(propsObj)
-    // propsObj[fileName] = !propsObj[fileName]
-    // setShowPropsStatus(propsObj);
-    // console.log("fileName", fileName)
-    // console.log("AFTER CLICK", propsObj);
-    console.log("AFTER CLICK STATE", showPropsStatus);
+  const handleProps = (itemID: string) => {
+    setShowPropsStatus({...showPropsStatus, [itemID]: !showPropsStatus[itemID]});
   };
+
+  const handleModal = (itemID: string) => {
+    return setShowModalStatus({...showModalStatus, [itemID]: !showModalStatus[itemID]});
+  }
+
 
   const getNodes = (tree: any) => {
-    if (!tree) {
-      return;
-    }
+    if (!tree) return;
 
     tree.forEach((item: any) => {
-      makePropsObj(item.fileName);
+      makePropsObj(item.id);
       const node = {
         id: (++id).toString(),
         data: {
@@ -143,25 +132,14 @@ const Sidebar = () => {
             >
               {/* for rendering modal to show live render of component */}
               <div style={{ alignSelf: "flex-end" }}>
-                {/* <CIcon icon={cilZoom} width={12} height={12} style={{marginRight: '2px' }} onClick={openRender} />
-                {setShowRender && (
-                  <Modal
-                    isOpen={showRender}
-                    onRequestClose={closeRender}
-                    style={customStyles}
-                    >
-                      <div>MODAL OPEN</div>
-                      <button onClick={closeRender}>CLOSE</button>
-                  </Modal>
-                )} */}
+                <CIcon icon={cilZoom} width={12} height={12} style={{marginRight: '2px' }} onClick={() => handleModal(item.id)} />
                 {/* if component has redux storage */}
                 {item.reduxConnect && (
                   <CIcon icon={cibRedux} width={12} height={12} />
                 )}
                 {Object.keys(item.props).length > 0 && (
                   <CIcon
-                    onClick={() => handleProps(item.fileName)}
-                    // onClick={() => setShowProps(!showProps)}
+                    onClick={() => handleProps(item.id)}
                     icon={cilInfo}
                     width={12}
                     height={12}
@@ -180,7 +158,7 @@ const Sidebar = () => {
                 {item.fileName}
               </p>
               {Object.keys(item.props).length > 0 &&
-                showPropsStatus[item.fileName] === true && (
+                showPropsStatus[item.id] === true && (
                   <>
                     <hr style={{ width: "75%", margin: "0.25em 0" }} />
                     <div
