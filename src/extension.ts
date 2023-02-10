@@ -8,4 +8,4 @@ export function activate(extContext: vscode.ExtensionContext) {
 	}));
 };
 
-export function deactivate() { }
+export function deactivate() {}
