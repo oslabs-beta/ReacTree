@@ -10,6 +10,7 @@ import CIcon from "@coreui/icons-react";
 import { cibRedux, cilInfo, cilZoom } from "@coreui/icons";
 
 import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -108,9 +109,9 @@ const Sidebar = () => {
     setShowPropsStatus({...showPropsStatus, [itemID]: !showPropsStatus[itemID]});
   };
 
-  const handleModal = (itemID: string) => {
-    return setShowModalStatus({...showModalStatus, [itemID]: !showModalStatus[itemID]});
-  }
+  // const handleModal = (itemID: string) => {
+  //   return setShowModalStatus({...showModalStatus, [itemID]: !showModalStatus[itemID]});
+  // }
 
 
   const getNodes = (tree: any) => {
@@ -132,7 +133,21 @@ const Sidebar = () => {
             >
               {/* for rendering modal to show live render of component */}
               <div style={{ alignSelf: "flex-end" }}>
-                <CIcon icon={cilZoom} width={12} height={12} style={{marginRight: '2px' }} onClick={() => handleModal(item.id)} />
+                <CIcon icon={cilZoom} width={12} height={12} style={{marginRight: '2px' }} onClick={handleShow} />
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Modal heading</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                      <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 {/* if component has redux storage */}
                 {item.reduxConnect && (
                   <CIcon icon={cibRedux} width={12} height={12} />
