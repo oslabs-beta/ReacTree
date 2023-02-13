@@ -1,6 +1,8 @@
 const Footer = () => {
     return(
-      <div></div>
+      <div id='Footer'>
+        © 2023 ReacTree | MIT License
+      </div>
     );
   }
   

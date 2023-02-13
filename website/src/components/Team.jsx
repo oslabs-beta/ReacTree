@@ -10,24 +10,38 @@ const Team = () => {
       <h2>Our Team Members</h2>
       <div className='team-members'>
         <div className='member'>
-          <img src={Justin}></img>
-          Justin Kim
+          <img className='member-photo'src={Justin}></img>
+          <div className='member-name'>Justin Kim</div>
+          <div className='member-title'>Software Engineer</div>
+            <div className='member-links'>
+              <a className='github-logo' href='https://github.com/justin27kim'>
+                <img src='https://cdn-icons-png.flaticon.com/512/25/25231.png'/>
+              </a>
+              <a className='linkedin-logo' href='https://www.linkedin.com/in/justin27kim/'>
+                <img src='https://cdn.onlinewebfonts.com/svg/img_24651.png'/>
+              </a>
+            </div>
+
         </div>
         <div className='member'>
-          <img src={Mike}></img>
-          Mike Benliyan
+          <img className='member-photo' src={Mike}></img>
+          <div className='member-name'>Mike Benliyan</div>
+          <div className='member-title'>Software Engineer</div>
         </div>
         <div className='member'>
-          <img src={Brian}></img>
-          Brian Noh
+          <img className='member-photo' src={Brian}></img>
+          <div className='member-name'>Brian Noh</div>
+          <div className='member-title'>Software Engineer</div>
         </div>
         <div className='member'>
-          <img src={Kevin}></img>
-          Kevin Liu
+          <img className='member-photo' src={Kevin}></img>
+          <div className='member-name'>Kevin Liu</div>
+          <div className='member-title'>Software Engineer</div>
         </div>
         <div className='member'>
-          <img src={Fabian}></img>
-          Fabian Salazar
+          <img className='member-photo' src={Fabian}></img>
+          <div className='member-name'>Fabian Salazar</div>
+          <div className='member-title'>Software Engineer</div>
         </div>
       </div>
     </div>

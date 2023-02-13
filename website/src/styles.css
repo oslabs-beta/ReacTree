@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  background-image: linear-gradient(
+    45deg,
+    #6ff3aaa9,
+    #3AE8C6,
+    #3AC0E8,
+    #82ceab
+  );
+  background-size: 400%;
+  animation: bg-animation 15s infinite alternate;
+}
+
+@keyframes bg-animation {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 25px;
+}
+
+.nav-padding {
+  padding-right: 15px;
+}
+
+.team h2{
+    display: flex;
+    justify-content: center;
+}
+.team-members {
+    display: flex; 
+    justify-content: space-around;
+}
+
+
+.member-photo {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 2rem;
+}
+
+
+.github {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+
+#Footer {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
