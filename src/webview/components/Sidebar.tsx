@@ -1,13 +1,14 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
-import { Node, Edge } from "reactflow";
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { Node, Edge } from 'reactflow';
 
-// import * as Modal from 'react-modal';
-import Flow from "./Flow";
-import Navbar from "./Navbar";
+import Flow from './Flow';
+import Navbar from './Navbar';
+import Modal from './Modal';
 
-import CIcon from "@coreui/icons-react";
-import { cibRedux, cilInfo, cilZoom } from "@coreui/icons";
+import CIcon from '@coreui/icons-react';
+import { cibRedux, cilInfo, cilZoom } from '@coreui/icons';
+import { readFile } from 'fs';
 
 interface vscode {
   postMessage(message: any): void;
@@ -31,27 +32,35 @@ const Sidebar = () => {
   const [showProps, setShowProps]: [boolean, Function] = useState(false);
   // const [showRender, setShowRender]: [boolean, Function] = useState(false);
   const [showPropsStatus, setShowPropsStatus]: [any, Function] = useState({});
+  const [modalActive, setModalActive]: [boolean, Function] = useState(false);
+  const [fileContent, setFileContent]: [string, Function] = useState('');
 
   useEffect(() => {
     // Event Listener for 'message' from the extension
-    window.addEventListener("message", (event) => {
+    window.addEventListener('message', (event) => {
       const message = event.data;
       switch (message.type) {
         // Listener to receive the tree data, update navbar and tree view
-        case "parsed-data": {
-          console.log("BEFORE HERE ", message.value);
+        case 'parsed-data': {
+          console.log('BEFORE HERE ', message.value);
           let data = [];
           data.push(message.value);
-          console.log("DATA ", data);
+          console.log('DATA ', data);
           setRootFile(message.value.fileName);
           setSettings(message.settings);
           setTreeData(data);
-          console.log("HERE", treeData);
+          console.log('HERE', treeData);
           break;
         }
         // Listener to receive the user's settings
-        case "settings-data": {
+        case 'settings-data': {
           setSettings(message.value);
+          break;
+        }
+        case 'file-content': {
+          console.log('FROM BACKEND', message.value);
+          console.log('TYPE', typeof message.value);
+          setFileContent(message.value);
           break;
         }
       }
@@ -59,13 +68,13 @@ const Sidebar = () => {
 
     // Post message to the extension whenever sapling is opened
     vscode.postMessage({
-      type: "onReacTreeVisible",
+      type: 'onReacTreeVisible',
       value: null,
     });
 
     // Post message to the extension for the user's settings whenever sapling is opened
     vscode.postMessage({
-      type: "onSettingsAcquire",
+      type: 'onSettingsAcquire',
       value: null,
     });
     // console.log('HERE', viewData);
@@ -75,7 +84,7 @@ const Sidebar = () => {
     // Edge case to verify that there is in fact a file path for the current node
     if (file) {
       vscode.postMessage({
-        type: "onViewFile",
+        type: 'onViewFile',
         value: file,
       });
     }
@@ -113,13 +122,28 @@ const Sidebar = () => {
   };
 
   const handleProps = (fileName: string) => {
-    setShowPropsStatus({...showPropsStatus, [fileName]: !showPropsStatus[fileName]});
+    setShowPropsStatus({
+      ...showPropsStatus,
+      [fileName]: !showPropsStatus[fileName],
+    });
     // setShowPropsStatus(propsObj)
     // propsObj[fileName] = !propsObj[fileName]
     // setShowPropsStatus(propsObj);
     // console.log("fileName", fileName)
     // console.log("AFTER CLICK", propsObj);
-    console.log("AFTER CLICK STATE", showPropsStatus);
+    console.log('AFTER CLICK STATE', showPropsStatus);
+  };
+
+  const sendFilePath = (item: any) => {
+    console.log('FILEPATH', item.filepath);
+    vscode.postMessage({
+      type: 'onViewFileContent',
+      value: item,
+    });
+  };
+
+  const handleModal = () => {
+    setModalActive(!modalActive);
   };
 
   const getNodes = (tree: any) => {
@@ -136,13 +160,13 @@ const Sidebar = () => {
           label: (
             <div
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
               }}
             >
               {/* for rendering modal to show live render of component */}
-              <div style={{ alignSelf: "flex-end" }}>
+              <div style={{ alignSelf: 'flex-end' }}>
                 {/* <CIcon icon={cilZoom} width={12} height={12} style={{marginRight: '2px' }} onClick={openRender} />
                 {setShowRender && (
                   <Modal
@@ -160,21 +184,42 @@ const Sidebar = () => {
                 )}
                 {Object.keys(item.props).length > 0 && (
                   <CIcon
-                    onClick={() => handleProps(item.fileName)}
+                    onClick={() => handleProps(item)}
                     // onClick={() => setShowProps(!showProps)}
                     icon={cilInfo}
                     width={12}
                     height={12}
-                    style={{ cursor: "pointer", color: "#003f8e" }}
+                    style={{ cursor: 'pointer', color: '#003f8e' }}
                   />
                 )}
+                <CIcon
+                  onClick={() => {
+                    sendFilePath(item);
+                    handleModal();
+                  }}
+                  icon={cilZoom}
+                  width={12}
+                  height={12}
+                  style={{
+                    marginLeft: '0.25rem',
+                    color: '#003f8e',
+                    cursor: 'pointer',
+                  }}
+                />
               </div>
+              {/* {modalActive && (
+                <Modal
+                  modalActive={modalActive}
+                  handleModal={handleModal}
+                  fileContent={fileContent}
+                />
+              )} */}
               <p
                 style={{
                   fontWeight: 800,
-                  marginBottom: "0.5em",
-                  textAlign: "center",
-                  color: item.depth === 0 ? "white" : "black",
+                  marginBottom: '0.5em',
+                  textAlign: 'center',
+                  color: item.depth === 0 ? 'white' : 'black',
                 }}
               >
                 {item.fileName}
@@ -182,17 +227,17 @@ const Sidebar = () => {
               {Object.keys(item.props).length > 0 &&
                 showPropsStatus[item.fileName] === true && (
                   <>
-                    <hr style={{ width: "75%", margin: "0.25em 0" }} />
+                    <hr style={{ width: '75%', margin: '0.25em 0' }} />
                     <div
                       style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        marginRight: "18px",
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        marginRight: '18px',
                       }}
                     >
                       {Object.keys(item.props).map((prop: any, idx: number) => (
-                        <div key={idx} style={{ margin: "0 0.5em" }}>
+                        <div key={idx} style={{ margin: '0 0.5em' }}>
                           &#8226; {prop}
                         </div>
                       ))}
@@ -201,11 +246,11 @@ const Sidebar = () => {
                 )}
               <button
                 style={{
-                  marginTop: "0.25em",
-                  backgroundColor: item.depth === 0 ? "white" : "#003f8e",
-                  color: item.depth === 0 ? "black" : "white",
-                  padding: "0.5em 1em",
-                  borderRadius: "5px",
+                  marginTop: '0.25em',
+                  backgroundColor: item.depth === 0 ? 'white' : '#003f8e',
+                  color: item.depth === 0 ? 'black' : 'white',
+                  padding: '0.5em 1em',
+                  borderRadius: '5px',
                 }}
                 onClick={() => viewFile(item.filePath)}
               >
@@ -215,10 +260,10 @@ const Sidebar = () => {
           ),
         },
         position: { x: 0, y: 0 },
-        type: item.depth === 0 ? "input" : "",
+        type: item.depth === 0 ? 'input' : '',
         style: {
-          backgroundColor: item.depth === 0 ? "#003f8e" : "white",
-          borderRadius: "5px",
+          backgroundColor: item.depth === 0 ? '#003f8e' : 'white',
+          borderRadius: '5px',
         },
       };
       initialNodes.push(node);
@@ -226,7 +271,7 @@ const Sidebar = () => {
         getNodes(item.children);
       }
     });
-    console.log("initial nodes: ", initialNodes);
+    console.log('initial nodes: ', initialNodes);
   };
 
   //initialEdges test
@@ -244,7 +289,7 @@ const Sidebar = () => {
           id: `e${parentId}-${nodeId}`,
           source: parentId.toString(),
           target: nodeId.toString(),
-          type: "smoothstep",
+          type: 'smoothstep',
           animated: false,
         };
         initialEdges.push(edge);
@@ -303,6 +348,11 @@ const Sidebar = () => {
     <div className="sidebar">
       <Navbar rootFile={rootFile} />
       <hr className="line_break" />
+      <Modal
+        modalActive={modalActive}
+        handleModal={handleModal}
+        fileContent={fileContent}
+      />
       <Flow initialNodes={initialNodes} initialEdges={initialEdges} />
     </div>
   );

@@ -340,3 +340,20 @@
 .inputfile + label {
   cursor: pointer;
 }
+
+.modal {
+  border: 1px solid rgb(255, 0, 0);
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+.closeModal {
+  align-self: flex-end;
+  margin-right: 15px;
+  margin-top: -5px;
+}
+
+
