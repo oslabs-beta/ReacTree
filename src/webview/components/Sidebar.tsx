@@ -1,6 +1,9 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Node, Edge } from "reactflow";
+import Button from '@mui/material/Button';
+import FilterNoneIcon from '@mui/icons-material/FilterNone';
+import Badge from '@mui/material/Badge';
 
 // import * as Modal from 'react-modal';
 import Flow from "./Flow";
@@ -8,6 +11,7 @@ import Navbar from "./Navbar";
 
 import CIcon from "@coreui/icons-react";
 import { cibRedux, cilInfo, cilZoom } from "@coreui/icons";
+import { types } from "util";
 
 interface vscode {
   postMessage(message: any): void;
@@ -129,11 +133,13 @@ const Sidebar = () => {
 
     tree.forEach((item: any) => {
       makePropsObj(item.fileName);
+      
       const node = {
         id: (++id).toString(),
         data: {
           // if the item has props, show them on each div
           label: (
+            <Badge badgeContent={item.count} color="primary">
             <div
               style={{
                 display: "flex",
@@ -155,6 +161,12 @@ const Sidebar = () => {
                   </Modal>
                 )} */}
                 {/* if component has redux storage */}
+                {/* {item.count > 1 && (
+                  <Badge badgeContent={item.count} color="primary">
+                      <FilterNoneIcon color="action"/>
+                  </Badge>
+                )} */}
+
                 {item.reduxConnect && (
                   <CIcon icon={cibRedux} width={12} height={12} />
                 )}
@@ -169,6 +181,7 @@ const Sidebar = () => {
                   />
                 )}
               </div>
+
               <p
                 style={{
                   fontWeight: 800,
@@ -199,19 +212,20 @@ const Sidebar = () => {
                     </div>
                   </>
                 )}
-              <button
-                style={{
-                  marginTop: "0.25em",
-                  backgroundColor: item.depth === 0 ? "white" : "#003f8e",
-                  color: item.depth === 0 ? "black" : "white",
-                  padding: "0.5em 1em",
-                  borderRadius: "5px",
-                }}
+              <Button variant="contained"
+                // style={{
+                //   marginTop: "0.25em",
+                //   backgroundColor: item.depth === 0 ? "white" : "#003f8e",
+                //   color: item.depth === 0 ? "black" : "white",
+                //   padding: "0.5em 1em",
+                //   borderRadius: "5px",
+                // }}
                 onClick={() => viewFile(item.filePath)}
               >
                 File
-              </button>
+              </Button>
             </div>
+            </Badge>
           ),
         },
         position: { x: 0, y: 0 },
