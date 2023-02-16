@@ -6,18 +6,18 @@
       "lib": ["es6", "dom"],
       "jsx": "react",
       "sourceMap": true,
-      "rootDir": "reactree/src",
+      "rootDir": "./src",
       "strict": false /* enable all strict type-checking options /
       / Additional Checks /
       // "noImplicitReturns": true, / Report error when not all code paths in function return a value. /
       // "noFallthroughCasesInSwitch": true, / Report errors for fallthrough cases in switch statement. /
       // "noUnusedParameters": true,  / Report errors on unused parameters. */
     },
-    "include": ["ReacTree/reactree/src", "ReacTree/reactree/src/types/index.d.ts"],
+    "include": ["./src/*.ts", "./src/types/index.d.ts"],
     "exclude": [
       "node_modules",
       ".vscode-test",
-      "ReacTree/reactree/src/webviews",
-      "ReacTree/reactree/src/test/test_apps"
+      "reactree/src/webviews",
+      "reactree/src/test/test_apps"
     ]
   }

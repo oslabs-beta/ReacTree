@@ -1,10 +1,10 @@
 {
   "name": "reactree",
-  "displayName": "REACTREE",
+  "displayName": "ReacTree",
   "description": "React higherarchy visualizer and component preview tool",
   "version": "0.0.1",
   "icon": "icon.png",
-  "publisher": "REACTREE",
+  "publisher": "ReacTreeDev",
   "preview": true,
   "engines": {
     "vscode": "^1.74.3"
@@ -17,8 +17,11 @@
     "Other"
   ],
   "keywords": [
-    "note",
-    "vscode"
+    "hierarchical",
+    "tree",
+    "vscode",
+    "react",
+    "redux"
   ],
   "license": "MIT",
   "activationEvents": [],
