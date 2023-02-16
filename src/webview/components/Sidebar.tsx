@@ -139,7 +139,7 @@ const Sidebar = () => {
         data: {
           // if the item has props, show them on each div
           label: (
-            <Badge badgeContent={item.count} color="primary">
+            // <Badge badgeContent={item.count} color="primary">
             <div
               style={{
                 display: "flex",
@@ -161,11 +161,11 @@ const Sidebar = () => {
                   </Modal>
                 )} */}
                 {/* if component has redux storage */}
-                {/* {item.count > 1 && (
+                {item.count > 1 && (
                   <Badge badgeContent={item.count} color="primary">
-                      <FilterNoneIcon color="action"/>
+                      <FilterNoneIcon color="action" className="icon"/>
                   </Badge>
-                )} */}
+                )}
 
                 {item.reduxConnect && (
                   <CIcon icon={cibRedux} width={12} height={12} />
@@ -225,7 +225,7 @@ const Sidebar = () => {
                 File
               </Button>
             </div>
-            </Badge>
+            // </Badge>
           ),
         },
         position: { x: 0, y: 0 },

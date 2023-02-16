@@ -340,3 +340,48 @@
 .inputfile + label {
   cursor: pointer;
 }
+
+.MuiBadge-root {
+  position: relative;
+  top: -15px;
+  right: -25px;
+}
+
+.icon {
+  visibility: hidden;
+}
+
+/* .controls {
+  position: absolute;
+  right: 0%;
+  display: flex; 
+  flex-direction: row;
+} */
+
+div.react-flow__panel.react-flow__attribution {
+  visibility: hidden;
+}
+
+div.react-flow__panel.react-flow__controls.bottom.left{
+  left:auto;
+  right: 6px;
+  bottom: 60px;
+  margin-bottom: 20px;
+  margin-right: 0px;
+  display: flex;
+  flex-direction: row;
+}  
+.react-flow__controls-button.react-flow__controls-zoomin{
+  border-radius: 30px 0px 0px 30px;
+}
+
+.show {
+  width: 26px;
+  height: 26.5px;
+  right: 0%;
+  bottom: 35px;
+}
+
+.hide {
+  visibility: hidden;
+}
