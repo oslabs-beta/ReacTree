@@ -4,6 +4,10 @@ import { Node, Edge } from "reactflow";
 import Button from '@mui/material/Button';
 import FilterNoneIcon from '@mui/icons-material/FilterNone';
 import Badge from '@mui/material/Badge';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
+import InfoIcon from '@mui/icons-material/Info';
 
 // import * as Modal from 'react-modal';
 import Flow from "./Flow";
@@ -12,6 +16,7 @@ import Navbar from "./Navbar";
 import CIcon from "@coreui/icons-react";
 import { cibRedux, cilInfo, cilZoom } from "@coreui/icons";
 import { types } from "util";
+import { borderBottom, fontSize, padding } from "@mui/system";
 
 interface vscode {
   postMessage(message: any): void;
@@ -139,14 +144,8 @@ const Sidebar = () => {
         data: {
           // if the item has props, show them on each div
           label: (
-            <Badge badgeContent={item.count} color="primary">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
+            // <Badge badgeContent={item.count} color="primary">
+            <div className="nodeData">
               {/* for rendering modal to show live render of component */}
               <div style={{ alignSelf: "flex-end" }}>
                 {/* <CIcon icon={cilZoom} width={12} height={12} style={{marginRight: '2px' }} onClick={openRender} />
@@ -161,33 +160,33 @@ const Sidebar = () => {
                   </Modal>
                 )} */}
                 {/* if component has redux storage */}
-                {/* {item.count > 1 && (
-                  <Badge badgeContent={item.count} color="primary">
-                      <FilterNoneIcon color="action"/>
+                {item.count >= 1 && (
+                  <Badge badgeContent={item.count}  sx={{
+                    "& .MuiBadge-badge": {
+                      color: "var(--vscode-button-foreground)",
+                      backgroundColor: "var(--vscode-settings-focusedRowBorder)"
+                    }
+                  }}>
                   </Badge>
-                )} */}
+                )}
 
                 {item.reduxConnect && (
                   <CIcon icon={cibRedux} width={12} height={12} />
-                )}
-                {Object.keys(item.props).length > 0 && (
-                  <CIcon
-                    onClick={() => handleProps(item.fileName)}
-                    // onClick={() => setShowProps(!showProps)}
-                    icon={cilInfo}
-                    width={12}
-                    height={12}
-                    style={{ cursor: "pointer", color: "#003f8e" }}
-                  />
                 )}
               </div>
 
               <p
                 style={{
-                  fontWeight: 800,
-                  marginBottom: "0.5em",
+                  fontFamily: 'Roboto',
+                  fontStyle: 'normal',
+                  fontWeight: 700,
+                  paddingBottom: '6px',
+                  margin: "8px 0px 2px 0px",
                   textAlign: "center",
-                  color: item.depth === 0 ? "white" : "black",
+                  color: 'var(--vscode-foreground)',
+                  fontSize: '1.3em',
+                  borderBottom: "2px solid var(--vscode-settings-focusedRowBorder)"
+
                 }}
               >
                 {item.fileName}
@@ -195,44 +194,46 @@ const Sidebar = () => {
               {Object.keys(item.props).length > 0 &&
                 showPropsStatus[item.fileName] === true && (
                   <>
-                    <hr style={{ width: "75%", margin: "0.25em 0" }} />
                     <div
                       style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        marginRight: "18px",
+                        display: "block",
+                        columnWidth: '64px',
+                        fontSize: '8pt',
+                        color: 'var(--vscode-foreground)',
+                        borderBottom: "2px solid var(--vscode-settings-focusedRowBorder)",
+                        padding: '4px 0px 6px 5px',
+                        wordBreak: 'break-all'
                       }}
                     >
                       {Object.keys(item.props).map((prop: any, idx: number) => (
-                        <div key={idx} style={{ margin: "0 0.5em" }}>
-                          &#8226; {prop}
+                        <div key={idx} style={{display: 'flex' }}>
+                          &#8226;{prop}
                         </div>
                       ))}
                     </div>
                   </>
                 )}
-              <Button variant="contained"
-                // style={{
-                //   marginTop: "0.25em",
-                //   backgroundColor: item.depth === 0 ? "white" : "#003f8e",
-                //   color: item.depth === 0 ? "black" : "white",
-                //   padding: "0.5em 1em",
-                //   borderRadius: "5px",
-                // }}
-                onClick={() => viewFile(item.filePath)}
-              >
-                File
-              </Button>
+              <div className="nodeToolbar">
+              {Object.keys(item.props).length > 0 && (
+                  <InfoIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }} onClick={() => handleProps(item.fileName)}/>
+                )}
+                {item.children.length > 0 && <CloseFullscreenIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }}/>}
+                <TextSnippetIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }} onClick={() => viewFile(item.filePath)}/>
+                <VisibilityIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }}/>
+              </div>
             </div>
-            </Badge>
           ),
         },
+        onClick : () => handleProps(item.fileName),
         position: { x: 0, y: 0 },
         type: item.depth === 0 ? "input" : "",
         style: {
-          backgroundColor: item.depth === 0 ? "#003f8e" : "white",
-          borderRadius: "5px",
+          backgroundColor: "var(--vscode-dropdown-background)",
+          borderRadius: "15px",
+          width: '170px',
+          boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+          border: 'none', 
+          padding: '0px 10px'
         },
       };
       initialNodes.push(node);
@@ -316,7 +317,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <Navbar rootFile={rootFile} />
-      <hr className="line_break" />
+
       <Flow initialNodes={initialNodes} initialEdges={initialEdges} />
     </div>
   );

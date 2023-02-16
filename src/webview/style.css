@@ -1,11 +1,29 @@
 /* this gets exported as style.css and can be used for the default theming */
 /* these are the necessary styles for React Flow, they get used by base.css and style.css */
-
+body {
+  padding: 0px;
+  /* background-color: #fafafa; */
+  background-color: var(--vscode-editor-background);
+	color: var(--vscode-editor-foreground);
+}
 .panel {
   height: 100vh;
   width: 100vw;
 }
+.MuiBadge-badge {
+  top: -8px !important;
+  right: -84px !important;
+}
 
+.nodeToolbar {
+  display: flex;
+  justify-content: center;
+  padding: 3px 0px;
+}
+
+.css-vubbuv {
+  font-size: 1.3rem;
+}
 .react-flow__container {
   position: absolute;
   width: 100%;
@@ -13,18 +31,21 @@
   top: 0;
   left: 0;
 }
+.react-flow__handle.connectable {
+  background-color: rgb(0 0 0 / 0%) !important;
+  border: none !important;
+}
 .react-flow__pane {
   z-index: 1;
-  cursor: -webkit-grab;
-  cursor: grab;
+  cursor: auto !important;
 }
-.react-flow__pane.selection {
+/* .react-flow__pane.selection {
   cursor: pointer;
 }
 .react-flow__pane.dragging {
   cursor: -webkit-grabbing;
   cursor: grabbing;
-}
+} */
 .react-flow__viewport {
   transform-origin: 0 0;
   z-index: 2;
@@ -311,32 +332,65 @@
   height: 100vh;
 }
 
+.navbar {
+  display: flex;
+  position: absolute;
+  top: 80px; 
+  /* padding: 10px; */
+  border-radius: 0px 35px 35px 0px;
+  z-index: 2;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  background-color: white;
+  background-color: var(--vscode-input-background);
+  border: solid var(--vscode-settings-focusedRowBorder);
+  border-left: none;
+}
+
 .inputfile {
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
   overflow: hidden;
-  position: absolute;
+  /* position: absolute; */
   z-index: -1;
 }
-
-.inputfile + label {
-  padding: 0.4em;
-  font-size: 1em;
-  font-weight: 700;
-  color: white;
-  background: #003f8e;
+.navbarContents{
+  display: flex;
+  padding: 2px 5px;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5em;
+}
+#inputLabel {
+  /* padding: 0.4em; */
+  font-size: 1.2em;
+  font-weight: 400;
+  /* background: #003f8e; */
   display: inline-block;
-  margin-left: 0.8em;
-  margin-top: 0.2em;
+  margin-left: 10px;
+  margin-right: 5px;
   border-radius: 5px;
   transition: 0.2s;
 }
+#inputLabel strong{
+  color: #2196f3;
+}
 
-.inputfile + label:hover {
+#inputLabel:hover {
   background: opacity(0.8);
 }
 
-.inputfile + label {
+#inputLabel {
   cursor: pointer;
 }
+
+.nodeData {
+  display: block;
+  width: 150px;
+  padding: 0;
+  font-size: 1.4em;
+
+}
+

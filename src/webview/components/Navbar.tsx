@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import * as ReactDOM from 'react-dom';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import ClearIcon from '@mui/icons-material/Clear';
 
 // imports for the icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -32,10 +34,14 @@ const Navbar = ({ rootFile }: any) => {
   return (
     <div className="navbar">
       <input type="file" name="file" id="file" className="inputfile" onChange={(e) => {fileMessage(e);}}/>
-      <label htmlFor="file">
-        <FontAwesomeIcon icon={faDownload}/>
-        <strong id="strong_file">{rootFile ? ` ${rootFile}` : ' Choose a file...'}</strong>
-      </label>
+      <div className='navbarContents'>
+        <label id='inputLabel' htmlFor="file">
+          {/* <FontAwesomeIcon icon={faDownload}/> */}
+          <strong id="strong_file">{rootFile ? ` ${rootFile}` : ' Select File'}</strong>
+        </label>
+        <RefreshIcon style={{fontSize:15, marginTop: 2, marginRight: 5}}/>
+        <ClearIcon style={{fontSize:15, marginTop: 2}}/>  
+      </div>
     </div>
   );
 };
