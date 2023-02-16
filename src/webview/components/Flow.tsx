@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { useCallback, useEffect } from 'react';
+import { IconButton } from '@mui/material';
+import NextIcon from '@mui/icons-material/NavigateNext';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import PIcon from '@mui/icons-material/LocalParking';
+import { useCallback, useEffect, useState } from 'react';
 import ReactFlow, {
   useNodesState,
   useEdgesState,
@@ -20,6 +24,7 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
   const nodeWidth = 172;
   // const nodeHeight = 36;
   const nodeHeight = 120;
+  const [disabled, setDisabled]: any = useState(false);
 
   const getLayoutedElements = (
     nodes: any[],
@@ -88,6 +93,7 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
   
   const onLayout = useCallback(
     (direction) => {
+      setDisabled(!disabled);
       const { nodes: layoutedNodes, edges: layoutedEdges } =
         getLayoutedElements(nodes, edges, direction);
 
@@ -109,10 +115,11 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
           connectionLineType={ConnectionLineType.SmoothStep}
           fitView
         >
-          <Controls style={{ borderRadius: '5px' }} />
+        <Controls style={{ borderRadius: '50px',}} /> 
         </ReactFlow>
-        <div className="controls" style={{ width: '100px' }}>
-          <button
+
+        {/* <div className="controls" style={{ width: '100px' }}>
+          <button className={disabled ? "show" : "hide"}
             onClick={() => onLayout('TB')}
             style={{
               backgroundColor: 'white',
@@ -123,19 +130,49 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
           >
             vertical
           </button>
-          <button
+          <button className={disabled ? "hide" : "show"}
             onClick={() => onLayout('LR')}
             style={{
               backgroundColor: 'white',
               color: 'black',
               borderRadius: '5px',
-              paddingLeft: '2px',
-              marginTop: '2px',
+              position:'absolute',
+              // paddingLeft: '2px',
+              // marginTop: '2px',
             }}
           >
             horizontal
-          </button>
-        </div>
+          </button> 
+        </div> */}
+      </div>
+      <div className="controls" /*style={{ width: '100px' }}*/>
+          <IconButton className={disabled ? "show" : "hide"}
+            onClick={() => onLayout('TB')}
+            style={{
+              backgroundColor: 'white',
+              color: 'black',
+              borderRadius: '0px',
+              position:'absolute',
+            }}
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+          <IconButton className={disabled ? "hide" : "show"}
+            onClick={() => onLayout('LR')}
+            style={{
+              backgroundColor: 'white',
+              color: 'black',
+              borderRadius: '0px',
+              position:'absolute',
+            }}
+          >
+            <NextIcon />
+          </IconButton> 
+      </div>
+      <div>
+        <PIcon className='allProps'>
+          
+        </PIcon>
       </div>
     </div>
   );

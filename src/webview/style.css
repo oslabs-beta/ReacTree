@@ -375,7 +375,7 @@ body {
   transition: 0.2s;
 }
 #inputLabel strong{
-  color: #2196f3;
+  color: var(--vscode-foreground);
 }
 
 #inputLabel:hover {
@@ -394,3 +394,45 @@ body {
 
 }
 
+
+.icon {
+  visibility: hidden;
+}
+
+div.react-flow__panel.react-flow__attribution {
+  visibility: hidden;
+}
+
+div.react-flow__panel.react-flow__controls.bottom.left{
+  left:auto;
+  right: 6px;
+  bottom: 60px;
+  height: 27px;
+  margin-bottom: 20px;
+  margin-right: 0px;
+  display: flex;
+  flex-direction: row;
+}  
+.react-flow__controls-button.react-flow__controls-zoomin{
+  border-radius: 30px 0px 0px 30px;
+}
+.react-flow__controls-button{
+  background-color: var(--vscode-input-background) !important;
+}
+.show {
+  width: 26px;
+  height: 27px;
+  right: 0%;
+  bottom: 34.5px;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.allProps {
+  width: 26px;
+  height: 27px;
+  right: 0%;
+  bottom: 34.5px;
+}
