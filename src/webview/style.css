@@ -351,13 +351,6 @@
   visibility: hidden;
 }
 
-/* .controls {
-  position: absolute;
-  right: 0%;
-  display: flex; 
-  flex-direction: row;
-} */
-
 div.react-flow__panel.react-flow__attribution {
   visibility: hidden;
 }
@@ -366,6 +359,7 @@ div.react-flow__panel.react-flow__controls.bottom.left{
   left:auto;
   right: 6px;
   bottom: 60px;
+  height: 27px;
   margin-bottom: 20px;
   margin-right: 0px;
   display: flex;
@@ -377,11 +371,18 @@ div.react-flow__panel.react-flow__controls.bottom.left{
 
 .show {
   width: 26px;
-  height: 26.5px;
+  height: 27px;
   right: 0%;
-  bottom: 35px;
+  bottom: 34.5px;
 }
 
 .hide {
   visibility: hidden;
+}
+
+.allProps {
+  width: 26px;
+  height: 27px;
+  right: 0%;
+  bottom: 34.5px;
 }

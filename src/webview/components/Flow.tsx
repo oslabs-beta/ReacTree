@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IconButton } from '@mui/material';
 import NextIcon from '@mui/icons-material/NavigateNext';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import PIcon from '@mui/icons-material/LocalParking';
 import { useCallback, useEffect, useState } from 'react';
 import ReactFlow, {
   useNodesState,
@@ -24,8 +25,6 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
   // const nodeHeight = 36;
   const nodeHeight = 120;
   const [disabled, setDisabled]: any = useState(false);
-  // const [Vdisabled, setVDisabled]: any = useState(false);
-  // const [Hdisabled, setHDisabled]: any = useState(true);
 
   const getLayoutedElements = (
     nodes: any[],
@@ -145,15 +144,8 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
             horizontal
           </button> 
         </div> */}
-        {/* <div className='orientationToggle' style={{ width: '100px', position:'absolute'}}>
-          <button
-            onClick={() => {console.log()}}
-          >
-            BUTTON
-          </button>
-        </div> */}
       </div>
-      <div className="controls" style={{ width: '100px' }}>
+      <div className="controls" /*style={{ width: '100px' }}*/>
           <IconButton className={disabled ? "show" : "hide"}
             onClick={() => onLayout('TB')}
             style={{
@@ -161,10 +153,8 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
               color: 'black',
               borderRadius: '0px',
               position:'absolute',
-              // width: '80%',
             }}
           >
-            {/* vertical */}
             <ExpandMoreIcon />
           </IconButton>
           <IconButton className={disabled ? "hide" : "show"}
@@ -174,13 +164,15 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
               color: 'black',
               borderRadius: '0px',
               position:'absolute',
-              // paddingLeft: '2px',
-              // marginTop: '2px',
             }}
           >
-            {/* horizontal */}
             <NextIcon />
           </IconButton> 
+      </div>
+      <div>
+        <PIcon className='allProps'>
+          
+        </PIcon>
       </div>
     </div>
   );
