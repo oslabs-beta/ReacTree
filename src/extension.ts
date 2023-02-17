@@ -8,8 +8,8 @@ export function activate(extContext: vscode.ExtensionContext) {
   );
 
   item.command = 'reacTree.startStatusBar';
-  item.tooltip = 'Generate hierarchy tree from current file';
-  item.text = '$(list-tree) Start Tree';
+  item.tooltip = 'Activate ReacTree';
+  item.text = '$(type-hierarchy) Start Tree';
   
   item.show();
 
