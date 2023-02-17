@@ -28,6 +28,10 @@
       {
         "command": "reacTree.start",
         "title": "ReacTree: Show Panel"
+      },
+      {
+        "command": "reacTree.startStatusBar",
+        "title": "ReacTree: Show StatusBar"
       }
     ]
   },

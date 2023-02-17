@@ -98,6 +98,7 @@ export default class ReacTreePanel {
             console.log('onViewFileContent', msg.value);
             if (!msg.value) return;
             this.readFileContent(msg.value);
+            break;
           case 'edit-contentFile':
             vscode.commands.executeCommand(
               'vscode-note.note.edit.col.content',

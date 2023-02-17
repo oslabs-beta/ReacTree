@@ -12,7 +12,7 @@ suite('Extension Test Suite', () => {
 	describe('reacTree loads correctly', () => {
     let reacTree;
     before (() => {
-      reacTree = vscode.extensions.getExtension('team-sapling.sapling');
+      reacTree = vscode.extensions.getExtension('ReacTreeDev.reactree');
     });
 
     test('reacTree is registered as an extension', () => {
