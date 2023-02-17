@@ -394,6 +394,10 @@ body {
 
 }
 
+.controls {
+  display:flex;
+  flex-direction: row;
+}
 
 .icon {
   visibility: hidden;
@@ -405,10 +409,9 @@ div.react-flow__panel.react-flow__attribution {
 
 div.react-flow__panel.react-flow__controls.bottom.left{
   left:auto;
-  right: 6px;
-  bottom: 60px;
+  right: 52px;
+  bottom: 25px;
   height: 27px;
-  margin-bottom: 20px;
   margin-right: 0px;
   display: flex;
   flex-direction: row;
@@ -421,9 +424,10 @@ div.react-flow__panel.react-flow__controls.bottom.left{
 }
 .show {
   width: 26px;
-  height: 27px;
-  right: 0%;
-  bottom: 34.5px;
+  height: 26px;
+  right: 26px;
+  bottom: 41px;
+  background-color: var(--vscode-input-background) !important;
 }
 
 .hide {
@@ -431,8 +435,19 @@ div.react-flow__panel.react-flow__controls.bottom.left{
 }
 
 .allProps {
+  left:auto;
   width: 26px;
-  height: 27px;
+  height: 26px;
   right: 0%;
-  bottom: 34.5px;
+  bottom: 41px;
+  background-color: var(--vscode-input-background) !important;
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium{
+  padding-right: 0px;
+  padding-left: 0px;
+  height: 26px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-color: var(--vscode-input-background) !important;
 }

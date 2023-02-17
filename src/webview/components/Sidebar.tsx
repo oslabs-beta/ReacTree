@@ -160,7 +160,7 @@ const Sidebar = () => {
                   </Modal>
                 )} */}
                 {/* if component has redux storage */}
-                {item.count >= 1 && (
+                {item.count > 1 && (
                   <Badge badgeContent={item.count}  sx={{
                     "& .MuiBadge-badge": {
                       color: "var(--vscode-button-foreground)",

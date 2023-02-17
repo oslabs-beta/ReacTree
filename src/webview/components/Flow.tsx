@@ -169,10 +169,15 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
             <NextIcon />
           </IconButton> 
       </div>
-      <div>
-        <PIcon className='allProps'>
-          
-        </PIcon>
+      
+      <div className='allProps' 
+         style={{ right:"0", 
+         position:"absolute",
+         borderRadius: '0px',
+         backgroundColor: 'white'}}>
+        <IconButton>
+          <PIcon/>
+        </IconButton>
       </div>
     </div>
   );
