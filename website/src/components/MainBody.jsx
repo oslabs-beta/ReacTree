@@ -2,7 +2,6 @@ const MainBody = () => {
   return(
     <div>
       <div className='logo-main'>
-        <h2>Introducing</h2>
         <h1>ReacTree</h1>
         <h3>Something something help you traverse your React project</h3>
         Img - logo banner

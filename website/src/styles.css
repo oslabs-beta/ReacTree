@@ -1,15 +1,17 @@
+
 body {
   margin: 0;
+  font-family:'Roboto', sans-serif;
   background-image: linear-gradient(
     45deg,
-    #6ff3aaa9,
-    #3AE8C6,
-    #3AC0E8,
-    #82ceab
+    #285e4f,
+    #3a6b5e,
+    #5fa9ac
   );
   background-size: 400%;
-  animation: bg-animation 15s infinite alternate;
+  animation: bg-animation 20s infinite alternate;
 }
+
 
 @keyframes bg-animation {
   0% {
@@ -24,42 +26,114 @@ nav {
   display: flex;
   justify-content: space-between;
   padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 25px;
+  padding-right: 35px;
+  padding-top: 30px;
 }
 
 .nav-padding {
-  padding-right: 15px;
+  margin-right: 35px;
+}
+
+.nav-button {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  padding: 11px;
+  border: 2px solid rgba(255, 255, 255, 0.788);
+  border-radius: 8px;
+  transition: 0.15s;
+}
+
+.nav-button:hover {
+  background-color:rgba(121, 231, 131, 0.726);
+  color: white;
+  border: 2px solid rgba(223, 223, 223, 0.753);
+}
+
+.logo-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+  color: #28282B;
+}
+
+.features-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+  color: #28282B;
+}
+
+.team {
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .team h2{
     display: flex;
     justify-content: center;
+    color: #28282B;
 }
+
 .team-members {
     display: flex; 
-    justify-content: space-around;
+    justify-content: center;
 }
 
+.member {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(243, 250, 253, 0.2);
+  padding: 2rem;
+  border-radius: 4rem;
+  margin-right: 1%;
+}
 
+.member-name {
+  color: white;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.member-title {
+  color: #A13941FF;
+  font-weight: 400;
+  font-size: 0.8rem
+
+}
 .member-photo {
     width: 8rem;
     height: 8rem;
     object-fit: cover;
     border-radius: 2rem;
+    border: 1.5px white solid;
 }
 
+.member-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
 
-.github {
+.linkedin-logo, .github-logo {
     width: 1.5rem;
     height: 1.5rem;
 }
 
+.github-logo {
+  margin-bottom: 4px;
+}
 
 #Footer {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
