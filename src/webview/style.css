@@ -297,9 +297,6 @@ body {
 .react-flow__selection:focus-visible {
   outline: none;
 }
-.react-flow__controls {
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.08);
-}
 .react-flow__controls-button {
   border: none;
   background: #fefefe;
@@ -340,7 +337,6 @@ body {
   border-radius: 0px 35px 35px 0px;
   z-index: 2;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-  background-color: white;
   background-color: var(--vscode-input-background);
   border: solid var(--vscode-settings-focusedRowBorder);
   border-left: none;
@@ -361,14 +357,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2.5em;
+  height: 3.5em;
 }
 #inputLabel {
   /* padding: 0.4em; */
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-weight: 400;
   /* background: #003f8e; */
-  display: inline-block;
+  display: flex;
   margin-left: 10px;
   margin-right: 5px;
   border-radius: 5px;
@@ -390,7 +386,7 @@ body {
   display: block;
   width: 150px;
   padding: 0;
-  font-size: 1.4em;
+  font-size: 1.5em;
 
 }
 
@@ -416,8 +412,29 @@ div.react-flow__panel.react-flow__controls.bottom.left{
 .react-flow__controls-button.react-flow__controls-zoomin{
   border-radius: 30px 0px 0px 30px;
 }
+.react-flow__controls {
+  border: solid var(--vscode-settings-focusedRowBorder) !important;
+  border-right: none !important;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%) !important;
+  border-radius: 50px 0px 0px 50px !important;
+  height: 3.5em !important;
+}
 .react-flow__controls-button{
   background-color: var(--vscode-input-background) !important;
+  border: none !important;
+  height: auto !important;
+  width: 3em !important;
+  fill: var(--vscode-foreground) !important;
+}
+.react-flow__controls-button:hover {
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0) !important;
+}
+.react-flow__controls-button:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
 }
 .show {
   width: 26px;

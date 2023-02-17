@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import * as ReactDOM from 'react-dom';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import FileUploadRoundedIcon from '@mui/icons-material/FileUploadRounded';
 import ClearIcon from '@mui/icons-material/Clear';
 
 // imports for the icons
@@ -38,9 +40,9 @@ const Navbar = ({ rootFile }: any) => {
         <label id='inputLabel' htmlFor="file">
           {/* <FontAwesomeIcon icon={faDownload}/> */}
           <strong id="strong_file">{rootFile ? ` ${rootFile}` : ' Select File'}</strong>
+          <FileUploadRoundedIcon htmlColor='var(--vscode-settings-focusedRowBorder)' style={{fontSize:20, position: 'relative', top: '4px'}}/>
         </label>
-        <RefreshIcon style={{fontSize:15, marginTop: 2, marginRight: 5}}/>
-        <ClearIcon style={{fontSize:15, marginTop: 2}}/>  
+        {/* <ClearIcon style={{fontSize:15, marginTop: 2}}/>   */}
       </div>
     </div>
   );
