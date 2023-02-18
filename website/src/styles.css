@@ -4,9 +4,9 @@ body {
   font-family:'Roboto', sans-serif;
   background-image: linear-gradient(
     45deg,
-    #285e4f,
-    #3a6b5e,
-    #5fa9ac
+    #39538b,
+    #448070,
+    #539799
   );
   background-size: 400%;
   animation: bg-animation 20s infinite alternate;
@@ -31,7 +31,7 @@ nav {
 }
 
 .nav-padding {
-  margin-right: 35px;
+  margin-right: 25px;
 }
 
 .nav-button {
@@ -41,7 +41,7 @@ nav {
   padding: 11px;
   border: 2px solid rgba(255, 255, 255, 0.788);
   border-radius: 8px;
-  transition: 0.15s;
+  transition: 0.1s;
 }
 
 .nav-button:hover {
@@ -68,18 +68,20 @@ nav {
 
 .team {
   margin-top: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 10%;
 }
 
 .team h2{
-    display: flex;
-    justify-content: center;
-    color: #28282B;
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+  color: rgba(248, 248, 248, 0.925);
+  margin-bottom: 5%;
 }
 
 .team-members {
-    display: flex; 
-    justify-content: center;
+  display: flex; 
+  justify-content: center;
 }
 
 .member {
@@ -89,7 +91,7 @@ nav {
   align-items: center;
   background: rgba(243, 250, 253, 0.2);
   padding: 2rem;
-  border-radius: 4rem;
+  border-radius: 1rem;
   margin-right: 1%;
 }
 
@@ -100,7 +102,7 @@ nav {
 }
 
 .member-title {
-  color: #A13941FF;
+  color: white;
   font-weight: 400;
   font-size: 0.8rem
 
@@ -109,7 +111,7 @@ nav {
     width: 8rem;
     height: 8rem;
     object-fit: cover;
-    border-radius: 2rem;
+    border-radius: 0.5rem;
     border: 1.5px white solid;
 }
 
@@ -136,4 +138,8 @@ nav {
   position: fixed;
   bottom: 0;
   width: 100%;
+  padding-top: 0.7em;
+  padding-bottom: 0.5em;
+  font-size: 0.9em;
+  background-color: rgba(182, 182, 182, 0.329);
 }
