@@ -11,14 +11,16 @@ body {
   width: 100vw;
 }
 .MuiBadge-badge {
-  top: -8px !important;
-  right: -84px !important;
+  top: -14px !important;
+  right: -128px !important;
 }
-
+.css-cgmxn1 {
+  display: inline !important;
+}
 .nodeToolbar {
   display: flex;
   justify-content: center;
-  padding: 3px 0px;
+  padding: 3px 4px;
 }
 
 .css-vubbuv {
@@ -374,6 +376,11 @@ body {
   color: var(--vscode-foreground);
 }
 
+.nodeTitle:hover {
+  white-space: normal !important; /* allow line breaks within the text */
+  overflow: visible !important;
+  text-overflow: initial !important; /* show the entire text */
+}
 #inputLabel:hover {
   background: opacity(0.8);
 }
@@ -384,15 +391,26 @@ body {
 
 .nodeData {
   display: block;
-  width: 150px;
   padding: 0;
   font-size: 1.5em;
 
 }
 
-
+.controls {
+  display:flex;
+  flex-direction: row;
+}
+.reduxIcon {
+  display: inline-block;
+  fill: var(--vscode-foreground);
+}
 .icon {
-  visibility: hidden;
+  position: relative;
+  right: 7px;
+  top: 3px;
+  width: 15px;
+  height: 15px;
+  fill: var(--vscode-foreground); 
 }
 
 div.react-flow__panel.react-flow__attribution {
@@ -401,10 +419,9 @@ div.react-flow__panel.react-flow__attribution {
 
 div.react-flow__panel.react-flow__controls.bottom.left{
   left:auto;
-  right: 6px;
-  bottom: 60px;
+  right: 0px;
+  bottom: 25px;
   height: 27px;
-  margin-bottom: 20px;
   margin-right: 0px;
   display: flex;
   flex-direction: row;
@@ -422,10 +439,28 @@ div.react-flow__panel.react-flow__controls.bottom.left{
 .react-flow__controls-button{
   background-color: var(--vscode-input-background) !important;
   border: none !important;
-  height: auto !important;
-  width: 3em !important;
+  height: 2.19rem !important;
+  width: 2.5rem !important;
   fill: var(--vscode-foreground) !important;
 }
+.customToolbarButton {
+  position: absolute;
+  display: flex;
+  bottom: 41px;
+  right: 50px;
+}
+.customToolbarButton svg{
+  max-width: 22px !important;
+  max-height: 22px !important;
+}
+.customToolbarButton2 {
+  right: 0px !important;
+}
+.customToolbarButton2 svg {
+  max-width: 18px !important;
+  max-height: 18px !important;
+}
+
 .react-flow__controls-button:hover {
   background-image: linear-gradient(rgb(0 0 0/40%) 0 0) !important;
 }
@@ -438,9 +473,10 @@ div.react-flow__panel.react-flow__controls.bottom.left{
 }
 .show {
   width: 26px;
-  height: 27px;
-  right: 0%;
-  bottom: 34.5px;
+  height: 26px;
+  right: 26px;
+  bottom: 41px;
+  background-color: var(--vscode-input-background) !important;
 }
 
 .hide {
@@ -448,8 +484,28 @@ div.react-flow__panel.react-flow__controls.bottom.left{
 }
 
 .allProps {
+  left:auto;
   width: 26px;
-  height: 27px;
+  height: 26px;
   right: 0%;
-  bottom: 34.5px;
+  bottom: 41px;
+  background-color: var(--vscode-input-background) !important;
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium{
+  padding-right: 0px;
+  padding-left: 0px;
+  height: 26px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-color: var(--vscode-input-background) !important;
+}
+.css-1yxmbwk {
+  display: inline-block !important;
+  height: 100% !important;
+  width: 2.5rem !important;
+  border-radius: 0 !important;
+}
+#extraButtonsContainer {
+  height: auto;
 }

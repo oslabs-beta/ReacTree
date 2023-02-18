@@ -1,7 +1,10 @@
 import * as React from 'react';
+const ReactDOM = require('react-dom');
 import { IconButton } from '@mui/material';
 import NextIcon from '@mui/icons-material/NavigateNext';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
+import SwapHorizRoundedIcon from '@mui/icons-material/SwapHorizRounded';
 import PIcon from '@mui/icons-material/LocalParking';
 import { useCallback, useEffect, useState } from 'react';
 import ReactFlow, {
@@ -17,11 +20,33 @@ import * as dagre from 'dagre';
 import 'reactflow/dist/style.css';
 import '../dagre.css';
 
-const Flow = ({ initialNodes, initialEdges }: any) => {
+const Flow = ({ initialNodes, initialEdges }: any) => {  
+  const addNewTools = () => {
+    const extraButton1 = document.createElement('button');
+    const extraButton2 = document.createElement('button');
+
+    extraButton1.setAttribute('type', 'button');
+    extraButton2.setAttribute('type', 'button');
+
+    extraButton1.setAttribute('class', 'react-flow__controls-button react-flow__controls-interactive');
+    extraButton2.setAttribute('class', 'react-flow__controls-button react-flow__controls-interactive');
+
+    const toolbar = document.getElementsByClassName('react-flow__panel react-flow__controls bottom left');
+    toolbar[0].appendChild(extraButton1);
+    toolbar[0].appendChild(extraButton2);
+  };
+
+  const [vertical, setVertical] = useState(true);
+  const [allProps, setAllProps] = useState(false);
+
+  useEffect(() => {
+    console.log('use effect initiated')
+    setTimeout(addNewTools, 5);
+  }, []);
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-  const nodeWidth = 172;
+  const nodeWidth = 250;
   // const nodeHeight = 36;
   const nodeHeight = 120;
   const [disabled, setDisabled]: any = useState(false);
@@ -58,7 +83,6 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
 
       return node;
     });
-
     return { nodes, edges };
   };
 
@@ -96,7 +120,6 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
       setDisabled(!disabled);
       const { nodes: layoutedNodes, edges: layoutedEdges } =
         getLayoutedElements(nodes, edges, direction);
-
       setNodes([...layoutedNodes]);
       setEdges([...layoutedEdges]);
     },
@@ -117,62 +140,36 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
         >
         <Controls style={{ borderRadius: '50px',}} /> 
         </ReactFlow>
-
-        {/* <div className="controls" style={{ width: '100px' }}>
-          <button className={disabled ? "show" : "hide"}
-            onClick={() => onLayout('TB')}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              borderRadius: '5px',
-              // width: '80%',
-            }}
-          >
-            vertical
+        {
+        vertical ?  
+          <button type='button' className='customToolbarButton react-flow__controls-button react-flow__controls-interactive' onClick={() => {
+            onLayout('LR')
+            setVertical(!vertical)
+          }}>
+            <SwapHorizRoundedIcon htmlColor='var(--vscode-foreground)' sx={{ fontSize: 35  }}  />
           </button>
-          <button className={disabled ? "hide" : "show"}
-            onClick={() => onLayout('LR')}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              borderRadius: '5px',
-              position:'absolute',
-              // paddingLeft: '2px',
-              // marginTop: '2px',
-            }}
-          >
-            horizontal
-          </button> 
-        </div> */}
-      </div>
-      <div className="controls" /*style={{ width: '100px' }}*/>
-          <IconButton className={disabled ? "show" : "hide"}
-            onClick={() => onLayout('TB')}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              borderRadius: '0px',
-              position:'absolute',
-            }}
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-          <IconButton className={disabled ? "hide" : "show"}
-            onClick={() => onLayout('LR')}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              borderRadius: '0px',
-              position:'absolute',
-            }}
-          >
-            <NextIcon />
-          </IconButton> 
-      </div>
-      <div>
-        <PIcon className='allProps'>
-          
-        </PIcon>
+          :
+          <button type='button' className='customToolbarButton react-flow__controls-button react-flow__controls-interactive' onClick={() => {
+            onLayout('TB')
+            setVertical(!vertical)
+          }}>
+            <SwapVertRoundedIcon htmlColor='var(--vscode-foreground)' sx={{ fontSize: 35  }}  />
+          </button>
+        }
+        {
+          allProps ? 
+            <button type='button' className='customToolbarButton2 customToolbarButton react-flow__controls-button react-flow__controls-interactive' onClick={() => {
+              setAllProps(!allProps);
+            }}>
+              <PIcon htmlColor='var(--vscode-settings-focusedRowBorder)' sx={{ fontSize: 25  }}  />
+            </button>
+          :
+          <button type='button' className='customToolbarButton2 customToolbarButton react-flow__controls-button react-flow__controls-interactive' onClick={() => {
+            setAllProps(!allProps);
+          }}>
+              <PIcon color='disabled' sx={{ fontSize: 25  }}  />
+            </button>
+        }
       </div>
     </div>
   );

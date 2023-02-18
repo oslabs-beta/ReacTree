@@ -147,20 +147,7 @@ const Sidebar = () => {
             // <Badge badgeContent={item.count} color="primary">
             <div className="nodeData">
               {/* for rendering modal to show live render of component */}
-              <div style={{ alignSelf: "flex-end" }}>
-                {/* <CIcon icon={cilZoom} width={12} height={12} style={{marginRight: '2px' }} onClick={openRender} />
-                {setShowRender && (
-                  <Modal
-                    isOpen={showRender}
-                    onRequestClose={closeRender}
-                    style={customStyles}
-                    >
-                      <div>MODAL OPEN</div>
-                      <button onClick={closeRender}>CLOSE</button>
-                  </Modal>
-                )} */}
-                {/* if component has redux storage */}
-                {item.count >= 1 && (
+                {item.count > 1 && (
                   <Badge badgeContent={item.count}  sx={{
                     "& .MuiBadge-badge": {
                       color: "var(--vscode-button-foreground)",
@@ -170,12 +157,9 @@ const Sidebar = () => {
                   </Badge>
                 )}
 
-                {item.reduxConnect && (
-                  <CIcon icon={cibRedux} width={12} height={12} />
-                )}
-              </div>
+                
 
-              <p
+              <p className='nodeTitle'
                 style={{
                   fontFamily: 'Roboto',
                   fontStyle: 'normal',
@@ -184,7 +168,10 @@ const Sidebar = () => {
                   margin: "8px 0px 2px 0px",
                   textAlign: "center",
                   color: 'var(--vscode-foreground)',
-                  fontSize: '1.3em',
+                  fontSize: '22px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
                   borderBottom: "2px solid var(--vscode-settings-focusedRowBorder)"
 
                 }}
@@ -197,8 +184,8 @@ const Sidebar = () => {
                     <div
                       style={{
                         display: "block",
-                        columnWidth: '64px',
-                        fontSize: '8pt',
+                        columnWidth: '112px',
+                        fontSize: '11pt',
                         color: 'var(--vscode-foreground)',
                         borderBottom: "2px solid var(--vscode-settings-focusedRowBorder)",
                         padding: '4px 0px 6px 5px',
@@ -213,13 +200,20 @@ const Sidebar = () => {
                     </div>
                   </>
                 )}
-              <div className="nodeToolbar">
-              {Object.keys(item.props).length > 0 && (
-                  <InfoIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }} onClick={() => handleProps(item.fileName)}/>
-                )}
-                {item.children.length > 0 && <CloseFullscreenIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }}/>}
-                <TextSnippetIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }} onClick={() => viewFile(item.filePath)}/>
-                <VisibilityIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }}/>
+              <div style={{justifyContent: 'space-between', display: 'flex', margin: '5px 0px'}}>
+                <div className="nodeToolbar">
+                  {Object.keys(item.props).length > 0 && (
+                      <InfoIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }} onClick={() => handleProps(item.fileName)}/>
+                    )}
+                    {item.children.length > 0 && <CloseFullscreenIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }}/>}
+                    <TextSnippetIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }} onClick={() => viewFile(item.filePath)}/>
+                    {/* <VisibilityIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }}/> */}
+                </div>
+                <div className="nodeIndicators">
+                  {item.reduxConnect && (
+                    <CIcon icon={cibRedux} width={12} height={12}/>
+                  )}
+                </div>
               </div>
             </div>
           ),
@@ -230,10 +224,10 @@ const Sidebar = () => {
         style: {
           backgroundColor: "var(--vscode-dropdown-background)",
           borderRadius: "15px",
-          width: '170px',
+          width: '265px',
           boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
           border: 'none', 
-          padding: '0px 10px'
+          padding: '10px 10px 3px 10px'
         },
       };
       initialNodes.push(node);
