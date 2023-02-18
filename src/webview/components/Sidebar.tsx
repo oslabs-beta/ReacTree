@@ -1,14 +1,21 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Node, Edge } from 'reactflow';
+import Button from '@mui/material/Button';
+import FilterNoneIcon from '@mui/icons-material/FilterNone';
+import Badge from '@mui/material/Badge';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
+import InfoIcon from '@mui/icons-material/Info';
 
 import Flow from './Flow';
 import Navbar from './Navbar';
-import Modal from './Modal';
 
 import CIcon from '@coreui/icons-react';
 import { cibRedux, cilInfo, cilZoom } from '@coreui/icons';
-import { readFile } from 'fs';
+import { types } from 'util';
+import { borderBottom, fontSize, padding } from '@mui/system';
 
 interface vscode {
   postMessage(message: any): void;
@@ -32,8 +39,7 @@ const Sidebar = () => {
   const [showProps, setShowProps]: [boolean, Function] = useState(false);
   // const [showRender, setShowRender]: [boolean, Function] = useState(false);
   const [showPropsStatus, setShowPropsStatus]: [any, Function] = useState({});
-  const [modalActive, setModalActive]: [boolean, Function] = useState(false);
-  const [fileContent, setFileContent]: [string, Function] = useState('');
+  const [showAllProps, setShowAllProps]: any = useState(false);
 
   useEffect(() => {
     // Event Listener for 'message' from the extension
@@ -55,12 +61,6 @@ const Sidebar = () => {
         // Listener to receive the user's settings
         case 'settings-data': {
           setSettings(message.value);
-          break;
-        }
-        case 'file-content': {
-          console.log('FROM BACKEND', message.value);
-          console.log('TYPE', typeof message.value);
-          setFileContent(message.value);
           break;
         }
       }
@@ -98,11 +98,6 @@ const Sidebar = () => {
     }
   }, [treeData, settings]);
 
-  // initialize iniialialNodes for ReactFlow setup
-  const initialNodes: Node[] = [];
-  let id = 0;
-  const propsObj: any = {};
-  // creates nodes for the initialNodes array
   const makePropsObj = (fileName: string) => {
     propsObj[fileName] = false;
     // setShowPropsStatus(propsObj);
@@ -123,128 +118,134 @@ const Sidebar = () => {
     });
   };
 
-  const handleModal = () => {
-    setModalActive(!modalActive);
-  };
+  // initialize iniialialNodes for ReactFlow setup
+  const initialNodes: Node[] = [];
+  let id = 0;
+  const propsObj: any = {};
 
+  // algorithm to generate the nodes for ReactFlow
   const getNodes = (tree: any) => {
     if (!tree) {
       return;
     }
-
     tree.forEach((item: any) => {
       makePropsObj(item.fileName);
       const node = {
         id: (++id).toString(),
         data: {
-          // if the item has props, show them on each div
           label: (
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
+            // <Badge badgeContent={item.count} color="primary">
+            <div className="nodeData">
               {/* for rendering modal to show live render of component */}
-              <div style={{ alignSelf: 'flex-end' }}>
-                {/* <CIcon icon={cilZoom} width={12} height={12} style={{marginRight: '2px' }} onClick={openRender} />
-                {setShowRender && (
-                  <Modal
-                    isOpen={showRender}
-                    onRequestClose={closeRender}
-                    style={customStyles}
-                    >
-                      <div>MODAL OPEN</div>
-                      <button onClick={closeRender}>CLOSE</button>
-                  </Modal>
-                )} */}
-                {/* if component has redux storage */}
-                {item.reduxConnect && (
-                  <CIcon icon={cibRedux} width={12} height={12} />
-                )}
-                {Object.keys(item.props).length > 0 && (
-                  <CIcon
-                    onClick={() => handleProps(item)}
-                    // onClick={() => setShowProps(!showProps)}
-                    icon={cilInfo}
-                    width={12}
-                    height={12}
-                    style={{ cursor: 'pointer', color: '#003f8e' }}
-                  />
-                )}
-                <CIcon
-                  onClick={() => {
-                    sendFilePath(item);
-                    handleModal();
+              {item.count > 1 && (
+                <Badge
+                  badgeContent={item.count}
+                  sx={{
+                    '& .MuiBadge-badge': {
+                      color: 'var(--vscode-button-foreground)',
+                      backgroundColor:
+                        'var(--vscode-settings-focusedRowBorder)',
+                    },
                   }}
-                  icon={cilZoom}
-                  width={12}
-                  height={12}
-                  style={{
-                    marginLeft: '0.25rem',
-                    color: '#003f8e',
-                    cursor: 'pointer',
-                  }}
-                />
-              </div>
-              {/* {modalActive && (
-                <Modal
-                  modalActive={modalActive}
-                  handleModal={handleModal}
-                  fileContent={fileContent}
-                />
-              )} */}
+                ></Badge>
+              )}
               <p
+                className="nodeTitle"
                 style={{
-                  fontWeight: 800,
-                  marginBottom: '0.5em',
+                  fontFamily: 'Roboto',
+                  fontStyle: 'normal',
+                  fontWeight: 700,
+                  paddingBottom: '6px',
+                  margin: '8px 0px 2px 0px',
                   textAlign: 'center',
-                  color: item.depth === 0 ? 'white' : 'black',
+                  color: 'var(--vscode-foreground)',
+                  fontSize: '22px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  borderBottom:
+                    '2px solid var(--vscode-settings-focusedRowBorder)',
                 }}
               >
                 {item.fileName}
               </p>
+              // if component has props, render the props
               {Object.keys(item.props).length > 0 &&
-                showPropsStatus[item.fileName] === true && (
+                (showPropsStatus[item.fileName] === true ||
+                  showAllProps === true) && (
                   <>
-                    <hr style={{ width: '75%', margin: '0.25em 0' }} />
                     <div
                       style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flex-start',
-                        marginRight: '18px',
+                        display: 'block',
+                        columnWidth: '112px',
+                        fontSize: '11pt',
+                        color: 'var(--vscode-foreground)',
+                        borderBottom:
+                          '2px solid var(--vscode-settings-focusedRowBorder)',
+                        padding: '4px 0px 6px 5px',
+                        wordBreak: 'break-all',
                       }}
                     >
                       {Object.keys(item.props).map((prop: any, idx: number) => (
-                        <div key={idx} style={{ margin: '0 0.5em' }}>
-                          &#8226; {prop}
+                        <div key={idx} style={{ display: 'flex' }}>
+                          &#8226;{prop}
                         </div>
                       ))}
                     </div>
                   </>
                 )}
-              <button
+              <div
                 style={{
-                  marginTop: '0.25em',
-                  backgroundColor: item.depth === 0 ? 'white' : '#003f8e',
-                  color: item.depth === 0 ? 'black' : 'white',
-                  padding: '0.5em 1em',
-                  borderRadius: '5px',
+                  justifyContent: 'space-between',
+                  display: 'flex',
+                  margin: '5px 0px',
                 }}
-                onClick={() => viewFile(item.filePath)}
               >
-                File
-              </button>
+                <div className="nodeToolbar">
+                  {Object.keys(item.props).length > 0 && (
+                    <InfoIcon
+                      style={{ cursor: 'pointer', padding: '0px 3px' }}
+                      htmlColor={'var(--vscode-foreground)'}
+                      sx={{ fontSize: 19 }}
+                      onClick={() => handleProps(item.fileName)}
+                    />
+                  )}
+                  {item.children.length > 0 && (
+                    <CloseFullscreenIcon
+                      style={{ cursor: 'pointer', padding: '0px 3px' }}
+                      htmlColor={'var(--vscode-foreground)'}
+                      sx={{ fontSize: 19 }}
+                    />
+                  )}
+                  <TextSnippetIcon
+                    style={{ cursor: 'pointer', padding: '0px 3px' }}
+                    htmlColor={'var(--vscode-foreground)'}
+                    sx={{ fontSize: 19 }}
+                    onClick={() => viewFile(item.filePath)}
+                  />
+                  {/* <VisibilityIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }}/> */}
+                </div>
+                // if component is connected to redux store, render the redux
+                icon
+                <div className="nodeIndicators">
+                  {item.reduxConnect && (
+                    <CIcon icon={cibRedux} width={12} height={12} />
+                  )}
+                </div>
+              </div>
             </div>
           ),
         },
+        onClick: () => handleProps(item.fileName),
         position: { x: 0, y: 0 },
         type: item.depth === 0 ? 'input' : '',
         style: {
-          backgroundColor: item.depth === 0 ? '#003f8e' : 'white',
-          borderRadius: '5px',
+          backgroundColor: 'var(--vscode-dropdown-background)',
+          borderRadius: '15px',
+          width: '265px',
+          boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+          border: 'none',
+          padding: '10px 10px 3px 10px',
         },
       };
       initialNodes.push(node);
@@ -259,6 +260,7 @@ const Sidebar = () => {
   const initialEdges: Edge[] = [];
   let ide = 0;
 
+  // algorithm to generate the edges for ReactFlow
   const makeEdges = (tree: any, parentId?: any) => {
     if (!tree) {
       return;
@@ -328,13 +330,12 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <Navbar rootFile={rootFile} />
-      <hr className="line_break" />
-      <Modal
-        modalActive={modalActive}
-        handleModal={handleModal}
-        fileContent={fileContent}
+      <Flow
+        initialNodes={initialNodes}
+        initialEdges={initialEdges}
+        showAllProps={showAllProps}
+        setShowAllProps={setShowAllProps}
       />
-      <Flow initialNodes={initialNodes} initialEdges={initialEdges} />
     </div>
   );
 };
