@@ -20,7 +20,7 @@ import 'reactflow/dist/style.css';
 import '../dagre.css';
 import { Diversity1Sharp } from '@mui/icons-material';
 
-const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps}: any) => {  
+const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps, showPropsStatus, setShowPropsStatus, handleProps}: any) => {  
 
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -108,22 +108,60 @@ const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps}: any)
     [nodes, edges]
   );
 
-  useEffect(() => {
-    let divs = document.getElementsByClassName("react-flow__panel react-flow__controls bottom left")
-    if(!appended && divs.length > 0){
-      setAppended(true)
-      for (let i = 0; i < divs.length; i++) {
-        const id = Math.random().toString() //or some such identifier 
-        const d = document.createElement("div")
-        console.log("divs length: ", divs.length)
-        d.id = id
-        divs[i].appendChild(d)
-        ReactDOM.render(<IconButton>
-          <PIcon/>
-        </IconButton>, document.getElementById(id))
+  // useEffect(() => {
+  //   let divs = document.getElementsByClassName("react-flow__panel react-flow__controls bottom left")
+  //   if(!appended && divs.length > 0){
+  //     setAppended(true)
+  //     for (let i = 0; i < divs.length; i++) {
+  //       const id = Math.random().toString() //or some such identifier 
+  //       const d = document.createElement("div")
+  //       console.log("divs length: ", divs.length)
+  //       d.id = id
+  //       divs[i].appendChild(d)
+  //       ReactDOM.render(<IconButton>
+  //         <PIcon/>
+  //       </IconButton>, document.getElementById(id))
+  //     }
+  //   }
+  // }, [<Navbar/>])     
+
+  function clearSelection() {
+    
+    const obj = {}
+    //clear current selection
+    for(let key in showPropsStatus){
+      if(showPropsStatus[key] === true){
+        obj[key] = false;
       }
     }
-  }, [<Navbar/>])     
+    setShowPropsStatus({
+      ...showPropsStatus, 
+      ...obj 
+    });
+    return;
+  }
+
+  useEffect(() => {  //incorporate async/await functionality similar to fetching in solo project
+    if(!showAllProps){
+      console.log(showPropsStatus)
+
+      clearSelection()
+      // const updatePropsStatus = async () => {
+      //   for(let key in showPropsStatus){
+      //     if(showPropsStatus[key] === true){
+      //       console.log(showPropsStatus[key])
+      //       await setShowPropsStatus({...showPropsStatus, [key]: !showPropsStatus[key]});
+      //       // await handleProps(key);
+      //       console.log(showPropsStatus[key])
+      //     }
+      //   }
+      // }
+
+      // updatePropsStatus();
+      console.log(showPropsStatus)
+      
+    }
+  },[showAllProps])
 
   return (
     <div className="tree_view" >
@@ -198,6 +236,9 @@ const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps}: any)
          borderRadius: '0px',
          backgroundColor: 'white'}}>
         <IconButton onClick={() => {
+          if(showAllProps){
+            /*setShowPropsStatus()*/
+          }
           setShowAllProps(!showAllProps);
           }}>
           <PIcon/>

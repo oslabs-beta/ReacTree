@@ -123,6 +123,8 @@ const Sidebar = () => {
   };
 
   const handleProps = (fileName: string) => {
+    console.log(fileName);
+    //console.log(showPropsStatus)
     setShowPropsStatus({...showPropsStatus, [fileName]: !showPropsStatus[fileName]});
     // setShowPropsStatus(propsObj)
     // propsObj[fileName] = !propsObj[fileName]
@@ -131,6 +133,10 @@ const Sidebar = () => {
     // console.log("AFTER CLICK", propsObj);
     console.log("AFTER CLICK STATE", showPropsStatus);
   };
+
+  useEffect(() => {
+    console.log(showPropsStatus)
+  },[showPropsStatus])
 
   const getNodes = (tree: any) => {
     if (!tree) {
@@ -320,7 +326,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <Navbar rootFile={rootFile} />
 
-      <Flow initialNodes={initialNodes} initialEdges={initialEdges} showAllProps={showAllProps} setShowAllProps={setShowAllProps}/>
+      <Flow initialNodes={initialNodes} initialEdges={initialEdges} showAllProps={showAllProps} setShowAllProps={setShowAllProps} showPropsStatus={showPropsStatus} setShowPropsStatus={setShowPropsStatus} handleProps={handleProps}/>
     </div>
   );
 };
