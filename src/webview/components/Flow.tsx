@@ -1,8 +1,4 @@
 import * as React from 'react';
-const ReactDOM = require('react-dom');
-import { IconButton } from '@mui/material';
-import NextIcon from '@mui/icons-material/NavigateNext';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
 import SwapHorizRoundedIcon from '@mui/icons-material/SwapHorizRounded';
 import PIcon from '@mui/icons-material/LocalParking';
@@ -12,7 +8,6 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
   ConnectionLineType,
-  MiniMap,
   Controls,
 } from 'reactflow';
 import * as dagre from 'dagre';
@@ -20,7 +15,7 @@ import * as dagre from 'dagre';
 import 'reactflow/dist/style.css';
 import '../dagre.css';
 
-const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps}: any) => {  
+const Flow = ({ initialNodes, initialEdges, handleAllProps}: any) => {  
   const addNewTools = () => {
     const extraButton1 = document.createElement('button');
     const extraButton2 = document.createElement('button');
@@ -35,18 +30,17 @@ const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps}: any)
     toolbar[0].appendChild(extraButton1);
     toolbar[0].appendChild(extraButton2);
   };
-
+  const [showAllProps, setShowAllProps]: [boolean, Function] = useState(false);
   const [vertical, setVertical] = useState(true);
 
   useEffect(() => {
-    console.log('use effect initiated')
     setTimeout(addNewTools, 5);
   }, []);
+  
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
   const nodeWidth = 250;
-  // const nodeHeight = 36;
   const nodeHeight = 120;
   const [disabled, setDisabled]: any = useState(false);
 
@@ -79,7 +73,6 @@ const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps}: any)
         x: nodeWithPosition.x - nodeWidth / 2,
         y: nodeWithPosition.y - nodeHeight / 2,
       };
-
       return node;
     });
     return { nodes, edges };
@@ -89,7 +82,6 @@ const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps}: any)
     initialNodes,
     initialEdges
   );
-
 
   useEffect(() => {
     if (initialNodes) {
@@ -145,28 +137,30 @@ const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps}: any)
             onLayout('LR')
             setVertical(!vertical)
           }}>
-            <SwapHorizRoundedIcon htmlColor='var(--vscode-foreground)' sx={{ fontSize: 35  }}  />
+            <SwapHorizRoundedIcon htmlColor='var(--vscode-foreground)' sx={{ fontSize: 35 }}  />
           </button>
           :
           <button type='button' className='customToolbarButton react-flow__controls-button react-flow__controls-interactive' onClick={() => {
             onLayout('TB')
             setVertical(!vertical)
           }}>
-            <SwapVertRoundedIcon htmlColor='var(--vscode-foreground)' sx={{ fontSize: 35  }}  />
+            <SwapVertRoundedIcon htmlColor='var(--vscode-foreground)' sx={{ fontSize: 35 }}  />
           </button>
         }
         {
           showAllProps ? 
             <button type='button' className='customToolbarButton2 customToolbarButton react-flow__controls-button react-flow__controls-interactive' onClick={() => {
+              handleAllProps('none');
               setShowAllProps(!showAllProps);
             }}>
-              <PIcon htmlColor='var(--vscode-settings-focusedRowBorder)' sx={{ fontSize: 25  }}  />
+              <PIcon htmlColor='var(--vscode-settings-focusedRowBorder)' sx={{ fontSize: 25 }} />
             </button>
           :
           <button type='button' className='customToolbarButton2 customToolbarButton react-flow__controls-button react-flow__controls-interactive' onClick={() => {
+            handleAllProps('block');
             setShowAllProps(!showAllProps);
           }}>
-              <PIcon color='disabled' sx={{ fontSize: 25  }}  />
+              <PIcon color='disabled' sx={{ fontSize: 25 }}  />
             </button>
         }
       </div>

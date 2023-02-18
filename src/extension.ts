@@ -10,7 +10,6 @@ export function activate(extContext: vscode.ExtensionContext) {
   item.command = 'reacTree.startStatusBar';
   item.tooltip = 'Activate ReacTree';
   item.text = '$(type-hierarchy) Start Tree';
-  
   item.show();
 
   extContext.subscriptions.push(
