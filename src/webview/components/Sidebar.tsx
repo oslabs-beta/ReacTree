@@ -9,9 +9,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import InfoIcon from '@mui/icons-material/Info';
 
-// import * as Modal from 'react-modal';
-import Flow from "./Flow";
-import Navbar from "./Navbar";
+import Flow from './Flow';
+import Navbar from './Navbar';
 
 import CIcon from "@coreui/icons-react";
 import { cibRedux, cilInfo, cilZoom } from "@coreui/icons";
@@ -44,23 +43,23 @@ const Sidebar = () => {
 
   useEffect(() => {
     // Event Listener for 'message' from the extension
-    window.addEventListener("message", (event) => {
+    window.addEventListener('message', (event) => {
       const message = event.data;
       switch (message.type) {
         // Listener to receive the tree data, update navbar and tree view
-        case "parsed-data": {
-          console.log("BEFORE HERE ", message.value);
+        case 'parsed-data': {
+          console.log('BEFORE HERE ', message.value);
           let data = [];
           data.push(message.value);
-          console.log("DATA ", data);
+          console.log('DATA ', data);
           setRootFile(message.value.fileName);
           setSettings(message.settings);
           setTreeData(data);
-          console.log("HERE", treeData);
+          console.log('HERE', treeData);
           break;
         }
         // Listener to receive the user's settings
-        case "settings-data": {
+        case 'settings-data': {
           setSettings(message.value);
           break;
         }
@@ -69,13 +68,13 @@ const Sidebar = () => {
 
     // Post message to the extension whenever sapling is opened
     vscode.postMessage({
-      type: "onReacTreeVisible",
+      type: 'onReacTreeVisible',
       value: null,
     });
 
     // Post message to the extension for the user's settings whenever sapling is opened
     vscode.postMessage({
-      type: "onSettingsAcquire",
+      type: 'onSettingsAcquire',
       value: null,
     });
     // console.log('HERE', viewData);
@@ -85,7 +84,7 @@ const Sidebar = () => {
     // Edge case to verify that there is in fact a file path for the current node
     if (file) {
       vscode.postMessage({
-        type: "onViewFile",
+        type: 'onViewFile',
         value: file,
       });
     }
@@ -123,14 +122,26 @@ const Sidebar = () => {
   };
 
   const handleProps = (fileName: string) => {
-    setShowPropsStatus({...showPropsStatus, [fileName]: !showPropsStatus[fileName]});
+    setShowPropsStatus({
+      ...showPropsStatus,
+      [fileName]: !showPropsStatus[fileName],
+    });
     // setShowPropsStatus(propsObj)
     // propsObj[fileName] = !propsObj[fileName]
     // setShowPropsStatus(propsObj);
     // console.log("fileName", fileName)
     // console.log("AFTER CLICK", propsObj);
-    console.log("AFTER CLICK STATE", showPropsStatus);
+    console.log('AFTER CLICK STATE', showPropsStatus);
   };
+
+  const sendFilePath = (item: any) => {
+    console.log('FILEPATH', item.filepath);
+    vscode.postMessage({
+      type: 'onViewFileContent',
+      value: item,
+    });
+  };
+
 
   const getNodes = (tree: any) => {
     if (!tree) {
@@ -221,7 +232,7 @@ const Sidebar = () => {
         },
         onClick : () => handleProps(item.fileName),
         position: { x: 0, y: 0 },
-        type: item.depth === 0 ? "input" : "",
+        type: item.depth === 0 ? 'input' : '',
         style: {
           backgroundColor: "var(--vscode-dropdown-background)",
           borderRadius: "15px",
@@ -236,7 +247,7 @@ const Sidebar = () => {
         getNodes(item.children);
       }
     });
-    console.log("initial nodes: ", initialNodes);
+    console.log('initial nodes: ', initialNodes);
   };
 
   //initialEdges test
@@ -254,7 +265,7 @@ const Sidebar = () => {
           id: `e${parentId}-${nodeId}`,
           source: parentId.toString(),
           target: nodeId.toString(),
-          type: "smoothstep",
+          type: 'smoothstep',
           animated: false,
         };
         initialEdges.push(edge);
