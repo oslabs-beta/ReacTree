@@ -4,12 +4,6 @@
   http://jedwatson.github.io/classnames
 */
 
-/*!
- * Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com
- * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- * Copyright 2023 Fonticons, Inc.
- */
-
 /**
  * @license React
  * react-dom.production.min.js
@@ -66,6 +60,14 @@
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @mui/styled-engine v5.11.8
+ *
+ * @license MIT
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
