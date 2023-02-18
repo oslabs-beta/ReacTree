@@ -1,11 +1,31 @@
 /* this gets exported as style.css and can be used for the default theming */
 /* these are the necessary styles for React Flow, they get used by base.css and style.css */
-
+body {
+  padding: 0px;
+  /* background-color: #fafafa; */
+  background-color: var(--vscode-editor-background);
+	color: var(--vscode-editor-foreground);
+}
 .panel {
   height: 100vh;
   width: 100vw;
 }
+.MuiBadge-badge {
+  top: -14px !important;
+  right: -128px !important;
+}
+.css-cgmxn1 {
+  display: inline !important;
+}
+.nodeToolbar {
+  display: flex;
+  justify-content: center;
+  padding: 3px 4px;
+}
 
+.css-vubbuv {
+  font-size: 1.3rem;
+}
 .react-flow__container {
   position: absolute;
   width: 100%;
@@ -13,18 +33,21 @@
   top: 0;
   left: 0;
 }
+.react-flow__handle.connectable {
+  background-color: rgb(0 0 0 / 0%) !important;
+  border: none !important;
+}
 .react-flow__pane {
   z-index: 1;
-  cursor: -webkit-grab;
-  cursor: grab;
+  cursor: auto !important;
 }
-.react-flow__pane.selection {
+/* .react-flow__pane.selection {
   cursor: pointer;
 }
 .react-flow__pane.dragging {
   cursor: -webkit-grabbing;
   cursor: grabbing;
-}
+} */
 .react-flow__viewport {
   transform-origin: 0 0;
   z-index: 2;
@@ -276,9 +299,6 @@
 .react-flow__selection:focus-visible {
   outline: none;
 }
-.react-flow__controls {
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.08);
-}
 .react-flow__controls-button {
   border: none;
   background: #fefefe;
@@ -311,32 +331,181 @@
   height: 100vh;
 }
 
+.navbar {
+  display: flex;
+  position: absolute;
+  top: 80px; 
+  /* padding: 10px; */
+  border-radius: 0px 35px 35px 0px;
+  z-index: 2;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  background-color: var(--vscode-input-background);
+  border: solid var(--vscode-settings-focusedRowBorder);
+  border-left: none;
+}
+
 .inputfile {
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
   overflow: hidden;
-  position: absolute;
+  /* position: absolute; */
   z-index: -1;
 }
-
-.inputfile + label {
-  padding: 0.4em;
-  font-size: 1em;
-  font-weight: 700;
-  color: white;
-  background: #003f8e;
-  display: inline-block;
-  margin-left: 0.8em;
-  margin-top: 0.2em;
+.navbarContents{
+  display: flex;
+  padding: 2px 5px;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.5em;
+}
+#inputLabel {
+  /* padding: 0.4em; */
+  font-size: 1.5em;
+  font-weight: 400;
+  /* background: #003f8e; */
+  display: flex;
+  margin-left: 10px;
+  margin-right: 5px;
   border-radius: 5px;
   transition: 0.2s;
 }
+#inputLabel strong{
+  color: var(--vscode-foreground);
+}
 
-.inputfile + label:hover {
+.nodeTitle:hover {
+  white-space: normal !important; /* allow line breaks within the text */
+  overflow: visible !important;
+  text-overflow: initial !important; /* show the entire text */
+}
+#inputLabel:hover {
   background: opacity(0.8);
 }
 
-.inputfile + label {
+#inputLabel {
   cursor: pointer;
+}
+
+.nodeData {
+  display: block;
+  padding: 0;
+  font-size: 1.5em;
+
+}
+
+.controls {
+  display:flex;
+  flex-direction: row;
+}
+.reduxIcon {
+  display: inline-block;
+  fill: var(--vscode-foreground);
+}
+.icon {
+  position: relative;
+  right: 7px;
+  top: 3px;
+  width: 15px;
+  height: 15px;
+  fill: var(--vscode-foreground); 
+}
+
+div.react-flow__panel.react-flow__attribution {
+  visibility: hidden;
+}
+
+div.react-flow__panel.react-flow__controls.bottom.left{
+  left:auto;
+  right: 0px;
+  bottom: 25px;
+  height: 27px;
+  margin-right: 0px;
+  display: flex;
+  flex-direction: row;
+}  
+.react-flow__controls-button.react-flow__controls-zoomin{
+  border-radius: 30px 0px 0px 30px;
+}
+.react-flow__controls {
+  border: solid var(--vscode-settings-focusedRowBorder) !important;
+  border-right: none !important;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%) !important;
+  border-radius: 50px 0px 0px 50px !important;
+  height: 3.5em !important;
+}
+.react-flow__controls-button{
+  background-color: var(--vscode-input-background) !important;
+  border: none !important;
+  height: 2.19rem !important;
+  width: 2.5rem !important;
+  fill: var(--vscode-foreground) !important;
+}
+.customToolbarButton {
+  position: absolute;
+  display: flex;
+  bottom: 41px;
+  right: 50px;
+}
+.customToolbarButton svg{
+  max-width: 22px !important;
+  max-height: 22px !important;
+}
+.customToolbarButton2 {
+  right: 0px !important;
+}
+.customToolbarButton2 svg {
+  max-width: 18px !important;
+  max-height: 18px !important;
+}
+
+.react-flow__controls-button:hover {
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0) !important;
+}
+.react-flow__controls-button:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+}
+.show {
+  width: 26px;
+  height: 26px;
+  right: 26px;
+  bottom: 41px;
+  background-color: var(--vscode-input-background) !important;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.allProps {
+  left:auto;
+  width: 26px;
+  height: 26px;
+  right: 0%;
+  bottom: 41px;
+  background-color: var(--vscode-input-background) !important;
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium{
+  padding-right: 0px;
+  padding-left: 0px;
+  height: 26px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-color: var(--vscode-input-background) !important;
+}
+.css-1yxmbwk {
+  display: inline-block !important;
+  height: 100% !important;
+  width: 2.5rem !important;
+  border-radius: 0 !important;
+}
+#extraButtonsContainer {
+  height: auto;
 }
