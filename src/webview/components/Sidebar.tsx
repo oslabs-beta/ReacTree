@@ -89,19 +89,6 @@ const Sidebar = () => {
       });
     }
   };
-  // toggle prop icon on/off
-  // const handleProps = () => {
-  //   setShowProps(!showProps);
-  // };
-
-  // // toggle render icon on/off
-  // const openRender = () => {
-  //   setShowRender(true);
-  // };
-
-  // const closeRender = () => {
-  //   setShowRender(false);
-  // };
 
   // Separate useEffect that gets triggered when the treeData and settings state variables get updated
   useEffect(() => {
@@ -126,12 +113,6 @@ const Sidebar = () => {
       ...showPropsStatus,
       [fileName]: !showPropsStatus[fileName],
     });
-    // setShowPropsStatus(propsObj)
-    // propsObj[fileName] = !propsObj[fileName]
-    // setShowPropsStatus(propsObj);
-    // console.log("fileName", fileName)
-    // console.log("AFTER CLICK", propsObj);
-    console.log('AFTER CLICK STATE', showPropsStatus);
   };
 
   const sendFilePath = (item: any) => {
