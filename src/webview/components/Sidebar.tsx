@@ -40,6 +40,7 @@ const Sidebar = () => {
   const [showProps, setShowProps]: [boolean, Function] = useState(false);
   // const [showRender, setShowRender]: [boolean, Function] = useState(false);
   const [showPropsStatus, setShowPropsStatus]: [any, Function] = useState({});
+  const [showAllProps, setShowAllProps]: any = useState(false);
 
   useEffect(() => {
     // Event Listener for 'message' from the extension
@@ -192,7 +193,7 @@ const Sidebar = () => {
                 {item.fileName}
               </p>
               {Object.keys(item.props).length > 0 &&
-                showPropsStatus[item.fileName] === true && (
+                (showPropsStatus[item.fileName] === true || showAllProps === true) && (
                   <>
                     <div
                       style={{
@@ -213,6 +214,7 @@ const Sidebar = () => {
                     </div>
                   </>
                 )}
+                
               <div className="nodeToolbar">
               {Object.keys(item.props).length > 0 && (
                   <InfoIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }} onClick={() => handleProps(item.fileName)}/>
@@ -318,7 +320,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <Navbar rootFile={rootFile} />
 
-      <Flow initialNodes={initialNodes} initialEdges={initialEdges} />
+      <Flow initialNodes={initialNodes} initialEdges={initialEdges} showAllProps={showAllProps} setShowAllProps={setShowAllProps}/>
     </div>
   );
 };

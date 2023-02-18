@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { IconButton } from '@mui/material';
+import * as ReactDOM from "react-dom";
+import Navbar from "./Navbar";
+import { Button, IconButton } from '@mui/material';
 import NextIcon from '@mui/icons-material/NavigateNext';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PIcon from '@mui/icons-material/LocalParking';
@@ -16,8 +18,10 @@ import * as dagre from 'dagre';
 
 import 'reactflow/dist/style.css';
 import '../dagre.css';
+import { Diversity1Sharp } from '@mui/icons-material';
 
-const Flow = ({ initialNodes, initialEdges }: any) => {
+const Flow = ({ initialNodes, initialEdges, showAllProps, setShowAllProps}: any) => {  
+
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
@@ -25,6 +29,7 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
   // const nodeHeight = 36;
   const nodeHeight = 120;
   const [disabled, setDisabled]: any = useState(false);
+  const [appended, setAppended]: any = useState(false);
 
   const getLayoutedElements = (
     nodes: any[],
@@ -103,6 +108,23 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
     [nodes, edges]
   );
 
+  useEffect(() => {
+    let divs = document.getElementsByClassName("react-flow__panel react-flow__controls bottom left")
+    if(!appended && divs.length > 0){
+      setAppended(true)
+      for (let i = 0; i < divs.length; i++) {
+        const id = Math.random().toString() //or some such identifier 
+        const d = document.createElement("div")
+        console.log("divs length: ", divs.length)
+        d.id = id
+        divs[i].appendChild(d)
+        ReactDOM.render(<IconButton>
+          <PIcon/>
+        </IconButton>, document.getElementById(id))
+      }
+    }
+  }, [<Navbar/>])     
+
   return (
     <div className="tree_view" >
       <div className="layoutflow">
@@ -115,7 +137,7 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
           connectionLineType={ConnectionLineType.SmoothStep}
           fitView
         >
-        <Controls style={{ borderRadius: '50px',}} /> 
+        <Controls style={{ borderRadius: '50px',}}/> 
         </ReactFlow>
 
         {/* <div className="controls" style={{ width: '100px' }}>
@@ -133,7 +155,7 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
           <button className={disabled ? "hide" : "show"}
             onClick={() => onLayout('LR')}
             style={{
-              backgroundColor: 'white',
+              backgroundColor: 'white', 
               color: 'black',
               borderRadius: '5px',
               position:'absolute',
@@ -175,7 +197,9 @@ const Flow = ({ initialNodes, initialEdges }: any) => {
          position:"absolute",
          borderRadius: '0px',
          backgroundColor: 'white'}}>
-        <IconButton>
+        <IconButton onClick={() => {
+          setShowAllProps(!showAllProps);
+          }}>
           <PIcon/>
         </IconButton>
       </div>
