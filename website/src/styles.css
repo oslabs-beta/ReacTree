@@ -1,61 +1,112 @@
-
 body {
   margin: 0;
-  font-family:'Roboto', sans-serif;
-  background-image: linear-gradient(
-    45deg,
-    #39538b,
-    #448070,
-    #539799
-  );
-  background-size: 400%;
-  animation: bg-animation 20s infinite alternate;
-}
-
-
-@keyframes bg-animation {
-  0% {
-    background-position: left;
-  }
-  100% {
-    background-position: right;
-  }
+  font-family: 'Open sans', sans-serif;
+  background-color: #F4F9F4;
 }
 
 nav {
   display: flex;
   justify-content: space-between;
-  padding-left: 25px;
-  padding-right: 35px;
-  padding-top: 30px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-top: 1.3em;
+  padding-bottom: 1.3em;
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
 .nav-padding {
-  margin-right: 25px;
+  margin-right: 1em;
 }
 
 .nav-button {
   text-decoration: none;
-  color: white;
+  color: #28282B;
+  font-size: 0.9em;
   font-weight: 600;
-  padding: 11px;
-  border: 2px solid rgba(255, 255, 255, 0.788);
-  border-radius: 8px;
+  padding: 0.6em;
+  border: 2px solid #28282bbd;
+  border-radius: 6px;
   transition: 0.1s;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
 }
 
 .nav-button:hover {
-  background-color:rgba(121, 231, 131, 0.726);
-  color: white;
+  background-color:#74B49B;
+  color: #2a2a2dd2;
   border: 2px solid rgba(223, 223, 223, 0.753);
+}
+
+.nav-button:active {
+  background-color: #A7D7C5;
+  box-shadow: 0 1px #666;
+  transform: translateY(1px);
+}
+
+.logo-main h1 {
+  display: flex;
+  align-items: center;
+}
+
+.reactree-logo {
+  padding-left: 0.3em;
+  width: 6rem;
+}
+
+.left-buttons {
+  padding-left: 2em;
+}
+
+.right-button {
+  padding-right: 2em;
 }
 
 .logo-main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 6em;
   color: #28282B;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.get-reactree {
+  width: 17em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.get-button {
+  display: flex;
+  text-decoration: none;
+  color: #28282B;
+  font-size: 0.6em;
+  font-weight: 600;
+  padding: 0.6em;
+  border: 2px solid #28282bbd;
+  border-radius: 6px;
+  transition: 0.1s;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+}
+
+.get-button:hover {
+  background-color:#74B49B;
+  color: #28282B;
+  border: 2px solid rgba(223, 223, 223, 0.753);
+}
+
+.get-button:active {
+  background-color: #A7D7C5;
+  box-shadow: 0 1.5px #666;
+  transform: translateY(1px);
+}
+
+.get-logo {
+  padding-left: 0.8em;
+  width: 1.3rem;
+  object-fit: cover;
 }
 
 .features-main {
@@ -66,6 +117,7 @@ nav {
   color: #28282B;
 }
 
+
 .team {
   margin-top: 5%;
   margin-bottom: 10%;
@@ -75,7 +127,7 @@ nav {
   display: flex;
   justify-content: center;
   font-size: 2em;
-  color: rgba(248, 248, 248, 0.925);
+  color: #28282B;
   margin-bottom: 5%;
 }
 
@@ -89,20 +141,21 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(243, 250, 253, 0.2);
+  background: white;
   padding: 2rem;
   border-radius: 1rem;
-  margin-right: 1%;
+  margin-right: 1em;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
 .member-name {
-  color: white;
+  color: #28282B;
   font-size: 1.2rem;
   margin-top: 1rem;
 }
 
 .member-title {
-  color: white;
+  color:#28282B;
   font-weight: 400;
   font-size: 0.8rem
 
@@ -112,7 +165,7 @@ nav {
     height: 8rem;
     object-fit: cover;
     border-radius: 0.5rem;
-    border: 1.5px white solid;
+    border: 1.5px solid #28282B;;
 }
 
 .member-links {
@@ -132,14 +185,14 @@ nav {
   margin-bottom: 4px;
 }
 
+
 #Footer {
   display: flex;
   justify-content: center;
-  position: fixed;
   bottom: 0;
   width: 100%;
   padding-top: 0.7em;
   padding-bottom: 0.5em;
   font-size: 0.9em;
-  background-color: rgba(182, 182, 182, 0.329);
+  background-color: #a7d7c58e;
 }
