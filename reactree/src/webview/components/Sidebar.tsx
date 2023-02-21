@@ -1,12 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Node, Edge } from "reactflow";
-<<<<<<< HEAD:reactree/src/webview/components/Sidebar.tsx
-import LiveRenderModal from './LiveRenderModal'
-
-import Flow from "./Flow";
-import Navbar from "./Navbar";
-=======
 import Button from '@mui/material/Button';
 import FilterNoneIcon from '@mui/icons-material/FilterNone';
 import Badge from '@mui/material/Badge';
@@ -17,7 +11,6 @@ import InfoIcon from '@mui/icons-material/Info';
 
 import Flow from './Flow';
 import Navbar from './Navbar';
->>>>>>> dev:src/webview/components/Sidebar.tsx
 
 import CIcon from "@coreui/icons-react";
 import { cibRedux, cilInfo, cilZoom } from "@coreui/icons";
@@ -48,14 +41,7 @@ const Sidebar = () => {
   const [settings, setSettings]: [{ [key: string]: boolean }, Function] = useState();
   const [rootFile, setRootFile]: [string | undefined, Function] = useState();
   const [showPropsStatus, setShowPropsStatus]: [any, Function] = useState({});
-<<<<<<< HEAD:reactree/src/webview/components/Sidebar.tsx
-  const [showModalStatus, setShowModalStatus]: [any, Function] = useState({});
-
-  const [show, setShow]: [boolean, Function] = useState(false);
-  const handleShow = () => setShow(!show);
-=======
   const [showAllProps, setShowAllProps]: any = useState(false);
->>>>>>> dev:src/webview/components/Sidebar.tsx
 
   useEffect(() => {
     // Event Listener for 'message' from the extension
@@ -123,16 +109,6 @@ const Sidebar = () => {
     propsObj[itemID] = false;
   };
 
-<<<<<<< HEAD:reactree/src/webview/components/Sidebar.tsx
-  const handleProps = (itemID: string) => {
-    setShowPropsStatus({...showPropsStatus, [itemID]: !showPropsStatus[itemID]});
-  };
-
-  // const handleModal = (itemID: string) => {
-  //   return setShowModalStatus({...showModalStatus, [itemID]: !showModalStatus[itemID]});
-  // }
-
-=======
   const handleProps = (fileName: string) => {
     setShowPropsStatus({
       ...showPropsStatus,
@@ -154,18 +130,13 @@ const Sidebar = () => {
     });
   };
 
->>>>>>> dev:src/webview/components/Sidebar.tsx
 
   const getNodes = (tree: any) => {
     if (!tree) return;
 
     tree.forEach((item: any) => {
-<<<<<<< HEAD:reactree/src/webview/components/Sidebar.tsx
-      makePropsObj(item.id);
-=======
       makePropsObj(item.fileName);
       
->>>>>>> dev:src/webview/components/Sidebar.tsx
       const node = {
         id: (++id).toString(),
         data: {
@@ -174,39 +145,6 @@ const Sidebar = () => {
             // <Badge badgeContent={item.count} color="primary">
             <div className="nodeData">
               {/* for rendering modal to show live render of component */}
-<<<<<<< HEAD:reactree/src/webview/components/Sidebar.tsx
-              <div style={{ alignSelf: "flex-end" }}>
-                <CIcon icon={cilZoom} width={12} height={12} style={{marginRight: '2px' }} onClick={handleShow} />
-                  <Modal show={show} onHide={handleShow}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Modal heading</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body></Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleShow}>
-                        Close
-                      </Button>
-                      <Button variant="primary" onClick={handleShow}>
-                        Save Changes
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                {/* if component has redux storage */}
-                {item.reduxConnect && (
-                  <CIcon icon={cibRedux} width={12} height={12} />
-                )}
-                {Object.keys(item.props).length > 0 && (
-                  <CIcon
-                    onClick={() => handleProps(item.id)}
-                    icon={cilInfo}
-                    width={12}
-                    height={12}
-                    style={{ cursor: "pointer", color: "#003f8e" }}
-                  />
-                )}
-              </div>
-              <p
-=======
                 {item.count > 1 && (
                   <Badge badgeContent={item.count}  sx={{
                     "& .MuiBadge-badge": {
@@ -220,7 +158,6 @@ const Sidebar = () => {
                 
 
               <p className='nodeTitle'
->>>>>>> dev:src/webview/components/Sidebar.tsx
                 style={{
                   fontFamily: 'Roboto',
                   fontStyle: 'normal',
@@ -240,11 +177,7 @@ const Sidebar = () => {
                 {item.fileName}
               </p>
               {Object.keys(item.props).length > 0 &&
-<<<<<<< HEAD:reactree/src/webview/components/Sidebar.tsx
-                showPropsStatus[item.id] === true && (
-=======
                 (showPropsStatus[item.fileName] === true || showAllProps === true) && (
->>>>>>> dev:src/webview/components/Sidebar.tsx
                   <>
                     <div
                       style={{

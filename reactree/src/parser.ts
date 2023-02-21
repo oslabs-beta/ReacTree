@@ -65,7 +65,7 @@ export class Parser {
   }
 
   // Set Sapling Parser with a specific Data Tree (from workspace state)
-  public setTree(tree: Tree): void {
+  public (tree: Tree): void {
     this.entryFile = tree.filePath;
     this.tree = tree;
   }
