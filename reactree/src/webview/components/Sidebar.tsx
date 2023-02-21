@@ -1,11 +1,8 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Node, Edge } from "reactflow";
-import Button from '@mui/material/Button';
-import FilterNoneIcon from '@mui/icons-material/FilterNone';
 import Badge from '@mui/material/Badge';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import InfoIcon from '@mui/icons-material/Info';
 
@@ -13,13 +10,7 @@ import Flow from './Flow';
 import Navbar from './Navbar';
 
 import CIcon from "@coreui/icons-react";
-import { cibRedux, cilInfo, cilZoom } from "@coreui/icons";
-import { types } from "util";
-import { borderBottom, fontSize, padding } from "@mui/system";
-
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-
+import { cibRedux } from "@coreui/icons";
 
 
 interface vscode {
@@ -37,12 +28,10 @@ interface SidebarProps {
 const Sidebar = () => {
   // state variables for the incomimg treeData, parsed viewData, user's settings, and the root file name
   const [treeData, setTreeData]: any = useState();
-  const [viewData, setViewData]: any = useState();
   const [settings, setSettings]: [{ [key: string]: boolean }, Function] = useState();
   const [rootFile, setRootFile]: [string | undefined, Function] = useState();
-  const [showPropsStatus, setShowPropsStatus]: [any, Function] = useState({});
-  const [showAllProps, setShowAllProps]: any = useState(false);
 
+  let viewData: any;
   useEffect(() => {
     // Event Listener for 'message' from the extension
     window.addEventListener('message', (event) => {
@@ -50,14 +39,11 @@ const Sidebar = () => {
       switch (message.type) {
         // Listener to receive the tree data, update navbar and tree view
         case 'parsed-data': {
-          console.log('BEFORE HERE ', message.value);
           let data = [];
           data.push(message.value);
-          console.log('DATA ', data);
           setRootFile(message.value.fileName);
           setSettings(message.settings);
           setTreeData(data);
-          console.log('HERE', treeData);
           break;
         }
         // Listener to receive the user's settings
@@ -79,7 +65,6 @@ const Sidebar = () => {
       type: 'onSettingsAcquire',
       value: null,
     });
-    // console.log('HERE', viewData);
   }, []);
 
   const viewFile = (file: any) => {
@@ -103,27 +88,25 @@ const Sidebar = () => {
   // initialize iniialialNodes for ReactFlow setup
   const initialNodes: Node[] = [];
   let id = 0;
+  const nodeIDs =[]
   const propsObj: any = {};
-  // creates nodes for the initialNodes array
-  const makePropsObj = (itemID: string) => {
-    propsObj[itemID] = false;
-  };
 
-  const handleProps = (fileName: string) => {
-    setShowPropsStatus({
-      ...showPropsStatus,
-      [fileName]: !showPropsStatus[fileName],
-    });
-    // setShowPropsStatus(propsObj)
-    // propsObj[fileName] = !propsObj[fileName]
-    // setShowPropsStatus(propsObj);
-    // console.log("fileName", fileName)
-    // console.log("AFTER CLICK", propsObj);
-    console.log('AFTER CLICK STATE', showPropsStatus);
-  };
+  const handleProps = (id) => {
+    const propsDiv = document.getElementById(id);
+    const styles = window.getComputedStyle(propsDiv);
+    const display = styles.getPropertyValue('display');
+    if (display === 'none') propsDiv.style.display = 'block';
+    else propsDiv.style.display = 'none'
+  }
+  const handleAllProps = (displayValue) => {
+    for (let i = 0; i < nodeIDs.length; i++) {
+      const id = nodeIDs[i];
+      const propsDiv = document.getElementById(id);
+      propsDiv.style.display = displayValue
+    }
+  }
 
   const sendFilePath = (item: any) => {
-    console.log('FILEPATH', item.filepath);
     vscode.postMessage({
       type: 'onViewFileContent',
       value: item,
@@ -132,11 +115,12 @@ const Sidebar = () => {
 
 
   const getNodes = (tree: any) => {
-    if (!tree) return;
+    if (!tree) {
+      return;
+    }
 
     tree.forEach((item: any) => {
-      makePropsObj(item.fileName);
-      
+      if (Object.keys(item.props).length > 0) nodeIDs.push(item.id);
       const node = {
         id: (++id).toString(),
         data: {
@@ -154,9 +138,6 @@ const Sidebar = () => {
                   }}>
                   </Badge>
                 )}
-
-                
-
               <p className='nodeTitle'
                 style={{
                   fontFamily: 'Roboto',
@@ -177,11 +158,11 @@ const Sidebar = () => {
                 {item.fileName}
               </p>
               {Object.keys(item.props).length > 0 &&
-                (showPropsStatus[item.fileName] === true || showAllProps === true) && (
+                (
                   <>
-                    <div
+                    <div id={item.id} 
                       style={{
-                        display: "block",
+                        display: "none",
                         columnWidth: '112px',
                         fontSize: '11pt',
                         color: 'var(--vscode-foreground)',
@@ -201,7 +182,7 @@ const Sidebar = () => {
               <div style={{justifyContent: 'space-between', display: 'flex', margin: '5px 0px'}}>
                 <div className="nodeToolbar">
                   {Object.keys(item.props).length > 0 && (
-                      <InfoIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }} onClick={() => handleProps(item.fileName)}/>
+                      <InfoIcon data-property={id.toString()} style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }} onClick={() => handleProps(item.id)}/>
                     )}
                     {item.children.length > 0 && <CloseFullscreenIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }}/>}
                     <TextSnippetIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }} onClick={() => viewFile(item.filePath)}/>
@@ -233,7 +214,6 @@ const Sidebar = () => {
         getNodes(item.children);
       }
     });
-    console.log('initial nodes: ', initialNodes);
   };
 
   //initialEdges test
@@ -299,18 +279,15 @@ const Sidebar = () => {
     // Invoking the helper function
     traverse(treeParsed);
     // Update the vewData state
-    setViewData([treeParsed]);
+    viewData = ([treeParsed])
+    getNodes(viewData);
+    makeEdges(viewData);
   };
-  getNodes(viewData);
-
-  makeEdges(viewData);
-
   // Render section
   return (
     <div className="sidebar">
       <Navbar rootFile={rootFile} />
-
-      <Flow initialNodes={initialNodes} initialEdges={initialEdges} showAllProps={showAllProps} setShowAllProps={setShowAllProps} />
+      <Flow initialNodes={initialNodes} initialEdges={initialEdges} handleAllProps={handleAllProps} />
     </div>
   );
 };

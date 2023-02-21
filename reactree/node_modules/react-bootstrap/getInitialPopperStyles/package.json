@@ -1,7 +1,0 @@
-{
-  "name": "react-bootstrap/getInitialPopperStyles",
-  "private": true,
-  "main": "../cjs/getInitialPopperStyles.js",
-  "module": "../esm/getInitialPopperStyles.js",
-  "types": "../esm/getInitialPopperStyles.d.ts"
-}

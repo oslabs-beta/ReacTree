@@ -74,9 +74,7 @@
 
 ## Installation
 
-To install ReacTree, search for "ReacTree" in the Visual Studio Code Marketplace or click [here](https://marketplace.visualstudio.com/).
-
-Once you have downloaded the extension from the Marketplace, you will see a ReacTree icon at the bottom of your status bar! Continue to the Getting Started section for more information.
+[Installation process for Marketplace]
 
 ## Getting Started
 
