@@ -446,7 +446,7 @@ div.react-flow__panel.react-flow__controls.bottom.left{
 .customToolbarButton {
   position: absolute;
   display: flex;
-  bottom: 41px;
+  bottom: 43px;
   right: 50px;
 }
 .customToolbarButton svg{
@@ -500,12 +500,14 @@ div.react-flow__panel.react-flow__controls.bottom.left{
   padding-bottom: 0px;
   background-color: var(--vscode-input-background) !important;
 }
+
 .css-1yxmbwk {
   display: inline-block !important;
   height: 100% !important;
   width: 2.5rem !important;
   border-radius: 0 !important;
 }
+
 #extraButtonsContainer {
   height: auto;
 }

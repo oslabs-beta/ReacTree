@@ -1,10 +1,6 @@
-import * as path from 'path';
 import * as vscode from 'vscode';
 import { getNonce } from './getNonce';
 import { Parser } from './parser';
-// import { Tree } from "./types/Tree";
-import * as fs from 'fs';
-import * as Babel from '@babel/core';
 
 export default class ReacTreePanel {
   public static currentPanel: ReacTreePanel | undefined;
@@ -28,7 +24,6 @@ export default class ReacTreePanel {
       ReacTreePanel.currentPanel._panel.reveal(column);
     } else {
       // ReactPanel.currentPanel = new ReactPanel(extensionPath, column || vscode.ViewColumn.One);
-      console.log('FIRST');
       ReacTreePanel.currentPanel = new ReacTreePanel(
         extContext,
         vscode.ViewColumn.Two
@@ -40,7 +35,6 @@ export default class ReacTreePanel {
     extContext: vscode.ExtensionContext,
     column: vscode.ViewColumn
   ) {
-    console.log('SECOND');
     this._extContext = extContext;
     this._extensionUri = extContext.extensionUri;
     // Not added - state preserver**
@@ -66,27 +60,17 @@ export default class ReacTreePanel {
     // This happens when the user closes the panel or when the panel is closed programatically
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
+    // Handle messages from the webview
     this._panel.webview.onDidReceiveMessage(
       async (msg: any) => {
         switch (msg.type) {
-          case 'startup':
-            console.log('message received');
-            // vscode.commands.executeCommand('vscode-note.note.edit', msg.data.id, msg.data.category);
-            break;
-          case 'testing':
-            console.log('reachedBrain');
-            this._panel!.webview.postMessage({ command: 'refactor' });
-            break;
           case 'onFile':
-            console.log(msg.value);
             if (!msg.value) break; //if doesnt work change to return
             this.parser = new Parser(msg.value);
             this.parser.parse();
-            console.log(this.parser.tree);
             this.updateView();
             break;
           case 'onViewFile':
-            console.log('onViewFile', msg.value);
             if (!msg.value) return;
             const doc = await vscode.workspace.openTextDocument(msg.value);
             const editor = await vscode.window.showTextDocument(doc, {
@@ -94,70 +78,11 @@ export default class ReacTreePanel {
               preview: false,
             });
             break;
-          case 'onViewFileContent':
-            console.log('onViewFileContent', msg.value);
-            if (!msg.value) return;
-            this.readFileContent(msg.value);
-            break;
-          case 'edit-contentFile':
-            vscode.commands.executeCommand(
-              'vscode-note.note.edit.col.content',
-              msg.data.id,
-              msg.data.n
-            );
-            break;
-          case 'edit-col':
-            vscode.commands.executeCommand(
-              'vscode-note.note.edit.col',
-              msg.data.id,
-              msg.data.cn
-            );
-            break;
-          case 'doc':
-            vscode.commands.executeCommand(
-              'vscode-note.note.doc.show',
-              msg.data
-            );
-            break;
-          case 'files':
-            vscode.commands.executeCommand(
-              'vscode-note.note.files.open',
-              msg.data
-            );
-            break;
         }
       },
       null,
       this._disposables
     );
-  }
-
-  private async readFileContent(node: any) {
-    // const code = fs.readFileSync(node.filePath, 'utf-8');
-    console.log('NODE: ', node.filePath)
-    console.log('PARENT NODE: ', node.parentList[0])
-    // const filePath: string = node.filePath;
-    // let parentFilePath: string;
-    // if (node.parentList > 0) {
-    //   parentFilePath = node.parentList[0];
-    // }
-
-    const code = fs.readFileSync(node.filePath, 'utf-8');
-    // const parentCode = fs.readFileSync(node.parentList[0], 'utf-8');
-    // console.log('FS: ', code)
-    // console.log('FS PARENT: ', parentCode)
-
-    // // const result = Babel.transformSync(code);
-
-    // // console.log('BABEL RESULT: ', result.code)
-
-    // // eval(result.code);
-
-    this._panel.webview.postMessage({
-      type: 'file-content',
-      value: code,
-      settings: await vscode.workspace.getConfiguration('reacTree'),
-    });
   }
 
   private async updateView() {
@@ -174,11 +99,8 @@ export default class ReacTreePanel {
 
   public dispose() {
     ReacTreePanel.currentPanel = undefined;
-    console.log('dipose part 1');
     // Clean up our resources
     this._panel.dispose();
-    console.log('dipose part 2');
-
     while (this._disposables.length) {
       const x = this._disposables.pop();
       if (x) {
@@ -213,7 +135,6 @@ export default class ReacTreePanel {
           const vscode = acquireVsCodeApi();
           window.onload = function() {
             vscode.postMessage({ command: 'startup' });
-            console.log('HTML started up.');
           };
         </script>
         <script nonce="${nonce}" src="${scriptUri}"></script>
