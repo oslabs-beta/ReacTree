@@ -44,11 +44,6 @@ nav {
   transform: translateY(1px);
 }
 
-.logo-main h1 {
-  display: flex;
-  align-items: center;
-}
-
 .reactree-logo {
   padding-left: 0.3em;
   width: 6rem;
@@ -72,8 +67,26 @@ nav {
   font-size: 1.5em;
 }
 
+.logo-main h1 {
+  display: flex;
+  align-items: center;
+}
+
+.sub-title {
+  font-size: 1em;
+  font-weight: 500;
+  margin-top: -0.5em;
+}
+
+.reactree-intro {
+  font-size: 0.9em;
+  font-weight: 300;
+  margin-top: -0.9em;
+  margin-bottom: 2em;
+}
+
 .get-reactree {
-  width: 17em;
+  width: 15em;
   display: flex;
   justify-content: space-between;
 }
@@ -84,7 +97,7 @@ nav {
   color: #28282B;
   font-size: 0.6em;
   font-weight: 600;
-  padding: 0.6em;
+  padding: 0.8em;
   border: 2px solid #28282bbd;
   border-radius: 6px;
   transition: 0.1s;
@@ -117,18 +130,53 @@ nav {
   color: #28282B;
 }
 
+.feature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.features-main h2 {
+  color: #2B3735;
+}
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #e0f0e3;
+  border-radius: 0.2rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  width: 20em;
+  height: 23.2em;
+  padding: 2em;
+}
+
+.feature-image {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 0.2rem;
+}
+
+@media only screen and (max-width: 1418px) {
+  .feature-text {
+    height: 10em;
+    width: 46em;
+  }
+}
 
 .team {
-  margin-top: 5%;
-  margin-bottom: 10%;
+  margin-top: 8em;
+  margin-bottom: 8em;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
 }
 
 .team h2{
   display: flex;
   justify-content: center;
-  font-size: 2em;
+  font-size: 2.8em;
   color: #28282B;
-  margin-bottom: 5%;
+  margin-bottom: 2em;
 }
 
 .team-members {
@@ -142,24 +190,27 @@ nav {
   justify-content: center;
   align-items: center;
   background: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  margin-right: 1em;
+  padding: 1.7rem;
+  border-radius: 0.5rem;
+  margin-right: 1.5em;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
 .member-name {
   color: #28282B;
   font-size: 1.2rem;
-  margin-top: 1rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
 }
 
 .member-title {
   color:#28282B;
-  font-weight: 400;
-  font-size: 0.8rem
-
+  font-weight: 500;
+  font-size: 0.85rem;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
 }
+
 .member-photo {
     width: 8rem;
     height: 8rem;
@@ -195,4 +246,5 @@ nav {
   padding-bottom: 0.5em;
   font-size: 0.9em;
   background-color: #a7d7c58e;
+  font-weight: 500;
 }
