@@ -1,10 +1,9 @@
 {
-  "name": "reactree",
-  "displayName": "REACTREE",
-  "description": "React higherarchy visualizer and component preview tool",
+  "name": "extensionnamegoeshere",
+  "displayName": "Extension Display Name Goes Here",
+  "description": "Extension Description Goes Here",
   "version": "0.0.1",
-  "icon": "icon.png",
-  "publisher": "REACTREE",
+  "publisher": "Organization Name Goes Here",
   "preview": true,
   "engines": {
     "vscode": "^1.74.3"
@@ -17,44 +16,31 @@
     "Other"
   ],
   "keywords": [
-    "note",
     "vscode"
   ],
-  "license": "MIT",
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "reacTree.start",
-        "title": "ReacTree: Show Panel"
+        "command": "extensionnamegoeshere.start",
+        "title": "Extension Command Title Goes Here"
       }
     ]
   },
-  "extensionPack": [
-    "docsmsft.docs-markdown",
-    "docsmsft.docs-preview"
-  ],
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "webpack --mode production --config webpack.config.ts",
-    "watch": "webpack --mode development --config webpack.config.ts --watch --info-verbosity verbose"
+    "compile": "webpack --mode production --config webpack.config.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
-    "@types/dagre": "^0.7.48",
-    "@types/fs-extra": "^8.0.1",
-    "@types/jest": "^24.0.24",
     "@types/node": "^12.20.55",
-    "@types/object-path": "^0.11.0",
     "@types/react": "^16.14.35",
     "@types/react-dom": "^16.9.4",
-    "@types/rimraf": "^2.0.3",
     "@types/webpack": "^4.41.0",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.1.1",
-    "sass-loader": "^8.0.0",
     "style-loader": "^1.0.2",
     "ts-loader": "^9.4.2",
     "css-loader": "^3.4.0",
@@ -64,17 +50,9 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "@coreui/icons": "^3.0.0",
-    "@coreui/icons-react": "^2.1.0",
-    "@fortawesome/free-solid-svg-icons": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@types/vscode": "^1.75.0",
-    "dagre": "^0.8.5",
-    "fs-extra": "^8.1.0",
-    "object-path": "^0.11.4",
     "path": "^0.12.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "reactflow": "^11.5.2"
+    "react-dom": "^18.2.0"
   }
 }

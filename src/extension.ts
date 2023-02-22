@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
-import ReacTreePanel from './panel'
+import PanelClass from './panel'
 
 
 export function activate(extContext: vscode.ExtensionContext) {
-    extContext.subscriptions.push(vscode.commands.registerCommand('reacTree.start', () => {
-        ReacTreePanel.createOrShow(extContext);
+    extContext.subscriptions.push(vscode.commands.registerCommand('extensionnamegoeshere.start', () => {
+        PanelClass.createOrShow(extContext);
 	}));
 };
 

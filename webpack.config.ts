@@ -22,7 +22,7 @@ const webviewConfig: webpack.Configuration = {
     path: path.resolve(__dirname, 'out'),
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', 'scss'],
+    extensions: ['.js', '.ts', '.tsx'],
   },
   module: {
     rules: [
