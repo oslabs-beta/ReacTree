@@ -156,8 +156,13 @@ nav {
   border-radius: 0.2rem;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   width: 28em;
-  height: 23.2em;
+  height: 24.1em;
   padding: 2em;
+}
+
+.feature-title h3{
+  margin-top: -0.01em;
+  font-size: 1.5em;
 }
 
 .feature-image {
@@ -172,14 +177,15 @@ nav {
   border-radius: 0.2rem;
   line-height: 1.7;
   width: 26em;
-  height: 28em;
+  height: 30em;
   font-weight: 500;
   font-size: 1em;
+  margin-top: -0.7em;
 }
 
 @media only screen and (max-width: 1418px) {
   .feature-text {
-    height: 11em;
+    height: 11.7em;
     width: 46em;
   }
   .feature-description {
