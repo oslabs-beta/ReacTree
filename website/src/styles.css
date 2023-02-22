@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Open sans', sans-serif;
-  background-color: #F4F9F4;
+  background: linear-gradient(#F4F9F4 15%, #FFFFFF 22%);
 }
 
 nav {
@@ -12,7 +12,7 @@ nav {
   width: 100%;
   padding-top: 1.3em;
   padding-bottom: 1.3em;
-  background-color: white;
+  background-color: #FFFFFF;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
@@ -79,10 +79,12 @@ nav {
 }
 
 .reactree-intro {
-  font-size: 0.9em;
+  font-size: 0.8em;
   font-weight: 300;
   margin-top: -0.9em;
-  margin-bottom: 2em;
+  margin-bottom: 1.7em;
+  max-width: 28em;
+  text-align: center;
 }
 
 .get-reactree {
@@ -126,7 +128,7 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 9em;
   color: #28282B;
 }
 
@@ -138,17 +140,22 @@ nav {
   gap: 3rem;
   margin-bottom: 3rem;
 }
+
 .features-main h2 {
-  color: #2B3735;
+  color: #2b3735e7;
+  font-size: 2.5em;
+  margin-bottom: 2.5em;
 }
+
 .feature-text {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background: #e0f0e3;
   border-radius: 0.2rem;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  width: 20em;
+  width: 28em;
   height: 23.2em;
   padding: 2em;
 }
@@ -158,17 +165,33 @@ nav {
   border-radius: 0.2rem;
 }
 
+.feature-description {
+  background: #f5fbf9bd;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  padding: 0.7em;
+  border-radius: 0.2rem;
+  line-height: 1.7;
+  width: 26em;
+  height: 28em;
+  font-weight: 500;
+  font-size: 1em;
+}
+
 @media only screen and (max-width: 1418px) {
   .feature-text {
-    height: 10em;
+    height: 11em;
     width: 46em;
+  }
+  .feature-description {
+    width: 45em;
+    line-height: 1.5;
+    padding: 0.5em;
   }
 }
 
 .team {
   margin-top: 8em;
   margin-bottom: 8em;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
 }
 
 .team h2{
@@ -189,7 +212,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
+  background: #FFFFFF;
   padding: 1.7rem;
   border-radius: 0.5rem;
   margin-right: 1.5em;

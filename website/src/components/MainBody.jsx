@@ -12,10 +12,11 @@ const MainBody = () => {
         <h1>ReacTree
           <img className='reactree-logo' src={ReacTree}></img>
         </h1>
-        <p className='sub-title'>Navigate and visualize your React application</p>
+        <p className='sub-title'>Visualize and navigate your React application</p>
         <br></br> 
         <p className='reactree-intro'>
-          Traverse your React project with a visual hierarchical tree
+          As your projects become more intricate, 
+          view and manage your parent-child components in a hierarchy tree
         </p>
         <br></br> 
         <div className='get-reactree'>
@@ -29,13 +30,23 @@ const MainBody = () => {
       </div>
       
       <div className='features-main'>
-        <h2>Features</h2>
+        <h2>Features Demo</h2>
         <div className='feature'>
           <div className='feature-text'>
             <div className='feature-title'>
-              <h3>feature title</h3>
+              <h3>Launch ReacTree</h3>
             </div>
-            <div className='feature-description'>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</div>
+            <div className='feature-description'>
+              <ul>
+                {/* <li>Click ReacTree from your status bar and select a React component</li>
+                <li>Toggle your tree nodes to view the component's props</li>
+                <li>Easily access and open component files </li> */}
+                <li>Access ReacTree from your status bar</li>
+                <li>Select your project's root file </li>
+                <li>Toggle the tree nodes to view the component's props</li>
+                <li>Easily access the component files and open them for editing</li>
+              </ul>
+            </div>
           </div>
           <img className='feature-image' src={LaunchPropsOpenFiles} alt="Launch reactree, show props, open files gif"/>
         </div>
@@ -43,9 +54,16 @@ const MainBody = () => {
         <div className='feature'>
           <div className='feature-text'>
             <div className='feature-title'>
-              <h3>feature title</h3>
+              <h3>Node Features</h3>
             </div>
-            <div className='feature-description'>feature description</div>
+            <div className='feature-description'>
+            <ul className='node-features'>
+                <li>Customize the tree by dragging and dropping components to your preferred layout</li>
+                <li>Toggle props in the control bar to view all components' props at once</li>
+                <li>Lock your tree in place and view either vertically or horizontally for easier navigation</li>
+                <li>Easily monitor component usage with the usage count conveniently displayed on the top right of each node.</li>
+              </ul>
+            </div>
           </div>
           <img className='feature-image' src={NavbarControls} alt="Nav-bar controls gif"/>
         </div>
@@ -53,9 +71,14 @@ const MainBody = () => {
         <div className='feature'>
           <div className='feature-text'>
             <div className='feature-title'>
-              <h3>feature title</h3>
+              <h3>Themes</h3>
             </div>
-            <div className='feature-description'>feature description</div>
+            <div className='feature-description'>
+              <ul>
+                <li>⇧⌘P(Mac) Ctrl+Shift+P (Windows), type "Preferences:Color Theme"</li>
+                <li>Choose a customized theme that best suit your preference</li>
+              </ul>
+            </div>
           </div>
           <img className='feature-image' src={Themes} alt="Themes gif"/>
         </div>

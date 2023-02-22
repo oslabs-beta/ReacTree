@@ -8,7 +8,7 @@ import Fabian from '../../public/Fabian.jpg';
 const Team = () => {
   return(
     <div className='team'>
-      <h2>Our Team Members</h2>
+      <h2>Meet Our Team</h2>
       <div className='team-members'>
         <div className='member'>
           <img className='member-photo'src={Justin}></img>
