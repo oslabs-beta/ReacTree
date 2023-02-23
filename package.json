@@ -11,14 +11,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/"
+    "url": "https://github.com/oslabs-beta/ReacTree/tree/dev"
   },
   "categories": [
     "Other"
   ],
   "keywords": [
-    "note",
-    "vscode"
+    "react",
+    "hierarchy tree",
+    "react components",
+    "parent-child",
+    "navigation",
+    "visualizer"
   ],
   "license": "MIT",
   "activationEvents": [],
