@@ -54,7 +54,7 @@ export default class ReacTreePanel {
     );
     
     // Set webview favicon
-    this._panel.iconPath = vscode.Uri.joinPath(this._extensionUri, "src/media", "favicon.ico");
+    this._panel.iconPath = vscode.Uri.joinPath(this._extensionUri, "src/media", "favicon.svg");
 
     // Set the webview's initial html content
     this._panel.webview.html = this._getHtmlForWebview(this._panel.webview);
