@@ -36,14 +36,14 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#about-the-project">Overview</a></li>
+    <li><a href="#overview">Overview</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#usage">Functionality</a></li>
-    <li><a href="#built-with">Tech Stack</a></li>
+    <li><a href="#functionality">Functionality</a></li>
+    <li><a href="#tech-stack">Tech Stack</a></li>
     <li><a href="#articles">Articles</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#creators">Meet our Team</a></li>
+    <li><a href="#meet-our-team">Meet our Team</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -58,7 +58,7 @@
 </p>
 <br/>
 <p align="center">
-  <img  src="./src/media/navbar-controls.gif" width=60% >
+  <img  src="./src/media/navbar-controls.gif" width=90% >
 </p>
 
 
@@ -69,7 +69,7 @@ The ReacTree extension can be easily installed via the <a href='https://marketpl
 <br/>
 <p align="center">
 <br/>
-<img src="./src/media/vscode marketplace search.png" width=50% />
+<img src="./src/media/vscode marketplace search.png" width=75% />
 <br/>
 </p>
 <br/>
@@ -81,7 +81,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 <br/>
 <p align="center">
 <br/>
-<img src="./src/media/status bar icon.png" width=50% />
+<img src="./src/media/status bar icon.png" width=75% />
 <br/>
 </p>
 <br/>
@@ -91,7 +91,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
  -  After launching the extension, click on the Select File button and select the file you want to serve as the root. The extension generates a hierarchy tree of React components, displaying the parent-child relationships and the data passed between components.
  -  Toggle the tree's nodes to view the component's props. Easily access the component files by clicking the file button, which will direct you to the corresponding file.
 <p align="center">
-  <img  src="./src/media/launch-props-open-files.gif" width=60% >
+  <img  src="./src/media/launch-props-open-files.gif" width=90% >
 </p>
 
 <br/>
@@ -100,7 +100,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 - Customize the tree by dragging and dropping components to your preferred layoud. Easily switch your view to vertical or horizontal with a click of a button. You can also lock your tree in place so you don't accidently move your tree.
 
 <p align="center">
-  <img  src="./src/media/navbar-controls.gif" width=60% >
+  <img  src="./src/media/navbar-controls.gif" width=90% >
 </p>
 
 <br/>
@@ -108,7 +108,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 
 - ⇧⌘P(Mac) Ctrl+Shift+P (Windows) then type "Preferences:Color Theme" to change the theme of VSCode and ReacTree that best suit your preference.
 <p align="center">
-  <img  src="./src/media/themes.gif" width=60% >
+  <img  src="./src/media/themes.gif" width=90% >
 </p>
 
 <br/>
