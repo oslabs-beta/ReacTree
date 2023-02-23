@@ -92,7 +92,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 <br/>
 <br/>
 
-- Customize the tree by dragging and dropping components to your preferred layoud. Easily switch your view to vertical or horizontal with a click of a button. You can also lock your tree in place so you don't accidently move your tree.
+- Customize the tree by dragging and dropping components to your preferred layout. Easily switch your view to vertical or horizontal with a click of a button. You can also lock your tree in place so you don't accidently move your tree.
 
 <p align="center">
   <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/navbar-controls.gif" width=90% >
