@@ -5,7 +5,7 @@
   "version": "1.0.1",
   "icon": "icon.png",
   "publisher": "ReacTreeDev",
-  "preview": true,
+  "preview": false,
   "engines": {
     "vscode": "^1.74.3"
   },
@@ -25,7 +25,9 @@
     "visualizer"
   ],
   "license": "MIT",
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [

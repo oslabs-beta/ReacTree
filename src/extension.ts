@@ -23,6 +23,7 @@ export function activate(extContext: vscode.ExtensionContext) {
       ReacTreePanel.createOrShow(extContext);
     })
   );
+  vscode.commands.executeCommand('reacTree.startStatusBar');
 }
 
 export function deactivate() {}
