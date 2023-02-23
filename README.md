@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/ReacTree">
-    <img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/ReactTree_NoBackground.png" alt="Logo" height="250">
+    <img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/ReactTree Logo_noBackground.png" alt="Logo" height="250">
   </a>
   <h1 align="center"><b>ReacTree</b></h1>
 </p>
@@ -19,16 +19,12 @@
 <!-- BADGES -->
 <div align="center">
   <!-- VSCode Version -->
-  <span><a href="https://marketplace.visualstudio.com/"><img alt="Visual Studio Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/
-ms-toolsai.jupyter-keymap"></a></span>
       <!--invisible image used for spacing between badges-->
   <span><img src="./src/media/transparent image.png" height=10 width=10 /></span> 
       <!-- VSCode Installs -->
-  <span><a href="https://marketplace.visualstudio.com/">Install ReacTree</a></span>
+  <b><span><a href="https://marketplace.visualstudio.com/items?itemName=ReacTreeDev.reactree">Install ReacTree</a></span></b> <span>v1.0.0</span>
       <!--invisible image used for spacing between badges-->
   <span><img src="./src/media/transparent image.png" height=10 width=10 /></span> <!--invisible-->
-      <!-- MIT License -->
-  <span><a alt="Visual Studio Marketplace Installs" src="./src/media/MIT License Badge.svg" height="20"> </a></span>
 </div>
 
 <hr>
@@ -66,7 +62,7 @@ ms-toolsai.jupyter-keymap"></a></span>
 
 
 ## <b>Installation</b>
-The ReacTree extension can be easily installed via the <a href='https://marketplace.visualstudio.com/VSCode'>VS Code Marketplace</a>. Bring up the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of VS Code or by using the View: Extensions command (Ctrl+Shift+X). Type ‘reactree’ in the search box and select the Install button. VS Code will download and install the extension from the Marketplace.
+The ReacTree extension can be easily installed via the <a href='https://marketplace.visualstudio.com/items?itemName=ReacTreeDev.reactree'>VS Code Marketplace</a>. Bring up the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of VS Code or by using the View: Extensions command (Ctrl+Shift+X). Type ‘reactree’ in the search box and select the Install button. VS Code will download and install the extension from the Marketplace.
 <br/>
 <p align="center">
 <br/>

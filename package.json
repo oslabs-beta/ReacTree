@@ -1,24 +1,28 @@
 {
   "name": "reactree",
-  "displayName": "REACTREE",
-  "description": "React higherarchy visualizer and component preview tool",
-  "version": "0.0.1",
-  "icon": "icon.png",
-  "publisher": "REACTREE",
+  "displayName": "ReacTree",
+  "description": "React hierarchy tree visualizer and navigation tool",
+  "version": "1.0.1",
+  "icon": "./src/media/icon.png",
+  "publisher": "ReacTreeDev",
   "preview": true,
   "engines": {
     "vscode": "^1.74.3"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/"
+    "url": "https://github.com/oslabs-beta/ReacTree/tree/dev"
   },
   "categories": [
     "Other"
   ],
   "keywords": [
-    "note",
-    "vscode"
+    "react",
+    "hierarchy tree",
+    "react components",
+    "parent-child",
+    "navigation",
+    "visualizer"
   ],
   "license": "MIT",
   "activationEvents": [],
