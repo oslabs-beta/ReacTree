@@ -2,7 +2,6 @@
 /* these are the necessary styles for React Flow, they get used by base.css and style.css */
 body {
   padding: 0px;
-  /* background-color: #fafafa; */
   background-color: var(--vscode-editor-background);
 	color: var(--vscode-editor-foreground);
 }
@@ -439,14 +438,14 @@ div.react-flow__panel.react-flow__controls.bottom.left{
 .react-flow__controls-button{
   background-color: var(--vscode-input-background) !important;
   border: none !important;
-  height: 2.19rem !important;
+  height: 33px !important;
   width: 2.5rem !important;
   fill: var(--vscode-foreground) !important;
 }
 .customToolbarButton {
   position: absolute;
   display: flex;
-  bottom: 43px;
+  bottom: 42px;
   right: 50px;
 }
 .customToolbarButton svg{

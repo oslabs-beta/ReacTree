@@ -61,7 +61,7 @@ The ReacTree extension can be easily installed via the <a href='https://marketpl
 <br/>
 <p align="center">
 <br/>
-<img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/dev/src/media/Install_ReacTree.png" width=75% />
+<img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/dev/src/media/Install_ReacTree.png" width=90% />
 <br/>
 </p>
 <br/>
