@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/ReacTree">
-    <img src="./src/media/ReactTree Logo.png" alt="Logo" height="250">
+    <img src="./src/media/ReactTree_NoBackground.png" alt="Logo" height="250">
   </a>
   <h1 align="center"><b>ReacTree</b></h1>
 </p>
