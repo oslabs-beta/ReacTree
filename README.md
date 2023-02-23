@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/ReacTree">
-    <img src="./src/media/ReactTree_NoBackground.png" alt="Logo" height="250">
+    <img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/ReactTree_NoBackground.png" alt="Logo" height="250">
   </a>
   <h1 align="center"><b>ReacTree</b></h1>
 </p>
@@ -19,7 +19,8 @@
 <!-- BADGES -->
 <div align="center">
   <!-- VSCode Version -->
-  <span><a href="https://marketplace.visualstudio.com/"><img alt="Visual Studio Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/xabikos.JavaScriptSnippets"></a></span>
+  <span><a href="https://marketplace.visualstudio.com/"><img alt="Visual Studio Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/
+ms-toolsai.jupyter-keymap"></a></span>
       <!--invisible image used for spacing between badges-->
   <span><img src="./src/media/transparent image.png" height=10 width=10 /></span> 
       <!-- VSCode Installs -->
@@ -58,7 +59,7 @@
 </p>
 <br/>
 <p align="center">
-  <img  src="./src/media/navbar-controls.gif" width=90% >
+  <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/navbar-controls.gif" width=90% >
 </p>
 
 
@@ -81,7 +82,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 <br/>
 <p align="center">
 <br/>
-<img src="./src/media/status bar icon.png" width=75% />
+<img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/status%20bar%20icon.png" width=75% />
 <br/>
 </p>
 <br/>
@@ -91,7 +92,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
  -  After launching the extension, click on the Select File button and select the file you want to serve as the root. The extension generates a hierarchy tree of React components, displaying the parent-child relationships and the data passed between components.
  -  Toggle the tree's nodes to view the component's props. Easily access the component files by clicking the file button, which will direct you to the corresponding file.
 <p align="center">
-  <img  src="./src/media/launch-props-open-files.gif" width=90% >
+  <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/launch-props-open-files.gif" width=90% >
 </p>
 
 <br/>
@@ -100,7 +101,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 - Customize the tree by dragging and dropping components to your preferred layoud. Easily switch your view to vertical or horizontal with a click of a button. You can also lock your tree in place so you don't accidently move your tree.
 
 <p align="center">
-  <img  src="./src/media/navbar-controls.gif" width=90% >
+  <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/navbar-controls.gif" width=90% >
 </p>
 
 <br/>
@@ -108,7 +109,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 
 - ⇧⌘P(Mac) Ctrl+Shift+P (Windows) then type "Preferences:Color Theme" to change the theme of VSCode and ReacTree that best suit your preference.
 <p align="center">
-  <img  src="./src/media/themes.gif" width=90% >
+  <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/themes.gif" width=90% >
 </p>
 
 <br/>
