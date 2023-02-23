@@ -140,7 +140,7 @@ const Sidebar = () => {
                 )}
               <p className='nodeTitle'
                 style={{
-                  fontFamily: 'Roboto',
+                  fontFamily: 'var(--vscode-font-family)',
                   fontStyle: 'normal',
                   fontWeight: 700,
                   paddingBottom: '6px',
@@ -184,9 +184,7 @@ const Sidebar = () => {
                   {Object.keys(item.props).length > 0 && (
                       <InfoIcon data-property={id.toString()} style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }} onClick={() => handleProps(item.id)}/>
                     )}
-                    {item.children.length > 0 && <CloseFullscreenIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }}/>}
                     <TextSnippetIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 19 }} onClick={() => viewFile(item.filePath)}/>
-                    {/* <VisibilityIcon style={{ cursor: "pointer", padding: '0px 3px' }} htmlColor={'var(--vscode-foreground)'} sx={{ fontSize: 17 }}/> */}
                 </div>
                 <div className="nodeIndicators">
                   {item.reduxConnect && (

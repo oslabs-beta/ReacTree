@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/ReacTree">
-    <img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/icon.png" alt="Logo" height="250">
+    <img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/dev/src/media/icon.png" alt="Logo" height="250">
   </a>
   <h1 align="center"><b>ReacTree</b></h1>
 </p>
@@ -61,7 +61,7 @@ The ReacTree extension can be easily installed via the <a href='https://marketpl
 <br/>
 <p align="center">
 <br/>
-<img src="./src/media/vscode marketplace search.png" width=75% />
+<img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/dev/src/media/Install_ReacTree.png" width=75% />
 <br/>
 </p>
 <br/>
@@ -121,7 +121,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 ## <b>Articles</b>
 Checkout out our <a href="https://medium.com/@bnohcub/onboarding-a-dense-react-codebase-reactree-has-your-back-c29c71dd9ee2">medium article</a> for more information about ReacTree!
 
-Additionally, we realized documentation on building a VSCode Webview Panel with React and Messaging is scarce. Don't worrry, we wrote <a href="https://medium.com/@michaelbenliyan/developers-guide-to-building-vscode-webview-panel-with-react-and-messages-797981f34013">this article</a> which goes in depth to easily understand how to build a Webview Panel!
+Additionally, we realized documentation on building a VSCode Webview Panel with React and Messaging is scarce. Don't worry, we wrote <a href="https://medium.com/@michaelbenliyan/developers-guide-to-building-vscode-webview-panel-with-react-and-messages-797981f34013">this article</a> which goes in depth to easily understand how to build a Webview Panel!
 
 <br/>
 <br/>
