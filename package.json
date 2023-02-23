@@ -1,9 +1,9 @@
 {
   "name": "reactree",
   "displayName": "ReacTree",
-  "description": "React higherarchy visualizer and component preview tool",
-  "version": "1.0.0",
-  "icon": "icon.png",
+  "description": "React hierarchy tree visualizer and navigation tool",
+  "version": "1.0.1",
+  "icon": "./src/media/icon.png",
   "publisher": "ReacTreeDev",
   "preview": true,
   "engines": {
@@ -65,9 +65,9 @@
     "@vscode/test-electron": "^2.2.3",
     "babel-loader": "^8.0.6",
     "chai": "^4.3.7",
+    "copy-webpack-plugin": "^5.1.1",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
-    "copy-webpack-plugin": "^5.1.1",
     "ts-loader": "^9.4.2",
     "ts-node": "^8.5.4",
     "typescript": "^4.9.5",
@@ -96,7 +96,6 @@
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-flow-renderer": "^10.3.17",
     "reactflow": "^11.5.2",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1"
