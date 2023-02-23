@@ -1,8 +1,12 @@
 {
-  "name": "website",
+  "name": "reactree",
   "version": "1.0.0",
-  "description": "",
+  "description": "Reactree website",
   "main": "index.js",
+  "engines": {
+    "node": "16.17.0",
+    "npm": "9.5.1"
+    },
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve --mode development",
