@@ -73,7 +73,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 <br/>
 <p align="center">
 <br/>
-<img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/status_bar_icon.png" width=85% />
+<img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/status_bar_icon.png" width=90% />
 <br/>
 </p>
 <br/>
