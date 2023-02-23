@@ -3,7 +3,7 @@
   "displayName": "ReacTree",
   "description": "React hierarchy tree visualizer and navigation tool",
   "version": "1.0.1",
-  "icon": "./src/media/icon.png",
+  "icon": "icon.png",
   "publisher": "ReacTreeDev",
   "preview": true,
   "engines": {
