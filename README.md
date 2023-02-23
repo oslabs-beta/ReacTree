@@ -19,7 +19,10 @@
 <!-- BADGES -->
 <div align="center">      
   <!-- VSCode Installs -->
-  <b><span><a href="https://marketplace.visualstudio.com/items?itemName=ReacTreeDev.reactree">Install ReacTree</a></span></b> <span>v1.0.0</span>
+    <b><u><span><a href="https://marketplace.visualstudio.com/items?itemName=ReacTreeDev.reactree">
+    Install ReacTree</a>
+    </span></u></b>
+    <p><img src="https://img.shields.io/visual-studio-marketplace/v/reactreedev.reactree"></p>
 </div>
 
 <hr>
