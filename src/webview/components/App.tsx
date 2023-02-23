@@ -3,7 +3,6 @@ import * as React from 'react';
 interface vscode {
   postMessage(message: any): void;
 }
-// declare function acquireVsCodeApi(): vscode;
 declare const vscode: vscode;
 
 const sendMessage = () => {
