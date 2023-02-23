@@ -119,7 +119,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 <br/>
 
 ## <b>Articles</b>
-Checkout out our <a href="mediumarticle">medium article</a> for more information about ReacTree!
+Checkout out our <a href="https://medium.com/@bnohcub/onboarding-a-dense-react-codebase-reactree-has-your-back-c29c71dd9ee2">medium article</a> for more information about ReacTree!
 
 Additionally, we realized documentation on building a VSCode Webview Panel with React and Messaging is scarce. Don't worrry, we wrote <a href="https://medium.com/@michaelbenliyan/developers-guide-to-building-vscode-webview-panel-with-react-and-messages-797981f34013">this article</a> which goes in depth to easily understand how to build a Webview Panel!
 
