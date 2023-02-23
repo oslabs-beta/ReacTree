@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/ReacTree">
-    <img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/ReactTree Logo_noBackground.png" alt="Logo" height="250">
+    <img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/ReactTree_Logo_noBackground.png" alt="Logo" height="250">
   </a>
   <h1 align="center"><b>ReacTree</b></h1>
 </p>
@@ -17,14 +17,9 @@
 
 
 <!-- BADGES -->
-<div align="center">
-  <!-- VSCode Version -->
-      <!--invisible image used for spacing between badges-->
-  <span><img src="./src/media/transparent image.png" height=10 width=10 /></span> 
-      <!-- VSCode Installs -->
+<div align="center">      
+  <!-- VSCode Installs -->
   <b><span><a href="https://marketplace.visualstudio.com/items?itemName=ReacTreeDev.reactree">Install ReacTree</a></span></b> <span>v1.0.0</span>
-      <!--invisible image used for spacing between badges-->
-  <span><img src="./src/media/transparent image.png" height=10 width=10 /></span> <!--invisible-->
 </div>
 
 <hr>
@@ -78,7 +73,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 <br/>
 <p align="center">
 <br/>
-<img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/status%20bar%20icon.png" width=75% />
+<img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/status_bar_icon.png" width=75% />
 <br/>
 </p>
 <br/>
@@ -126,7 +121,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 ## <b>Articles</b>
 Checkout out our <a href="mediumarticle">medium article</a> for more information about ReacTree!
 
-Additionally, we realized documentation on building a VSCode Webview Panel with React and Messaging is scarce. Don't worrry, we wrote <a href="mediumarticle">this article</a> which goes in depth to easily understand how to build a Webview Panel!
+Additionally, we realized documentation on building a VSCode Webview Panel with React and Messaging is scarce. Don't worrry, we wrote <a href="https://medium.com/@michaelbenliyan/developers-guide-to-building-vscode-webview-panel-with-react-and-messages-797981f34013">this article</a> which goes in depth to easily understand how to build a Webview Panel!
 
 <br/>
 <br/>
