@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/ReacTree">
-    <img src="./src/media/ReactTree Logo.png" alt="Logo" height="250">
+    <img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/icon.png" alt="Logo" height="250">
   </a>
   <h1 align="center"><b>ReacTree</b></h1>
 </p>
@@ -17,17 +17,9 @@
 
 
 <!-- BADGES -->
-<div align="center">
-  <!-- VSCode Version -->
-  <span><a href="https://marketplace.visualstudio.com/"><img alt="Visual Studio Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/xabikos.JavaScriptSnippets"></a></span>
-      <!--invisible image used for spacing between badges-->
-  <span><img src="./src/media/transparent image.png" height=10 width=10 /></span> 
-      <!-- VSCode Installs -->
-  <span><a href="https://marketplace.visualstudio.com/">Install ReacTree</a></span>
-      <!--invisible image used for spacing between badges-->
-  <span><img src="./src/media/transparent image.png" height=10 width=10 /></span> <!--invisible-->
-      <!-- MIT License -->
-  <span><a alt="Visual Studio Marketplace Installs" src="./src/media/MIT License Badge.svg" height="20"> </a></span>
+<div align="center">      
+  <!-- VSCode Installs -->
+  <b><span><a href="https://marketplace.visualstudio.com/items?itemName=ReacTreeDev.reactree">Install ReacTree</a></span></b> <span>v1.0.0</span>
 </div>
 
 <hr>
@@ -36,14 +28,14 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#about-the-project">Overview</a></li>
+    <li><a href="#overview">Overview</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#usage">Functionality</a></li>
-    <li><a href="#built-with">Tech Stack</a></li>
+    <li><a href="#functionality">Functionality</a></li>
+    <li><a href="#tech-stack">Tech Stack</a></li>
     <li><a href="#articles">Articles</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#creators">Meet our Team</a></li>
+    <li><a href="#meet-our-team">Meet our Team</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -58,18 +50,18 @@
 </p>
 <br/>
 <p align="center">
-  <img  src="./src/media/navbar-controls.gif" width=60% >
+  <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/navbar-controls.gif" width=90% >
 </p>
 
 
 
 
 ## <b>Installation</b>
-The ReacTree extension can be easily installed via the <a href='https://marketplace.visualstudio.com/VSCode'>VS Code Marketplace</a>. Bring up the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of VS Code or by using the View: Extensions command (Ctrl+Shift+X). Type ‘reactree’ in the search box and select the Install button. VS Code will download and install the extension from the Marketplace.
+The ReacTree extension can be easily installed via the <a href='https://marketplace.visualstudio.com/items?itemName=ReacTreeDev.reactree'>VS Code Marketplace</a>. Bring up the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of VS Code or by using the View: Extensions command (Ctrl+Shift+X). Type ‘reactree’ in the search box and select the Install button. VS Code will download and install the extension from the Marketplace.
 <br/>
 <p align="center">
 <br/>
-<img src="./src/media/vscode marketplace search.png" width=50% />
+<img src="./src/media/vscode marketplace search.png" width=75% />
 <br/>
 </p>
 <br/>
@@ -81,7 +73,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 <br/>
 <p align="center">
 <br/>
-<img src="./src/media/status bar icon.png" width=50% />
+<img src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/status_bar_icon.png" width=90% />
 <br/>
 </p>
 <br/>
@@ -91,7 +83,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
  -  After launching the extension, click on the Select File button and select the file you want to serve as the root. The extension generates a hierarchy tree of React components, displaying the parent-child relationships and the data passed between components.
  -  Toggle the tree's nodes to view the component's props. Easily access the component files by clicking the file button, which will direct you to the corresponding file.
 <p align="center">
-  <img  src="./src/media/launch-props-open-files.gif" width=60% >
+  <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/launch-props-open-files.gif" width=90% >
 </p>
 
 <br/>
@@ -100,7 +92,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 - Customize the tree by dragging and dropping components to your preferred layoud. Easily switch your view to vertical or horizontal with a click of a button. You can also lock your tree in place so you don't accidently move your tree.
 
 <p align="center">
-  <img  src="./src/media/navbar-controls.gif" width=60% >
+  <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/navbar-controls.gif" width=90% >
 </p>
 
 <br/>
@@ -108,7 +100,7 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 
 - ⇧⌘P(Mac) Ctrl+Shift+P (Windows) then type "Preferences:Color Theme" to change the theme of VSCode and ReacTree that best suit your preference.
 <p align="center">
-  <img  src="./src/media/themes.gif" width=60% >
+  <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/themes.gif" width=90% >
 </p>
 
 <br/>
@@ -127,9 +119,9 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 <br/>
 
 ## <b>Articles</b>
-Checkout out our <a href="mediumarticle">medium article</a> for more information about ReacTree!
+Checkout out our <a href="https://medium.com/@bnohcub/onboarding-a-dense-react-codebase-reactree-has-your-back-c29c71dd9ee2">medium article</a> for more information about ReacTree!
 
-Additionally, we realized documentation on building a VSCode Webview Panel with React and Messaging is scarce. Don't worrry, we wrote <a href="mediumarticle">this article</a> which goes in depth to easily understand how to build a Webview Panel!
+Additionally, we realized documentation on building a VSCode Webview Panel with React and Messaging is scarce. Don't worrry, we wrote <a href="https://medium.com/@michaelbenliyan/developers-guide-to-building-vscode-webview-panel-with-react-and-messages-797981f34013">this article</a> which goes in depth to easily understand how to build a Webview Panel!
 
 <br/>
 <br/>
