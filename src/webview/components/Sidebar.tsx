@@ -140,7 +140,7 @@ const Sidebar = () => {
                 )}
               <p className='nodeTitle'
                 style={{
-                  fontFamily: 'Roboto',
+                  fontFamily: 'var(--vscode-font-family)',
                   fontStyle: 'normal',
                   fontWeight: 700,
                   paddingBottom: '6px',

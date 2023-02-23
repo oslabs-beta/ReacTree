@@ -2,7 +2,7 @@
   "name": "reactree",
   "displayName": "ReacTree",
   "description": "React hierarchy tree visualizer and navigation tool",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icon": "icon.png",
   "publisher": "ReacTreeDev",
   "preview": false,
