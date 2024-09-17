@@ -13,7 +13,7 @@ export class Parser {
   constructor(filePath: string) {
     // Fix when selecting files in wsl file system
     this.entryFile = filePath;
-    if (process.platform === 'linux' && this.entryFile.includes('wsl$')) {
+    if (process.platform === 'linux' && this.entryFile.includes('wsl')) {
       this.entryFile = path.resolve(
         filePath.split(path.win32.sep).join(path.posix.sep)
       );
@@ -389,10 +389,11 @@ export class Parser {
     // Check that react-redux is imported in this file (and we have a connect method or otherwise)
     let reduxImported = false;
     let connectAlias;
+    let reduxToolKitHooks = {};
     Object.keys(importsObj).forEach((key) => {
       if (
         importsObj[key].importPath === 'react-redux' &&
-        importsObj[key].importName === 'connect'
+        (importsObj[key].importName === 'connect'|| importsObj[key].importName === 'useSelector' || importsObj[key].importName === 'useDispatch')
       ) {
         reduxImported = true;
         connectAlias = key;
@@ -403,7 +404,7 @@ export class Parser {
       return false;
     }
 
-    // Check that connect method is invoked and exported in the file
+    // Check that connect method is invoked and exported in the file (Vanilla Redux)
     for (let i = 0; i < astTokens.length; i += 1) {
       if (
         astTokens[i].type.label === 'export' &&
@@ -411,6 +412,23 @@ export class Parser {
         astTokens[i + 2].value === connectAlias
       ) {
         return true;
+      }
+
+      // Check whether useDispatch or useSelector were invoked in the file (Redux Toolkit)
+      if (astTokens[i].value === 'useDispatch' || 
+        astTokens[i].value === 'useSelector'
+      ) {
+        // Record frequency of useDispatch and useSelector hooks
+        if(reduxToolKitHooks.hasOwnProperty(astTokens[i].value)){
+          reduxToolKitHooks[astTokens[i].value]++;
+
+          // Frequency of 1 = importing of hook, Frequency of 2 = hook was invoked
+          if(reduxToolKitHooks[astTokens[i].value] > 1){
+            return true;
+          }
+        } else {
+          reduxToolKitHooks[astTokens[i].value] = 1;
+        }
       }
     }
     return false;

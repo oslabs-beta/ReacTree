@@ -160,7 +160,7 @@ const Flow = ({ initialNodes, initialEdges, handleAllProps}: any) => {
             handleAllProps('block');
             setShowAllProps(!showAllProps);
           }}>
-              <PIcon color='disabled' sx={{ fontSize: 25 }}  />
+              <PIcon htmlColor='var(--vscode-foreground)' sx={{ fontSize: 25 }}  />
             </button>
         }
       </div>

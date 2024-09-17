@@ -98,6 +98,15 @@ After installing the ReacTree extension in your VSCode, a ‘Start Tree’ item 
 <br/>
 <br/>
 
+- Quickly identify which components are accessing and/or updating global state via Redux or Redux Tool Kit.
+
+<p align="center">
+  <img  src="src/media/redux_connection.png" width=60% >
+</p>
+
+<br/>
+<br/>
+
 - ⇧⌘P(Mac) Ctrl+Shift+P (Windows) then type "Preferences:Color Theme" (or use ⌘K⌘T on Mac or Ctlr+K Ctrl+T on Windows) to change the theme of VSCode and ReacTree that best suits your preference.
 <p align="center">
   <img  src="https://raw.githubusercontent.com/oslabs-beta/ReacTree/fabian/readme/src/media/themes.gif" width=90% >
@@ -131,6 +140,14 @@ Additionally, we realized documentation on building a VSCode Webview Panel with 
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
+### Contributor Usage
+
+1. Download/clone the project from [Github](https://github.com/oslabs-beta/ReacTree/)
+2. To view the webview, run the following command: `npm run watch`
+3. Press F5. A new VSCode window will open with the ReacTree Extension.
+4. Click the Start Tree item on the Status Bar (bottom right) to open the extension.
+
+<br/>
 You can check out more information and get started with ReacTree on its official webpage and on its <a href="https://www.linkedin.com/company/react-tree/">LinkedIn</a> page. These pages provide useful information about the project, including how it works, its key features, and how to get started with using it.
 
 Additionally, you can find the project’s source code, documentation, and issue tracker in Github. You can also fork the project, make changes, and submit pull requests to help improve the project.
