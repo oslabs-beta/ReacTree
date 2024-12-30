@@ -1,17 +1,17 @@
 {
-  "name": "reactree",
-  "displayName": "ReacTree",
-  "description": "React hierarchy tree visualizer and navigation tool",
-  "version": "1.0.7",
+  "name": "reactreev2",
+  "displayName": "ReacTreeV2",
+  "description": "Fixed - React hierarchy tree visualizer and navigation tool",
+  "version": "2.0.0",
   "icon": "icon.png",
-  "publisher": "ReacTreeDev",
+  "publisher": "abhi11verma",
   "preview": false,
   "engines": {
     "vscode": "^1.74.3"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/oslabs-beta/ReacTree/tree/main"
+    "url": "https://github.com/abhi11verma/ReacTreeV2"
   },
   "categories": [
     "Other"

@@ -12,8 +12,10 @@ export default class ReacTreePanel {
   private readonly _extContext: vscode.ExtensionContext;
   private parser: Parser | undefined;
   private _disposables: vscode.Disposable[] = [];
+  private currentFilePath: string;
 
-  public static createOrShow(extContext: vscode.ExtensionContext) {
+
+  public static createOrShow(extensionContext: vscode.ExtensionContext, filePath: string) {
     const column = vscode.window.activeTextEditor
       ? vscode.window.activeTextEditor.viewColumn
       : undefined;
@@ -25,18 +27,22 @@ export default class ReacTreePanel {
     } else {
       // ReactPanel.currentPanel = new ReactPanel(extensionPath, column || vscode.ViewColumn.One);
       ReacTreePanel.currentPanel = new ReacTreePanel(
-        extContext,
-        vscode.ViewColumn.Two
+        extensionContext,
+        vscode.ViewColumn.Two,
+        filePath
       );
     }
   }
 
   private constructor(
     extContext: vscode.ExtensionContext,
-    column: vscode.ViewColumn
+    column: vscode.ViewColumn,
+    filePath: string
   ) {
     this._extContext = extContext;
     this._extensionUri = extContext.extensionUri;
+    this.currentFilePath = filePath;
+
     // Not added - state preserver**
 
     // Create and show a new webview panel
@@ -63,10 +69,17 @@ export default class ReacTreePanel {
     // This happens when the user closes the panel or when the panel is closed programatically
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
+    // Send the current file path to the webview
+    this._panel.webview.postMessage({
+      type: 'currentFilePath',
+      value: this.currentFilePath
+    });
+  
     // Handle messages from the webview
     this._panel.webview.onDidReceiveMessage(
       async (msg: any) => {
         switch (msg.type) {
+          // TODO : Removed manual file selection support and repurposed the existing tree generation functionality
           case 'onFile':
             if (!msg.value) break; //if doesnt work change to return
             this.parser = new Parser(msg.value);
@@ -117,10 +130,11 @@ export default class ReacTreePanel {
       vscode.Uri.joinPath(this._extensionUri, 'out', 'main.wv.js')
     );
 
-    const styleUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'media', 'styles.css')
-    );
-
+    // TODO: Fix this later for customizing the view
+    // const styleUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(this._extensionUri, 'media', 'styles.css')
+    // );
+    // <link rel="stylesheet" href="${styleUri}">
     // Use a nonce to whitelist which scripts can be run
     const nonce = getNonce();
 
@@ -130,7 +144,7 @@ export default class ReacTreePanel {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>reacttree</title>
-        <link rel="stylesheet" href="${styleUri}">
+        
       </head>
       <body>
         <div id="root"></div>

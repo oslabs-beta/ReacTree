@@ -17,32 +17,33 @@ interface vscode {
 declare const vscode: vscode;
 
 const Navbar = ({ rootFile }: any) => {
-  // onChange function that will send a message to the extension when the user selects a file
-  const fileMessage = (e: any) => {
-    const filePath = e.target.files[0].path;
-    // Reset event target value to null so the same file selection causes onChange event to trigger
-    e.target.value = null;
-    if (filePath) {
-      vscode.postMessage({
-        type: "onFile",
-        value: filePath
-      });
-    }
-  };
+ // Listen for messages from the extension
+  React.useEffect(() => {
+    window.addEventListener('message', (event) => {
+      const message = event.data;
+      if (message.type === 'currentFilePath') {
+        sendFileMessage(message.value);
+      } else if (message.type === 'parsed-data') {
+        console.log('Restoring tree data:', message.value); // Add log
+      }
+    });
+  }, []);
 
+  // onChange function that will send a message to the extension when the user selects a file
+function sendFileMessage(filePath: string) {
+  vscode.postMessage({
+    type: 'onFile',
+    value: filePath,
+  });
+}
   console.log('ROOT', rootFile)
 
   // Render section
   return (
     <div className="navbar">
-      <input type="file" name="file" id="file" className="inputfile" onChange={(e) => {fileMessage(e);}}/>
       <div className='navbarContents'>
-        <label id='inputLabel' htmlFor="file">
-          {/* <FontAwesomeIcon icon={faDownload}/> */}
-          <strong id="strong_file">{rootFile ? ` ${rootFile}` : ' Select File'}</strong>
-          <FileUploadRoundedIcon htmlColor='var(--vscode-settings-focusedRowBorder)' style={{fontSize:20, position: 'relative', top: '4px'}}/>
-        </label>
-        {/* <ClearIcon style={{fontSize:15, marginTop: 2}}/>   */}
+        <label  className='navbarLabel' htmlFor="file-upload">
+          </label>
       </div>
     </div>
   );
